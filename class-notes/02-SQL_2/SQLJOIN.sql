@@ -49,4 +49,20 @@ WHERE AlbumId=(SELECT AlbumId
 SELECT CustomerId FROM invoices WHERE BillingCity='Berlin';
 SELECT * FROM customers WHERE CustomerId=38 or CustomerId=36;
 --veya
-SELECT * FROM customers
+SELECT * FROM customers WHERE CustomerId IN(38,36);
+
+SELECT FirstName,LastName,Phone
+FROM customers
+WHERE CustomerId IN (SELECT CustomerId FROM invoices WHERE BillingCity='Berlin');
+
+-- Amerika'daki müsterilerin sayisi
+SELECT count(*) FROM customers WHERE Country='USA';
+-- Amerika'daki fatura kesilen müsterilerin sayisi
+SELECT count(*) FROM invoices WHERE BillingCountry='USA';
+-- Amerika'daki fatura kesilen müsterilerin bilgileri
+SELECT CustomerId FROM invoices WHERE BillingCountry='USA';
+SELECT *
+FROM customers
+WHERE CustomerId IN(SELECT CustomerId
+                    FROM invoices
+                    WHERE BillingCountry='USA');
