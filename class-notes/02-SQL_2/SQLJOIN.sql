@@ -109,3 +109,17 @@ JOIN media_types ON tracks.MediaTypeId=media_types.MediaTypeId;
 -- Examples
 -- müsterilerden mail domain'i apple olanlar
 SELECT * FROM customers WHERE Email like '%apple%';
+-- Almanya'da kac müsteri var
+SELECT count(*) FROM customers WHERE Country='Germany';
+-- kac farkli ülkeden müsterim var
+SELECT count(DISTINCT(Country)) as müsteriOlanÜlkeSayisi FROM customers;
+
+-- GROUP BY
+-- hangi ülkeden kac adet müsterim var
+SELECT Country, count(*) FROM customers GROUP BY Country;
+
+-- hangi müsteriye kac adet fatura kesildi
+SELECT invoices.CustomerId,customers.FirstName,count(*)
+FROM invoices
+JOIN customers
+ON invoices.CustomerId=customers.CustomerId GROUP BY invoices.CustomerId;
