@@ -66,3 +66,46 @@ FROM customers
 WHERE CustomerId IN(SELECT CustomerId
                     FROM invoices
                     WHERE BillingCountry='USA');
+
+-- JOIN
+-- INNER JOIN
+-- hangi albüm hangi artiste ait
+
+SELECT *
+FROM albums
+JOIN artists ON albums.ArtistId=artist.ArtistId;
+
+SELECT *
+FROM artists
+INNER JOIN albums ON artists.ArtistId=albums.ArtistId;
+
+SELECT *
+FROM artists
+LEFT JOIN albums ON artists.ArtistId=albums.ArtistId;
+
+--hangi fatura kime ait
+SELECT *
+FROM invoices
+JOIN customers
+ON invoices.CustomerId=CustomerId;
+
+SELECT invoices.InvoiceId,invoices.Total,customers.FirstName,customers.LastName
+FROM customers
+LEFT JOIN invoices
+ON customers.CustomerId=invoices.CustomerId ORDER BY InvoiceId;
+
+-- her bir müzik parcasinin adi ve türü
+SELECT tracks.Name,tracks.GenreId,genres.GenreId,genres.Name
+FROM tracks
+JOIN genres
+ON tracks.GenreId=genres.GenreId;
+
+-- müzik parcasinin adi,türü hangi albüme ait oldugu ve hangi medya türünde oldugunu getirin
+SELECT tracks.Name,genres.Name,media_types.Name
+FROM tracks
+JOIN genres ON tracks.GenreId=genres.GenreId
+JOIN media_types ON tracks.MediaTypeId=media_types.MediaTypeId;
+
+-- Examples
+-- müsterilerden mail domain'i apple olanlar
+SELECT * FROM customers WHERE Email like '%apple%';
