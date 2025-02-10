@@ -153,7 +153,7 @@ console.log(jsonCar.brand);
 const obj = JSON.parse(jsonCar);
 console.log(typeof obj);
 
-/*------------------------------------------*/
+/*------------------------------------------*
 
 //? CONSTRUCTORS
 
@@ -162,6 +162,26 @@ const constructorFn = function () {
 };
 
 /*------------------------------------------*/
+
+const carConstructor = function (brand, model, year, methodParam) {
+  this.brand = brand;
+  this.model = model;
+  this.year = year;
+
+  this.startEngine = function () {
+    return `${this.brand}'s engine has started.`;
+  };
+};
+
+const newCar = new carConstructor("Ford", "Mustang", 1990);
+console.log(newCar);
+console.log(typeof newCar);
+console.log(newCar.startEngine());
+
+const mercedes = new carConstructor("Mercedes", "Maybach", 2025);
+console.log(mercedes);
+console.log(mercedes.startEngine());
+
 /*------------------------------------------*/
 /*------------------------------------------*/
 /*------------------------------------------*/
