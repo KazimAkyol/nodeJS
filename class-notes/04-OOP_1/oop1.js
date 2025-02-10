@@ -105,7 +105,7 @@ const [item1, item2, ...otherItems] = testArr;
 console.log(item1);
 console.log(otherItems);
 
-/*------------------------------------------*/
+/*------------------------------------------*
 //? OBJECT DESTRUCTURING
 
 const Car = {
@@ -131,14 +131,36 @@ const Car = {
   },
 };
 
-// Rest Operator (key isimleri önemli)
-
+//* Rest Operator (key isimleri önemli)
 const { brand, ...otherItems } = Car;
 
-console.log(brand);
-console.log(otherItems);
+// console.log(brand);
+// console.log(otherItems);
+
+//* Spread Operator
+const newObj = { newKey: "newValue", ...Car };
+// console.log(newObj);
+
+//* Object to JSON
+console.log(typeof Car);
+
+const jsonCar = JSON.stringify(Car);
+console.log(typeof jsonCar);
+console.log(jsonCar);
+console.log(jsonCar.brand);
+
+//* JSON to Object
+const obj = JSON.parse(jsonCar);
+console.log(typeof obj);
 
 /*------------------------------------------*/
+
+//? CONSTRUCTORS
+
+const constructorFn = function () {
+  this.property = "value";
+};
+
 /*------------------------------------------*/
 /*------------------------------------------*/
 /*------------------------------------------*/
