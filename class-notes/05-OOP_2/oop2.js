@@ -2,7 +2,7 @@
 
 /* ------------------------------------ *
             OOP & CLASSES
-/* ------------------------------------ */
+/* ------------------------------------ *
 //? OOP: Object Oriented Programming
 //? DRY: Don't Repeat Yourself
 //? BLUEPRINT: Taslak(Mimarlarin kullandigi mavi sablon kagidi)
@@ -34,6 +34,59 @@ const instanceExp2 = new PascalCaseClassName(0);
 // console.log(instanceExp);
 console.log(instanceExp2);
 
+/* ------------------------------------ *
+
+class Car {
+  isRunning = false;
+
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  runEngine() {
+    this.isRunning = true;
+    console.log("Engine started");
+    return this.isRunning;
+  }
+}
+
+const Bmw = new Car("BMW", "760Li", 2025);
+console.log(Bmw);
+Bmw.runEngine();
+console.log(Bmw);
+
+const Mercedes = new Car("Mercedes", "AMG", 2025);
+console.log(Mercedes);
+
 /* ------------------------------------ */
-/* ------------------------------------ */
+//* INHERITANCE: MirasAlma. Baska bir class'in özelliklerini/metodlarini devralma. (parent-child)
+
+class Vehicle {
+  vehicleIsActive = true;
+
+  constructor(vehicleType) {
+    this.vehicleType = vehicleType;
+  }
+}
+
+const vehicle1 = new Vehicle("Car");
+console.log(vehicle1);
+class Car {
+  isRunning = false;
+
+  constructor(brand, model, year, vehicleType) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  runEngine() {
+    this.isRunning = true;
+    console.log("Engine started");
+    return this.isRunning;
+  }
+}
+
 /* ------------------------------------ */
