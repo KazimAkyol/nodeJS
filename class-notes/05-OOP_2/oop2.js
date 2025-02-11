@@ -27,7 +27,7 @@ class PascalCaseClassName {
   }
 }
 
-//* INSTANCE = Bir Class'tan türetilen objedir
+//* INSTANCE = Bir Class'tan türetilen objedir.
 
 const instanceExp = new PascalCaseClassName(0, 1);
 const instanceExp2 = new PascalCaseClassName(0);
@@ -147,7 +147,7 @@ class Car extends Vehicle {
 const Bmw = new Car("BMW", "760Li", 2025, "Car");
 console.log(Bmw.getDetailOfType());
 
-/* ------------------------------------ */
+/* ------------------------------------ *
 
 //? Access Modifiers:
 //? - PUBLIC: Genel erişime açık. (Parent: Yes, Child: Yes, Instance: Yes)
@@ -178,16 +178,37 @@ class Vehicle {
 }
 
 class Car extends Vehicle {
-     isRunning = false
+  isRunning = false;
 
-     constructor(brand, model, year, vehicleType) {
-        super(vehicleType) // Parent class'a parametre göndermek icin 'super' keywordunu kullaniriz.
-        this.brand = brand
-        this.model=model
-        this.year=year
-     }
+  constructor(brand, model, year, vehicleType) {
+    super(vehicleType); // Parent class'a parametre göndermek icin 'super' keywordunu kullaniriz.
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
 
-     //? Override: Üst metodla ayni isim ve yapida yenir bir metod yazma
-     getDetailOfType(){}
+  //? Override: Üst metodla ayni isim ve yapida yenir bir metod yazma
+  getDetailOfType() {
+    console.log("This is a from Car Class");
+    return super.getDetailOfType();
+  }
 }
 
+const Bmw = new Car("BMW", "760li", 2025, "Car");
+console.log(Bmw.privateAttribute);
+// console.log(Bmw.privateMethod());
+// console.log(Bmw.protetetedProperty);
+
+/* ------------------------------------ */
+//? GETTER & SETTER METHODS: Görevi veri getirme (getter) ve veri güncelleme (setter) olan metodlardır.
+//? "STATIC" KEYWORD: Class'dan direkt erişim. (Instance erişemez.)
+
+class Car {
+
+    isRunning = false
+    #price=100
+
+    constructor(brand,model,year) {
+        this.brand = brand
+    }
+}
