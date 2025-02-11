@@ -62,6 +62,7 @@ console.log(Mercedes);
 
 /* ------------------------------------ */
 //* INHERITANCE: MirasAlma. Baska bir class'in özelliklerini/metodlarini devralma. (parent-child)
+//* SUPER: Parent Class - THIS:Child Class
 
 class Vehicle {
   vehicleIsActive = true;
@@ -73,20 +74,21 @@ class Vehicle {
 
 const vehicle1 = new Vehicle("Car");
 console.log(vehicle1);
-class Car {
+class Car extends Vehicle {
   isRunning = false;
 
   constructor(brand, model, year, vehicleType) {
+    super(vehicleType); // Parent class'a parametre göndermek icin 'super keyword'ünü kullaniriz.
     this.brand = brand;
     this.model = model;
     this.year = year;
   }
-
-  runEngine() {
-    this.isRunning = true;
-    console.log("Engine started");
-    return this.isRunning;
-  }
 }
+
+const Bmw = new Car("BMW", "760Li", 2025, "Car");
+console.log(Bmw);
+
+const Motorbike = new Car("Harley-Davidson", "Street 750", 2021, "Motorbike");
+console.log(Motorbike);
 
 /* ------------------------------------ */
