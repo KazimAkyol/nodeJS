@@ -86,9 +86,26 @@ class Car extends Vehicle {
 }
 
 const Bmw = new Car("BMW", "760Li", 2025, "Car");
-console.log(Bmw);
+// console.log(Bmw);
 
-const Motorbike = new Car("Harley-Davidson", "Street 750", 2021, "Motorbike");
-console.log(Motorbike);
+// const Motorbike = new Car("Harley-Davidson", "Street 750", 2021, "Motorbike");
+// console.log(Motorbike);
+
+class Accessory extends Car {
+  constructor(brand, model, year, vehicleType, accessoryName) {
+    super(brand, model, year, vehicleType);
+    this.accessoryName = accessoryName;
+  }
+}
+
+// const Bmw = new Accessory("BMW", "760Li", 2025, "Car", "Bosch Climate");
+const BmwAccessory = new Accessory(
+  Bmw.brand,
+  Bmw.model,
+  Bmw.year,
+  Bmw.vehicleType,
+  "Bosch Climate"
+);
+console.log(BmwAccessory);
 
 /* ------------------------------------ */
