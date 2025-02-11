@@ -110,8 +110,8 @@ console.log(BmwAccessory);
 
 /* ------------------------------------ *
 //? Polymorphism: Miras aldigimiz sinifin özellik/metodlarini yeniden yazabiliriz.
-//? Override:
-//? Overload:
+//? - Override: Üst metodla aynı isim ve yapıda yeni bir metod yazma. (ezme / iptal etme / önceliğini alma)
+//? - Overload: Üst metodla aynı isimde ama farklı yapıda (farklı adet/tip) yeni method oluşturma. (aynı anda ikisi de aktif) (JS desteklemez)
 
 class Vehicle {
   vehicleIsActive = true;
@@ -147,7 +147,7 @@ class Car extends Vehicle {
 const Bmw = new Car("BMW", "760Li", 2025, "Car");
 console.log(Bmw.getDetailOfType());
 
-/* ------------------------------------ *
+/* ------------------------------------ */
 
 //? Access Modifiers:
 //? - PUBLIC: Genel erişime açık. (Parent: Yes, Child: Yes, Instance: Yes)
@@ -195,20 +195,40 @@ class Car extends Vehicle {
 }
 
 const Bmw = new Car("BMW", "760li", 2025, "Car");
-console.log(Bmw.privateAttribute);
+// console.log(Bmw.privateAttribute);
 // console.log(Bmw.privateMethod());
 // console.log(Bmw.protetetedProperty);
 
-/* ------------------------------------ */
+/* ------------------------------------ *
 //? GETTER & SETTER METHODS: Görevi veri getirme (getter) ve veri güncelleme (setter) olan metodlardır.
 //? "STATIC" KEYWORD: Class'dan direkt erişim. (Instance erişemez.)
 
 class Car {
+  isRunning = false;
+  #price = 100;
 
-    isRunning = false
-    #price=100
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
 
-    constructor(brand,model,year) {
-        this.brand = brand
-    }
+  get getPrice() {
+    return this.#price;
+  }
+
+  set setPrice(newPrice) {
+    this.#price = newPrice;
+  }
 }
+
+//? Direkt class ile erismek istediklarimizi static ile isaretleriz.
+//? Statik property veya methodlara instance ile erisilmez.
+
+static staticProp = 'Static prop'
+
+static customObject() {
+    console.log('This is custom object')
+}
+
+/* ------------------------------------ */
