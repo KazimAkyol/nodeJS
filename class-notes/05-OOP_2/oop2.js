@@ -60,7 +60,7 @@ console.log(Bmw);
 const Mercedes = new Car("Mercedes", "AMG", 2025);
 console.log(Mercedes);
 
-/* ------------------------------------ */
+/* ------------------------------------ *
 //* INHERITANCE: MirasAlma. Baska bir class'in özelliklerini/metodlarini devralma. (parent-child)
 //* SUPER: Parent Class - THIS:Child Class
 
@@ -109,3 +109,40 @@ const BmwAccessory = new Accessory(
 console.log(BmwAccessory);
 
 /* ------------------------------------ */
+//? Polymorphism: Miras aldigimiz sinifin özellik/metodlarini yeniden yazabiliriz.
+//? Override:
+//? Overload:
+
+class Vehicle {
+  vehicleIsActive = true;
+
+  constructor(vehicleType) {
+    this.vehicleType = vehicleType;
+  }
+
+  getDetailOfType() {
+    console.log("This is from Vehicle Class");
+    return this.vehicleType;
+  }
+}
+
+const vehicle1 = new Vehicle("Car");
+console.log(vehicle1);
+class Car extends Vehicle {
+  isRunning = false;
+
+  constructor(brand, model, year, vehicleType) {
+    super(vehicleType); // Parent class'a parametre göndermek icin 'super keyword'ünü kullaniriz.
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  getDetailOfType() {
+    console.log("This is from Car Class");
+    return super.getDetailOfType();
+  }
+}
+
+const Bmw = new Car("BMW", "760Li", 2025, "Car");
+console.log(Bmw.getDetailOfType());
