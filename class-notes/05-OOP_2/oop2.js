@@ -108,7 +108,7 @@ const BmwAccessory = new Accessory(
 );
 console.log(BmwAccessory);
 
-/* ------------------------------------ */
+/* ------------------------------------ *
 //? Polymorphism: Miras aldigimiz sinifin özellik/metodlarini yeniden yazabiliriz.
 //? Override:
 //? Overload:
@@ -146,3 +146,48 @@ class Car extends Vehicle {
 
 const Bmw = new Car("BMW", "760Li", 2025, "Car");
 console.log(Bmw.getDetailOfType());
+
+/* ------------------------------------ */
+
+//? Access Modifiers:
+//? - PUBLIC: Genel erişime açık. (Parent: Yes, Child: Yes, Instance: Yes)
+//? - PROTECTED: Sadece tanımlı olduğu class ve Inherit edilen child-class erişebilir. (Parent: Yes, Child: Yes, Instance: No) (JS Desteklemez.)
+//? - PRIVATE: Sadece tanımlı olduğu class içinde erişim var. (Parent: Yes, Child: No, Instance: No)
+
+class Vehicle {
+  vehicleIsActive = true;
+
+  #privateAttribute = "Private Attribute";
+  #privateMethod() {
+    console.log("This is a private method");
+  }
+
+  _protetetedProperty = "Protected Property";
+  _protetetedMethod() {
+    return this;
+  }
+
+  constructor(vehicleType) {
+    this.vehicleType = vehicleType;
+  }
+
+  getDetailOfType() {
+    console.log("This is from Vehicle Class");
+    return this.vehicleType;
+  }
+}
+
+class Car extends Vehicle {
+     isRunning = false
+
+     constructor(brand, model, year, vehicleType) {
+        super(vehicleType) // Parent class'a parametre göndermek icin 'super' keywordunu kullaniriz.
+        this.brand = brand
+        this.model=model
+        this.year=year
+     }
+
+     //? Override: Üst metodla ayni isim ve yapida yenir bir metod yazma
+     getDetailOfType(){}
+}
+
