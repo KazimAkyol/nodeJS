@@ -147,7 +147,7 @@ class Car extends Vehicle {
 const Bmw = new Car("BMW", "760Li", 2025, "Car");
 console.log(Bmw.getDetailOfType());
 
-/* ------------------------------------ */
+/* ------------------------------------ *
 
 //? Access Modifiers:
 //? - PUBLIC: Genel erişime açık. (Parent: Yes, Child: Yes, Instance: Yes)
@@ -197,9 +197,9 @@ class Car extends Vehicle {
 const Bmw = new Car("BMW", "760li", 2025, "Car");
 // console.log(Bmw.privateAttribute);
 // console.log(Bmw.privateMethod());
-// console.log(Bmw.protetetedProperty);
+console.log(Bmw.protetetedProperty);
 
-/* ------------------------------------ *
+/* ------------------------------------ */
 //? GETTER & SETTER METHODS: Görevi veri getirme (getter) ve veri güncelleme (setter) olan metodlardır.
 //? "STATIC" KEYWORD: Class'dan direkt erişim. (Instance erişemez.)
 
@@ -220,15 +220,31 @@ class Car {
   set setPrice(newPrice) {
     this.#price = newPrice;
   }
+
+  //? Direkt class ile erismek istediklarimizi static ile isaretleriz.
+  //? Statik property veya methodlara instance ile erisilmez.
+
+  static staticProp = "Static prop";
+
+  static CustomObject() {
+    console.log("This is custom object");
+  }
 }
 
-//? Direkt class ile erismek istediklarimizi static ile isaretleriz.
-//? Statik property veya methodlara instance ile erisilmez.
+const Bmw = new Car("BMW", "760Li", 2025);
 
-static staticProp = 'Static prop'
+console.log(Bmw);
+// console.log(Bmw.price); // Private methodlara direkt ulasamayiz. Bunun icin getter methodlarini kullaniriz.
+// console.log(Bmw.getPrice()); // Getter methodlarinda parantez kullanilmaz.
+console.log(Bmw.getPrice);
+Bmw.setPrice = 50;
+console.log(Bmw.getPrice);
 
-static customObject() {
-    console.log('This is custom object')
-}
+// JSON.parse()
+// Object.values()
+
+Car.CustomObject();
+// console.log(Bmw.CustomObject());
+console.log(Car.staticProp);
 
 /* ------------------------------------ */
