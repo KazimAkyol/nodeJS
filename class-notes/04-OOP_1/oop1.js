@@ -88,7 +88,7 @@ console.log(Car.getDetailsWithArrowFn()); // This keyword arrow fonksiyonlarda u
 
 /*------------------------------------------*
 
-//? ARRAY DESTRUCTIONS
+//? ARRAY DESTRUCTURING
 
 const testArr = ["value0", "value1", "value2", "value3"];
 
@@ -152,6 +152,7 @@ console.log(jsonCar.brand);
 //* JSON to Object
 const obj = JSON.parse(jsonCar);
 console.log(typeof obj);
+console.log(obj.brand);
 
 /*------------------------------------------*
 
