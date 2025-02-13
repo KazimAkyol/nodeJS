@@ -46,7 +46,8 @@ console.log("modul dosyasi calisti");
 //   console.log("testFunc2 running");
 // };
 
-//! Bizim kullanacagimiz yöntem (piyasa standarti)
+//! Bizim kullanacagimiz yöntem (piyasa standarti):
+
 module.exports = {
   test1: function () {
     console.log("test1 running");

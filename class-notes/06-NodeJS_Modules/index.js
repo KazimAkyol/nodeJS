@@ -1,6 +1,8 @@
 "use strict";
 
-const { testFunc1, testFunc2 } = require("./module/module.js");
+// $npm init -y
+// npm install // package-lock.json olusturur.
+// nodemon // nodemon index.js'de calistirir ve izler.
 
 console.log("indexjs");
 
