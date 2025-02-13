@@ -15,37 +15,43 @@ require("./module/module.js");
 // const testFunc = require("./module/module.js");
 // testFunc();
 
-// const { testFunc1, testFunc2 } = require("./module/module.js");
-// testFunc1();
-// testFunc2();
-// console.log(testFunc1);
+//! ismi degistirilmis fonksiyonlari yeni isimleriyle destructuring ettik:
+// const { test1:func1, test2 } = require("./module/module.js");
+// func1();
+// test2();
+
+/* ------------------------------------------------- */
 
 // const singleFunc = require("./module/module.js");
 // singleFunc();
-
 // const { testFunc1, testFunc2 } = singleFunc();
 // testFunc1();
 // testFunc2();
 
+/* ------------------------------------------------- */
+
 //! Array olarak karsilama
-// const [testFunc1, testFunc2] = require("./module/module.js");
-// testFunc1();
-// testFunc2();
+const [testFunc1, testFunc2] = require("./module/module.js");
+testFunc1();
+
+/* ------------------------------------------------- */
 
 //! direkt export sonrasi karsilama
 // testFunc1();
 // testFunc2();
 
-//! Bizim kullanacagimiz import yöntemi:
+/* ------------------------------------------------- */
 
-const {
-  test1: func1,
-  test2,
-  test3,
-  variable: deger,
-} = require("./module/module.js");
+//* Bizim kullanacagimiz import yöntemi:
 
-func1();
-test2();
-test3();
-console.log(deger);
+// const {
+//   test1: func1,
+//   test2,
+//   test3,
+//   variable: deger,
+// } = require("./module/module.js");
+
+// func1();
+// test2();
+// test3();
+// console.log(deger);
