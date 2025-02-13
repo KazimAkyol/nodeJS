@@ -9,20 +9,30 @@ console.log("modul dosyasi calisti");
 
 // module.exports = testFunc;
 
-const singleFunc = function () {
-  const yil = 2025;
-  console.log(yil);
+//! tek fonksiyon icinden cagirma:
 
-  const testFunc1 = function () {
-    console.log("testFunc1 running");
-  };
+// const singleFunc = function () {
+//   const yil = 2025;
+//   console.log(yil);
 
-  const testFunc2 = function () {
-    console.log("testFunc2 running");
-  };
+//   const testFunc1 = function () {
+//     console.log("testFunc1 running");
+//   };
 
-  testFunc1();
-  testFunc2();
+//   const testFunc2 = function () {
+//     console.log("testFunc2 running");
+//   };
+
+//   return { testFunc1, testFunc2 };
+// };
+
+// module.exports = singleFunc;
+
+const testFunc1 = function () {
+  console.log("testFunc1 running");
+};
+const testFunc2 = function () {
+  console.log("testFunc2 running");
 };
 
-module.exports = singleFunc;
+module.exports = [testFunc1, testFunc2];

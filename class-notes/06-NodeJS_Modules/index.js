@@ -16,5 +16,14 @@ require("./module/module.js");
 // testFunc2();
 // console.log(testFunc1);
 
-const singleFunc = require("./module/module.js");
-singleFunc();
+// const singleFunc = require("./module/module.js");
+// singleFunc();
+
+// const { testFunc1, testFunc2 } = singleFunc();
+// testFunc1();
+// testFunc2();
+
+//! Array olarak karsilama
+const [testFunc1, testFunc2] = require("./module/module.js");
+testFunc1();
+testFunc2();
