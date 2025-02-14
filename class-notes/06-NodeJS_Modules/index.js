@@ -30,7 +30,7 @@ require("./module/module.js");
 
 /* ------------------------------------------------- */
 
-//! Array olarak karsilama
+//! array olarak karsilama
 const [testFunc1, testFunc2] = require("./module/module.js");
 testFunc1();
 
