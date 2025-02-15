@@ -43,6 +43,12 @@ const app = http.createServer((req, res) => {
       res.statusMessage = "POST yapamazsin"; //* mesaj döndürür.
       res.end("can not this method"); //*tarayiciya mesaj gönderir.
     }
+    else if (req.method=="DELETE"){
+        res.writeHead(405, "silme yapamazsin"),{
+            "Content-Type": "text/html",
+            "another-header": "another content",
+        }
+    }
   }
 });
 
