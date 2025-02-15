@@ -21,15 +21,29 @@ const app = http.createServer((req, res) => {
   //     res.end("<h1>Yeni blog ekle</h1>");
   //   }
 
+  /* ----------------------------------------------------------------- */
+
+  //   if (req.url == "/") {
+  //     res.write("this");
+  //     res.write("is");
+  //     res.write("home");
+  //     res.write("page");
+  //     res.write("   ");
+  //     res.write("welcome to clarusway");
+  //   }
+  //   res.end();
+
   if (req.url == "/") {
-    res.write("this");
-    res.write("is");
-    res.write("home");
-    res.write("page");
-    res.write("   ");
-    res.write("welcome to clarusway");
+    if (req.method == "GET") {
+      //* default zaten GET'tir.
+      res.end("<h1> Welcome to HomePage </h1>");
+    } else if (req.method == "POST") {
+      //* eger methodumuz POST ise;
+      res.statusCode = 400;
+      res.statusMessage = "POST yapamazsin"; //* mesaj döndürür.
+      res.end("can not this method"); //*tarayiciya mesaj gönderir.
+    }
   }
-  res.end();
 });
 
 app.listen(PORT, () => console.log(`server running: http://${HOST}:${PORT}`)); // Belirtilen HOST ve POST üzerinden sunucuyu baslatir.
