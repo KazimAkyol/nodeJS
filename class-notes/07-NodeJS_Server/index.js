@@ -7,6 +7,7 @@ require("dotenv").config(); //? .env dosyasindaki verileri process.env icine yü
 const PORT = process?.env.PORT || 8000;
 const HOST = process?.env.HOST || "127.0.0.1";
 
+const { error } = require("node:console");
 const http = require("node:http"); // http modülünü cagirir. Bu node.js'in icindedir.
 
 const app = http.createServer((req, res) => {
@@ -41,7 +42,7 @@ const app = http.createServer((req, res) => {
       //* eger methodumuz POST ise;
       res.statusCode = 400;
       res.statusMessage = "POST yapamazsin"; //* mesaj döndürür.
-      res.end("can not this method"); //*tarayiciya mesaj gönderir.
+      res.end("can not POST methods"); //*tarayiciya mesaj gönderir.
     } else if (req.method == "DELETE") {
       res.writeHead(405, "silme yapamazsin", {
         "Content-Type": "text/html", //* Yanitin iceriginin htmö oldugunu belirtir.
@@ -49,6 +50,14 @@ const app = http.createServer((req, res) => {
       });
       res.end("can not this method");
     }
+  } else if (req.url == "/list") {
+    const obj = {
+      error: false,
+      message: "this is list page",
+    };
+    res.end(JSON.stringify(obj));
+  } else if (req.url == "/test") {
+    res.end("<h1> Test page </h1>");
   }
 });
 
