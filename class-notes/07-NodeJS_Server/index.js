@@ -8,11 +8,11 @@ const PORT = process?.env.PORT || 8000;
 const HOST = process?.env.HOST || "127.0.0.1";
 
 const { error } = require("node:console");
-const http = require("node:http"); // http modülünü cagirir. Bu node.js'in icindedir.
+const http = require("node:http"); //? http modülünü cagirir. Bu node.js'in icindedir.
 
 const app = http.createServer((req, res) => {
-  // Piyasa standarti app olarak isimlendirilir.
-  console.log(req); // gelen HTTP istegini tüm detaylariyla yazdirir.
+  //? Piyasa standarti app olarak isimlendirilir.
+  // console.log(req); //? gelen HTTP istegini tüm detaylariyla yazdirir.
   console.log("--------------------");
   //   if (req.url == "/") {
   //     res.end("<h1>welcome</h1>");
@@ -22,7 +22,7 @@ const app = http.createServer((req, res) => {
   //     res.end("<h1>Yeni blog ekle</h1>");
   //   }
 
-  /* ----------------------------------------------------------------- */
+  //* --------------------------------------------------------------------------------------- //
 
   //   if (req.url == "/") {
   //     res.write("this");
@@ -47,6 +47,8 @@ const app = http.createServer((req, res) => {
       res.writeHead(405, "silme yapamazsin", {
         "Content-Type": "text/html", //* Yanitin iceriginin htmö oldugunu belirtir.
         "another-header": "another content", //* özel bir header ekler.
+        // "another-header1": "another content", //* özel bir header ekler.
+        // "another-header2": "another content", //* özel bir header ekler.
       });
       res.end("can not this method");
     }
