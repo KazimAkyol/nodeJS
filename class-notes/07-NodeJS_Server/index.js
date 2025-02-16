@@ -42,12 +42,12 @@ const app = http.createServer((req, res) => {
       res.statusCode = 400;
       res.statusMessage = "POST yapamazsin"; //* mesaj döndürür.
       res.end("can not this method"); //*tarayiciya mesaj gönderir.
-    }
-    else if (req.method=="DELETE"){
-        res.writeHead(405, "silme yapamazsin"),{
-            "Content-Type": "text/html",
-            "another-header": "another content",
-        }
+    } else if (req.method == "DELETE") {
+      res.writeHead(405, "silme yapamazsin", {
+        "Content-Type": "text/html", //* Yanitin iceriginin htmö oldugunu belirtir.
+        "another-header": "another content", //* özel bir header ekler.
+      });
+      res.end("can not this method");
     }
   }
 });
