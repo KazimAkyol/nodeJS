@@ -23,7 +23,6 @@ for (let i = 1; i < 5; i++) {
 function carpma(a, b) {
   return a * b;
 }
-
 console.log(`${carpma(2, 10)}`);
 console.log(typeof `${carpma(2, 10)}`);
 

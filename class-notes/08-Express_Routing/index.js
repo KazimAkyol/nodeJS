@@ -1,8 +1,8 @@
 "use strict";
 
-/* ------------------------------------------------------------- *
+/* ------------------------------------------------------------------------ *
                     Express & Routing
-/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------------------ */
 //* npm init -y => create package.json
 //* npm i express dotenv
 
@@ -15,23 +15,25 @@ const app = express(); // Run application on express.
 require("dotenv").config();
 const PORT = process.env.PORT;
 
+/* ------------------------------------------------------------------------ *
+
 //? HTTP_METHODS & URLS:
-// app.get("/", (req, res) => res.end("called in 'get' method."));
-// app.post("/", (req, res) => res.end("called in 'post' method."));
-// app.put("/", (req, res) => res.end("called in 'put' method."));
-// app.patch("/", (req, res) => res.end("called in 'patch' method."));
-// app.delete("/", (req, res) => res.end("called in 'delete' method."));
+app.get("/", (req, res) => res.end("called in 'get' method."));
+app.post("/", (req, res) => res.end("called in 'post' method."));
+app.put("/", (req, res) => res.end("called in 'put' method."));
+app.patch("/", (req, res) => res.end("called in 'patch' method."));
+app.delete("/", (req, res) => res.end("called in 'delete' method."));
 
 //* Tüm methodlara izin ver;
-// app.all("/", (req, res) => res.end("called in 'all' method."));
+app.all("/", (req, res) => res.end("called in 'all' method."));
 
 //* app.route('url)
-// app
-//   .route("/")
-//   .get((req, res) => res.send("get"))
-//   .post((req, res) => res.send("post"))
-//   .put((req, res) => res.send("put"))
-//   .delete((req, res) => res.send("delete"));
+app
+  .route("/")
+  .get((req, res) => res.send("get"))
+  .post((req, res) => res.send("post"))
+  .put((req, res) => res.send("put"))
+  .delete((req, res) => res.send("delete"));
 
 /* ------------------------------------------------------------------------ *
 //? URL(Path) Options:
@@ -70,7 +72,7 @@ app.get("/blogs/:blogId/:author/search/*", (req, res) => {
   });
 });
 
-// app.get("/user/:userId([0,9])", (req, res) => {
+// app.get('/user/:userId([0-9]+)', (req, res) => {
 app.get("/user/:userId(\\d+)", (req, res) => {
   res.send({
     params: req.params,
@@ -110,10 +112,16 @@ app.delete("/status-codes", (req, res) =>
 /* ------------------------------------------------------------------------ */
 
 //? Download File:
-app.get('/download', (req,res)=>res.download('.index.js', 'changendName.txt'));
+app.get("/download", (req, res) =>
+  res.download(".index.js", "changendName.txt")
+);
 
 //? Redirect:
-app.get('/redirect', (req,res)=> res.redirect(301, 'https://www.clarsway.com'))
-app.get('/redirect', (req,res)=> res.redirect(301, 'https://www.clarsway.com'))
+app.get("/redirect", (req, res) =>
+  res.redirect(301, "https://www.clarsway.com")
+);
+app.get("/redirect-temp", (req, res) =>
+  res.redirect(302, "https://www.clarsway.com")
+);
 /* ------------------------------------------------------------------------ */
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));

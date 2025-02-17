@@ -1,5 +1,8 @@
 "use strict";
 
+//* Yazilan kodlarin izlenmesini(watching) istiyorsak Terminale (nodemon klasör adi) seklinde yazilir:
+// $ nodemon oop1.js
+
 /* ---------------------------------------- * // alt + shift + a
                     OBJECTS
 /* ---------------------------------------- *
