@@ -51,13 +51,23 @@ app.get(/xyz$/, (req, res) => res.send("regexp /xyz$/")); // url ends with ='xyz
 
 /* ------------------------------------------------------------------------ */
 //? URL Parameters:
-app.get('/blogs', (req,res)=> {
-    console.log(req)
+app.get("/blogs/:blogId", (req, res) => {
+  //   console.log(req); // request bir obje yapisindadir ve icindeki degerlere nokta '.' notasyonuyla ulasabiliriz.
 
-    res.send('thia is blogs route')
-})
-
-
+  res.send({
+    blogId: req.params.blogId,
+    url: {
+      protocol: req.protocol,
+      subdomains: req.subdomains,
+      hostname: req.hostname,
+      //   baseUrl: req.baseUrl, // deprecated.
+      params: req.params,
+      query: req.query,
+      path: req.path,
+      originalUrls: req.originalUrl,
+    },
+  });
+});
 
 /* ------------------------------------------------------------------------ */
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));
