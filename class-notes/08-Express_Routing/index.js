@@ -11,14 +11,9 @@
 const express = require("express"); // Express değişkenine express Framework atadik.
 
 const app = express(); // Run application on express.
-/* ------------------------------------------------------------- */
 //? Env
 require("dotenv").config();
 const PORT = process.env.PORT;
-
-// if(req.url == "/") { //*Routing with NodeJs
-
-// }
 
 //? HTTP_METHODS & URLS:
 // app.get("/", (req, res) => res.end("called in 'get' method."));
@@ -38,7 +33,7 @@ const PORT = process.env.PORT;
 //   .put((req, res) => res.send("put"))
 //   .delete((req, res) => res.send("delete"));
 
-/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
 //? URL(Path) Options:
 
 app.get("/", (req, res) => res.send("in 'root' path")); // == root
@@ -55,7 +50,16 @@ app.get("/abc*123", (req, res) => res.send("in abc*123")); // abc123 or abc(ANY)
 app.get(/xyz$/, (req, res) => res.send("regexp /xyz$/")); // url ends with ='xyz'
 
 /* ------------------------------------------------------------------------ */
+//? URL Parameters:
+app.get('/blogs', (req,res)=> {
+    console.log(req)
 
+    res.send('thia is blogs route')
+})
+
+
+
+/* ------------------------------------------------------------------------ */
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));
 /* ------------------------------------------------------------- */
 /* ------------------------------------------------------------- */
