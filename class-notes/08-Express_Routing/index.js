@@ -6,7 +6,19 @@
 //* npm init -y => create package.json
 //* npm i express dotenv
 
-console.log("hi");
+/* Express Start */
+
+const express = require("express"); // Express değişkenine express Framework atadik.
+
+const app = express(); // Run application on express.
+/* ------------------------------------------------------------- */
+//* Env
+require("dotenv").config();
+const PORT = process.env.PORT;
+
+/* ------------------------------------------------------------- */
+
+app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));
 /* ------------------------------------------------------------- */
 /* ------------------------------------------------------------- */
 /* ------------------------------------------------------------- */
