@@ -49,6 +49,11 @@ app.get("/abc(x?)123", (req, res) => res.send("in abc(x?)123")); // abc123 or ab
 app.get("/abc(x+)123", (req, res) => res.send("in abc(x+)123")); // abc123 or abc....xxx123
 app.get("/abc*123", (req, res) => res.send("in abc*123")); // abc123 or abc(ANY)123
 
+//* express-urls supported regexp:
+// app.get(/xyz/, (req, res) => res.send("regexp /xyz/")); // url contains ='xyz'
+// app.get(/^\/xyz/, (req, res) => res.send("regexp /^xyz/")); // url starts with ='xyz'
+app.get(/xyz$/, (req, res) => res.send("regexp /xyz$/")); // url ends with ='xyz'
+
 /* ------------------------------------------------------------------------ */
 
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));
