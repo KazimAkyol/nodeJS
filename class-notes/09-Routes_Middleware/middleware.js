@@ -1,15 +1,15 @@
 "use strict";
 
-/* --------------------------------------------------------- *
-                   EXPRESSJS - MIDDLEWARES
-/* --------------------------------------------------------- */
+/* ------------------------------------------------------------------------ *
+                           EXPRESSJS - MIDDLEWARES
+/* ------------------------------------------------------------------------ */
 
 const express = require("express");
 const app = express();
 
 require("dotenv").config();
 const PORT = process.env.PORT;
-/* --------------------------------------------------------- *
+/* ------------------------------------------------------------------------ *
 //? Middleware functions must has three parameters.
 //? Last parameter is for next()
 
@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 
   res.send({ message: "Hello Cohort DE-10" });
 });
-/* --------------------------------------------------------- *
+/* ------------------------------------------------------------------------ *
 // Middleware:
 app.get("/", (req, res, next) => {
   if (req.query.username == "clarusway") {
@@ -42,7 +42,7 @@ app.get("/", (req, res, next) => {
 app.get("/", (req, res) => {
   res.send({ message: "Hello Clarusway" });
 });
-/* --------------------------------------------------------- *
+/* ------------------------------------------------------------------------ *
 // Sending data from middleware to others routes.
 app.get("/", (req, res, next) => {
   if (req.query.username == "clarusway") {
@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
   console.log(req.username);
   res.send({ message: "Hello" });
 });
-/* --------------------------------------------------------- *
+/* ------------------------------------------------------------------------ *
 
 app.get("/", (req, res, next) => {
   req.message1 = "middleware-1 started.";
@@ -88,7 +88,7 @@ app.get("/", (req, res) => {
     message4: req.message4,
   });
 });
-/* --------------------------------------------------------- */
+/* ------------------------------------------------------------------------ *
 
 const middleFn1 = (req, res, next) => {
   console.log("middleware function 1 started");
@@ -116,6 +116,18 @@ app.get("/abc", (req, res) => {
     mesaage: " Hello Cohort DE-10",
   });
 });
-/* --------------------------------------------------------- */
+/* ------------------------------------------------------------------------ */
+
+const { middleFn1, middleFn2 } = require("./middlewares"); // in object
+app.use(middleFn1, middleFn2);
+
+app.post("/abc", (req, res) => {
+  console.log("this is from route");
+  res.send({
+    message: "Hello Cohort DE-10",
+  });
+});
+
+/* ------------------------------------------------------------------------ */
 
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));
