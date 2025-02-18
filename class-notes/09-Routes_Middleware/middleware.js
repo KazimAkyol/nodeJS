@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
   console.log(req.username);
   res.send({ message: "Hello" });
 });
-/* --------------------------------------------------------- */
+/* --------------------------------------------------------- *
 
 app.get("/", (req, res, next) => {
   req.message1 = "middleware-1 started.";
@@ -88,5 +88,34 @@ app.get("/", (req, res) => {
     message4: req.message4,
   });
 });
+/* --------------------------------------------------------- */
+
+const middleFn1 = (req, res, next) => {
+  console.log("middleware function 1 started");
+  next();
+};
+
+const middleFn2 = (req, res, next) => {
+  console.log("middleware function 2 started");
+  next();
+};
+
+//* use middleware function:
+// app.use(middleFn1);
+// app.use(middleFn2);
+
+//* Alternative:
+// app.use(middleFn1, middleFn2);
+// app.use([middleFn1, middleFn2]);
+app.get("/abc", middleFn1); // only '/' and only get
+app.use("/abc", middleFn2); // anly '/abc' and all methods
+
+app.get("/abc", (req, res) => {
+  console.log("this is from route");
+  res.send({
+    mesaage: " Hello Cohort DE-10",
+  });
+});
+/* --------------------------------------------------------- */
 
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));
