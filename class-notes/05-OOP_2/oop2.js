@@ -34,7 +34,7 @@ const instanceExp2 = new PascalCaseClassName(0);
 // console.log(instanceExp);
 console.log(instanceExp2);
 
-/* ------------------------------------ */
+/* ------------------------------------ *
 
 class Car {
   isRunning = false;
@@ -85,7 +85,7 @@ class Car extends Vehicle {
   }
 }
 
-const Bmw = new Car("BMW", "760Li", 2025, "Car");
+// const Bmw = new Car("BMW", "760Li", 2025, "Car");
 // console.log(Bmw);
 
 // const Motorbike = new Car("Harley-Davidson", "Street 750", 2021, "Motorbike");
@@ -109,9 +109,9 @@ const BmwAccessory = new Accessory(
 console.log(BmwAccessory);
 
 /* ------------------------------------ *
-//? Polymorphism: Miras aldigimiz sinifin özellik/metodlarini yeniden yazabiliriz.
-//? - Override: Üst metodla aynı isim ve yapıda yeni bir metod yazma. (ezme / iptal etme / önceliğini alma)
-//? - Overload: Üst metodla aynı isimde ama farklı yapıda (farklı adet/tip) yeni method oluşturma. (aynı anda ikisi de aktif) (JS desteklemez)
+//* Polymorphism: Miras aldigimiz sinifin özellik/metodlarini yeniden yazabiliriz.
+//* - Override: Üst metodla aynı isim ve yapıda yeni bir metod yazma. (ezme / iptal etme / önceliğini alma)
+//* - Overload: Üst metodla aynı isimde ama farklı yapıda (farklı adet/tip) yeni method oluşturma. (aynı anda ikisi de aktif) (JS desteklemez)
 
 class Vehicle {
   vehicleIsActive = true;
@@ -162,8 +162,8 @@ class Vehicle {
     console.log("This is a private method");
   }
 
-  _protetetedProperty = "Protected Property";
-  _protetetedMethod() {
+  _protectedProperty = "Protected Property";
+  _protectedMethod() {
     return this;
   }
 
@@ -197,9 +197,10 @@ class Car extends Vehicle {
 const Bmw = new Car("BMW", "760li", 2025, "Car");
 // console.log(Bmw.privateAttribute);
 // console.log(Bmw.privateMethod());
-console.log(Bmw.protetetedProperty);
+console.log(Bmw._protectedProperty);
 
 /* ------------------------------------ */
+
 //? GETTER & SETTER METHODS: Görevi veri getirme (getter) ve veri güncelleme (setter) olan metodlardır.
 //? "STATIC" KEYWORD: Class'dan direkt erişim. (Instance erişemez.)
 
@@ -221,7 +222,7 @@ class Car {
     this.#price = newPrice;
   }
 
-  //? Direkt class ile erismek istediklarimizi static ile isaretleriz.
+  //? Direkt class ile erismek istediklerimizi static ile isaretleriz.
   //? Statik property veya methodlara instance ile erisilmez.
 
   static staticProp = "Static prop";
@@ -246,5 +247,3 @@ console.log(Bmw.getPrice);
 Car.CustomObject();
 // console.log(Bmw.CustomObject());
 console.log(Car.staticProp);
-
-/* ------------------------------------ */

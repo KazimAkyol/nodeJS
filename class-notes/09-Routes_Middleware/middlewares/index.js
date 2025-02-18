@@ -34,7 +34,8 @@ module.exports = {
     console.log("middleware function 1 started");
     next();
   },
+  middleFn2: (req, res, next) => {
+    console.log("middleware function 2 started");
+    next();
+  },
 };
-/* --------------------------------------------------------- */
-/* --------------------------------------------------------- */
-/* --------------------------------------------------------- */
