@@ -13,41 +13,30 @@ const PORT = process.env.PORT;
 //? Middleware functions must has three parameters.
 //? Last parameter is for next()
 
-// Middleware:
-app.get("/", (req, res, next) => {
-  console.log("Middleware started");
+// Route-Middleware
+app.get('/', (req, res, next) => {
 
-  next();
-});
-
-// Route-Path:
-app.get("/", (req, res) => {
-  console.log("Route started");
-
-  res.send({ message: "Hello Cohort DE-10" });
-});
-/* ------------------------------------------------------------------------ *
-// Middleware:
-app.get("/", (req, res, next) => {
-  if (req.query.username == "clarusway") {
+    console.log('Middlware started.');
     next();
-  } else {
-    res.send({
-      message: "username is wrong",
-    });
-  }
 });
 
-// Route
-app.get("/", (req, res) => {
-  res.send({ message: "Hello Clarusway" });
+// Route-Path;
+app.get('/', (req, res) => {
+
+    console.log('Route started');
+
+    res.send({
+        message: "Hello Cohort DE-10"
+    })
 });
+
+
 /* ------------------------------------------------------------------------ *
+
 // Sending data from middleware to others routes.
 app.get("/", (req, res, next) => {
-  if (req.query.username == "clarusway") {
-    req.username = "hagi";
-    console.log(req);
+  if (req.query.username) {
+    req.username = req.query?.username;
     next();
   } else {
     res.send({
@@ -58,9 +47,9 @@ app.get("/", (req, res, next) => {
 
 // Route
 app.get("/", (req, res) => {
-  console.log(req.username);
   res.send({ message: "Hello" });
 });
+
 /* ------------------------------------------------------------------------ *
 
 app.get("/", (req, res, next) => {
@@ -113,10 +102,11 @@ app.use("/abc", middleFn2); // anly '/abc' and all methods
 app.get("/abc", (req, res) => {
   console.log("this is from route");
   res.send({
-    mesaage: " Hello Cohort DE-10",
+    message: "Hello Cohort DE-10",
   });
 });
 /* ------------------------------------------------------------------------ */
+//? Import from other file
 
 const { middleFn1, middleFn2 } = require("./middlewares"); // in object
 app.use(middleFn1, middleFn2);
