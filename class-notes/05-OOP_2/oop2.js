@@ -34,7 +34,7 @@ const instanceExp2 = new PascalCaseClassName(0);
 // console.log(instanceExp);
 console.log(instanceExp2);
 
-/* ------------------------------------ *
+/* ------------------------------------ */
 
 class Car {
   isRunning = false;

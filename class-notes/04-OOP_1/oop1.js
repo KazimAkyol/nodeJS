@@ -90,7 +90,6 @@ const Car = {
 console.log(Car.getDetailsWithArrowFn()); // This keyword arrow fonksiyonlarda ulasilamaz.
 
 /*------------------------------------------*
-
 //? ARRAY DESTRUCTURING
 
 const testArr = ["value0", "value1", "value2", "value3"];
@@ -98,6 +97,7 @@ const testArr = ["value0", "value1", "value2", "value3"];
 // console.log(testArr[0]);
 // console.log(testArr[1]);
 // console.log(testArr[2]);
+
 // const val3 = testArr.slice(3, 4);
 // console.log(val3);
 
@@ -158,7 +158,6 @@ console.log(typeof obj);
 console.log(obj.brand);
 
 /*------------------------------------------*
-
 //? CONSTRUCTORS
 
 const constructorFn = function () {
