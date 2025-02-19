@@ -1,6 +1,6 @@
 "use strict";
 
-//! $ npm install dotenv
+// $ npm install dotenv
 
 require("dotenv").config(); //? .env dosyasindaki verileri process.env icine yükler.
 

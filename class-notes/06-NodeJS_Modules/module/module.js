@@ -75,15 +75,15 @@ module.exports = [testFunc1, testFunc2];
 
 //* Bizim kullanacagimiz yöntem (piyasa standarti):
 
-// module.exports = {
-//   test1: function () {
-//     console.log("test1 running");
-//   },
-//   test2: function () {
-//     console.log("test2 running");
-//   },
-//   test3: function () {
-//     console.log("test3 running");
-//   },
-//   variable: "new value",
-// };
+module.exports = {
+  test1: function () {
+    console.log("test1 running");
+  },
+  test2: function () {
+    console.log("test2 running");
+  },
+  test3: function () {
+    console.log("test3 running");
+  },
+  variable: "new value",
+};

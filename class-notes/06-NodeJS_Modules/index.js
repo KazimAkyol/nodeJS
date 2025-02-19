@@ -44,14 +44,13 @@ testFunc1();
 
 //* Bizim kullanacagimiz import yöntemi:
 
-// const {
-//   test1: func1,
-//   test2,
-//   test3,
-//   variable: deger,
-// } = require("./module/module.js");
-
-// func1();
-// test2();
-// test3();
-// console.log(deger);
+const {
+  test1: func1,
+  test2,
+  test3,
+  variable: deger,
+} = require("./module/module.js");
+func1();
+test2();
+test3();
+console.log(deger);
