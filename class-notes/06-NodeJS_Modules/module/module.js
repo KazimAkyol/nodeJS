@@ -47,7 +47,7 @@ console.log("modul dosyasi calisti");
 // };
 
 // module.exports = singleFunc;
-/* ------------------------------------------------- */
+/* ------------------------------------------------- *
 
 //! array olarak disari aktarma
 
@@ -62,7 +62,7 @@ module.exports = [testFunc1, testFunc2];
 
 /* ------------------------------------------------- */
 
-//! direkt export
+//! direkt export:
 // module.exports.testFunc1 = function () {
 //   console.log("testFunc1 running");
 // };
@@ -73,7 +73,7 @@ module.exports = [testFunc1, testFunc2];
 
 /* ------------------------------------------------- */
 
-//! Bizim kullanacagimiz yöntem (piyasa standarti):
+//* Bizim kullanacagimiz yöntem (piyasa standarti):
 
 // module.exports = {
 //   test1: function () {

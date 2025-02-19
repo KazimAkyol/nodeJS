@@ -28,7 +28,7 @@ require("./module/module.js");
 // testFunc1();
 // testFunc2();
 
-/* ------------------------------------------------- */
+/* ------------------------------------------------- *
 
 //! array olarak karsilama
 const [testFunc1, testFunc2] = require("./module/module.js");
