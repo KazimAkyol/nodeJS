@@ -15,7 +15,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
-/* ------------------------------------------------------- *
+/* ------------------------------------------------------- */
 //* throw
 //* 1- json veri göndermemiz lazim
 //* 2- her hatada bizim bildigimiz formatta gönderilmeli
@@ -23,6 +23,7 @@ const PORT = process.env.PORT || 8000;
 app.get("/user/:id", (req, res) => {
   const id = req.params.id;
   if (isNaN(id)) {
+    res.errorStatusCode = 400;
     throw new Error("ID is not a number");
   } else {
     res.send({
@@ -32,7 +33,7 @@ app.get("/user/:id", (req, res) => {
   }
 });
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 //* try-catch
 
 app.get("/user/:id", (req, res, next) => {
@@ -62,10 +63,15 @@ app.get("/user/:id", (req, res, next) => {
 /* ------------------------------------------------------- */
 
 //* Error Handler Middleware
+//* throw atilarak, try-catch blogu olmadan da calisir. Bu Error Handler'in gücünü gösterir.
+//* Error Handler'dan habersiz hicbir hata attirilamaz.
+
+//* Hatanin kimden kaynaklandigini statusCode olarak ifade edebilmek icin; örnegin id number olmasi gerekirken baska bir veri girildiginde 400(Bad Request), res degiskeninin yazilmasi unutuldugunda 500(Internal Server Error); bir statusCode tanimlanir ve url girilen veriye göre hata türü elde edilir.
 
 const errorHandler = (err, req, res, next) => {
   console.log("error handler worked");
-  res.send({
+  const statusCode = res.errorStatusCode ?? 500;
+  res.status(statusCode).send({
     error: true,
     message: err.message,
   });
