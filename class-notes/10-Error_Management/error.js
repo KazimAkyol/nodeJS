@@ -15,7 +15,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 //* throw
 //* 1- json veri göndermemiz lazim
 //* 2- her hatada bizim bildigimiz formatta gönderilmeli
@@ -60,20 +60,28 @@ app.get("/user/:id", (req, res, next) => {
 });
 
 //* middleware fonksiyonunun calismasi icin try-catch blogunda next(err) yazarak error handler'a yönlendirme yapilarak(middleware fonksiyonunun calisma sistemi) Terminal'de console'a yazilan yazi görülür. Burada 'error handler worked' yazdirildi.
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 
 //* async-functions
 
-const asyncFn= async()=> {
-    throw new Error('Created error in async-fn')
-}
+const asyncFn = async () => {
+  throw new Error("Created error in async-fn");
+};
 
+app.get("/async", async (req, res, next) => {
+  await asyncFn().catch(next);
+});
+
+/* ------------------------------------------------------- */
+
+//* express-async-errors
 /* ------------------------------------------------------- */
 
 //* Error Handler Middleware
 //* throw atilarak, try-catch blogu olmadan da calisir. Bu Error Handler'in gücünü gösterir.
 //* Error Handler'dan habersiz hicbir hata attirilamaz.
 //* Error Handler kodlarin en altinda bulunmali.
+//* Error Handler can not catch the async functions errors. For this one we can use catch method like this : catch(this)
 
 //* Hatanin kimden kaynaklandigini statusCode olarak ifade edebilmek icin; örnegin id number olmasi gerekirken baska bir veri girildiginde 400(Bad Request), res degiskeninin yazilmasi unutuldugunda 500(Internal Server Error); bir statusCode tanimlanir ve url girilen veriye göre hata türü elde edilir.
 
