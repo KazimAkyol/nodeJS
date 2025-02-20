@@ -5,7 +5,7 @@
 
 // $ npm init -y
 // npm install express dotenv
-// echo PORT=800 > .env
+// echo PORT=8000 > .env
 // cat > .gitignore && paste gitignore content & ctrl+c
 // nodemon
 
@@ -16,11 +16,12 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
+//? throw
 
 app.get("/user/:id", (req, res) => {
   const id = req.params.id;
   if (isNaN(id)) {
-    //...
+    throw new Error('ID is not a number');
   } else {
     res.send({
       error: false,
