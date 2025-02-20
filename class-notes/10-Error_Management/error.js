@@ -24,7 +24,7 @@ app.get("/user/:id", (req, res) => {
   const id = req.params.id;
   if (isNaN(id)) {
     res.errorStatusCode = 400;
-    throw new Error("ID is not a number");
+    throw new Error("ID is not a number", { cause: "params.id=" + id });
   } else {
     res.send({
       error: false,
@@ -62,9 +62,18 @@ app.get("/user/:id", (req, res, next) => {
 //* middleware fonksiyonunun calismasi icin try-catch blogunda next(err) yazarak error handler'a yönlendirme yapilarak(middleware fonksiyonunun calisma sistemi) Terminal'de console'a yazilan yazi görülür. Burada 'error handler worked' yazdirildi.
 /* ------------------------------------------------------- */
 
+//* async-functions
+
+const asyncFn= async()=> {
+    throw new Error('Created error in async-fn')
+}
+
+/* ------------------------------------------------------- */
+
 //* Error Handler Middleware
 //* throw atilarak, try-catch blogu olmadan da calisir. Bu Error Handler'in gücünü gösterir.
 //* Error Handler'dan habersiz hicbir hata attirilamaz.
+//* Error Handler kodlarin en altinda bulunmali.
 
 //* Hatanin kimden kaynaklandigini statusCode olarak ifade edebilmek icin; örnegin id number olmasi gerekirken baska bir veri girildiginde 400(Bad Request), res degiskeninin yazilmasi unutuldugunda 500(Internal Server Error); bir statusCode tanimlanir ve url girilen veriye göre hata türü elde edilir.
 
@@ -73,10 +82,14 @@ const errorHandler = (err, req, res, next) => {
   const statusCode = res.errorStatusCode ?? 500;
   res.status(statusCode).send({
     error: true,
-    message: err.message,
+    message: err.message, // This is error message.
+    cause: err.cause, // This discribes the reason of the error.
+    // stack: err.stack, // Error Details
   });
 };
 
+//* for run errorHandler call in use.
+//* It must be at last middleware.
 app.use(errorHandler);
 
 /* ------------------------------------------------------- */
