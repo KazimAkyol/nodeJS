@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- *
 //* throw
+
 //* 1- json veri göndermemiz lazim
 //* 2- her hatada bizim bildigimiz formatta gönderilmeli
 
@@ -54,12 +55,12 @@ app.get("/user/:id", (req, res, next) => {
     //   error: true,
     //   message: error.message,
     // });
-    //* to send this error to erro handler middleware
+    //* to send this error to errorHandler middleware
     next(err); // if you send error in the next method, it goes directly to the error handler middleware function.
   }
 });
 
-//* middleware fonksiyonunun calismasi icin try-catch blogunda next(err) yazarak error handler'a yönlendirme yapilarak(middleware fonksiyonunun calisma sistemi) Terminal'de console'a yazilan yazi görülür. Burada 'error handler worked' yazdirildi.
+//* middleware fonksiyonunun calismasi icin try-catch blogunda next(err) yazarak errorHandler'a yönlendirme yapilarak(middleware fonksiyonunun calisma sistemi) Terminal'de console'a yazilan yazi görülür. Burada 'error handler worked' yazdirildi.
 /* ------------------------------------------------------- *
 
 //* async-functions
@@ -75,13 +76,25 @@ app.get("/async", async (req, res, next) => {
 /* ------------------------------------------------------- */
 
 //* express-async-errors
+
+//* Proje durdurulur ve npm adresinden express-async-errors kurulumu Terminal'de yapildiktan sonra nodemon ile tekrar calistirilir.
+//* This module helps errorHandler to catch async errors.
+
+require("express-async-errors");
+
+app.get("/async", async (req, res, next) => {
+  res.errorStatusCode = 400;
+  throw new error("Created error in self-async-fn");
+});
+
 /* ------------------------------------------------------- */
 
 //* Error Handler Middleware
-//* throw atilarak, try-catch blogu olmadan da calisir. Bu Error Handler'in gücünü gösterir.
-//* Error Handler'dan habersiz hicbir hata attirilamaz.
-//* Error Handler kodlarin en altinda bulunmali.
-//* Error Handler can not catch the async functions errors. For this one we can use catch method like this : catch(this)
+
+//* throw atilarak, try-catch blogu olmadan da calisir. Bu errorHandler'in gücünü gösterir.
+//* errorHandler'dan habersiz hicbir hata attirilamaz.
+//* errorHandler kodlarin en altinda bulunmali.
+//* errorHandler can not catch the async functions errors. For this one we can use catch method like this : catch(this)
 
 //* Hatanin kimden kaynaklandigini statusCode olarak ifade edebilmek icin; örnegin id number olmasi gerekirken baska bir veri girildiginde 400(Bad Request), res degiskeninin yazilmasi unutuldugunda 500(Internal Server Error); bir statusCode tanimlanir ve url girilen veriye göre hata türü elde edilir.
 

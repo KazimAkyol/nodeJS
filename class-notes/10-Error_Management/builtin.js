@@ -1,7 +1,7 @@
 "use strict";
 const { error } = require("console");
 /* -------------------------------------------------------
-    EXPRESSJS - BUILTIN MIDDLEWARES
+           EXPRESSJS - BUILTIN MIDDLEWARES
 ------------------------------------------------------- */
 
 const express = require("express");
