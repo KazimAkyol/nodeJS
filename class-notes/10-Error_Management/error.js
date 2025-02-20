@@ -35,8 +35,7 @@ app.get("/user/:id", (req, res) => {
 /* ------------------------------------------------------- */
 //* try-catch
 
-
-app.get("/user/:id", (req, res) => {
+app.get("/user/:id", (req, res, next) => {
   const id = req.params.id;
 
   try {
@@ -49,13 +48,30 @@ app.get("/user/:id", (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.send({
-      error: true,
-      message: error.message,
-    });
+    // console.log(error);
+    // res.send({
+    //   error: true,
+    //   message: error.message,
+    // });
+    //* to send this error to erro handler middleware
+    next(err); // if you send error in the next method, it goes directly to the error handler middleware function.
   }
 });
+
+//* middleware fonksiyonunun calismasi icin try-catch blogunda next(err) yazarak error handler'a yönlendirme yapilarak(middleware fonksiyonunun calisma sistemi) Terminal'de console'a yazilan yazi görülür. Burada 'error handler worked' yazdirildi.
+/* ------------------------------------------------------- */
+
+//* Error Handler Middleware
+
+const errorHandler = (err, req, res, next) => {
+  console.log("error handler worked");
+  res.send({
+    error: true,
+    message: err.message,
+  });
+};
+
+app.use(errorHandler);
 
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
