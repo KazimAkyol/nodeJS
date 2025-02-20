@@ -22,7 +22,7 @@ app.use(express.text());
 //* Read form data
 app.use(express.urlencoded({ extended: true }));
 
-app.all("/:id", (req, res) => {
+app.all("/", (req, res) => {
   res.send({
     error: false,
     params: req.params,
@@ -33,4 +33,10 @@ app.all("/:id", (req, res) => {
 });
 
 /* ------------------------------------------------------- */
+
+//* Static Files
+
+// app.use("/images", express.static("/.images"));
+app.use("/public", express.static("./images"));
+
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
