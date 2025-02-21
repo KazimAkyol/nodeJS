@@ -28,10 +28,45 @@ app.all("/", (req, res) => {
 
 //* Sequilize
 
-const {Sequelize, DataTypes} = require('sequelize')
+const { Sequelize, DataTypes } = require("sequelize");
+
+//* where is DB(DB Connection Detail)
+const sequelize = new Sequelize("sqlite:./db.sqlite3");
+
+//* sequelize.define('tableName', {columns})
+const Todo = sequelize.define("todos", {
+  id: {
+    type: DataTypes.INTEGER,
+    // allowNull: false, // default:true
+    unique: true,
+    field: "custom_name",
+    comment: "description or comment",
+    primaryKey: true,
+    autoIncrement: true,
+  },
+
+  title: {
+    type: DataTypes.STRING(256), // varchar(256)
+    allowNull: false,
+  },
+
+  description: DataTypes.TEXT, // Short and Using
+
+  priority: {
+    // -1: Low, 0: Normal, 1: High
+    type: DataTypes.SMALLINT,
+    allowNull: false,
+    defaultValue: 0,
+  },
+
+  isDone: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: 0,
+  },
+});
 
 /* ------------------------------------------------------- */
-
 
 const errorHandler = (err, req, res, next) => {
   const errorStatusCode = res.errorStatusCode ?? 500;
