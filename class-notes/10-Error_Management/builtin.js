@@ -40,8 +40,9 @@ app.all("/:id", (req, res) => {
 /* ------------------------------------------------------- */
 
 //* Static Files
+//* url'i bizim Backend tarafindaki folder structure'mizla eslesiyorsa ve eslesen veriyi cekmek istiyorsak bunlara Static Files denir. Genelde resim olarak görülür.
 
-// app.use("/images", express.static("/.images"));
+// app.use("/images", express.static("./images"));
 app.use("/public", express.static("./images"));
 
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
