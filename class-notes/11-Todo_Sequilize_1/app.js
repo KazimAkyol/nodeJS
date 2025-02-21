@@ -3,6 +3,13 @@
     EXPRESSJS - TODO Project with Sequelize
 ------------------------------------------------------- */
 
+// $ npm init -y
+// npm i express dotenv express-async-errors
+// echo PORT=8000 > .env
+// npm i sequelize
+// npm i sqlite3
+// nodemon
+
 const express = require("express");
 const app = express();
 
@@ -11,24 +18,31 @@ const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
 // Accept json data:
-app.use(express.json())
+app.use(express.json());
 
-app.all('/', (req, res) => {
-    res.send('WELCOME TO TODO API')
-})
+app.all("/", (req, res) => {
+  res.send("WELCOME TO TODO API");
+});
 
-// continue from here...
+/* ------------------------------------------------------- */
+
+//* Sequilize
+
+const {Sequelize, DataTypes} = require('sequelize')
+
+/* ------------------------------------------------------- */
+
 
 const errorHandler = (err, req, res, next) => {
-    const errorStatusCode = res.errorStatusCode ?? 500
-    console.log('errorHandler worked.')
-    res.status(errorStatusCode).send({
-        error: true, // special data
-        message: err.message, // error string message
-        cause: err.cause, // error option cause
-        // stack: err.stack, // error details
-    })
-}
-app.use(errorHandler)
+  const errorStatusCode = res.errorStatusCode ?? 500;
+  console.log("errorHandler worked.");
+  res.status(errorStatusCode).send({
+    error: true, // special data
+    message: err.message, // error string message
+    cause: err.cause, // error option cause
+    // stack: err.stack, // error details
+  });
+};
+app.use(errorHandler);
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
