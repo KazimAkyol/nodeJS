@@ -66,6 +66,8 @@ const Todo = sequelize.define("todos", {
     defaultValue: 0,
   },
 
+  // newField: DataTypes.TEXT
+
   // No need define createdAt & updateAt fields. They are default created.
 });
 
@@ -77,6 +79,37 @@ sequelize
   .authenticate()
   .then(() => console.log("* DB Connected *"))
   .catch(() => console.log("! DB Not Connected !"));
+/* ------------------------------------------------------- */
+
+//* Routers
+const router = express.Router();
+
+// List Todos:
+router.get("/todo", async (req, res) => {
+  const result = await Todo.findAll(); // Select * From todos
+
+  res.send({
+    error: false,
+    result,
+  });
+});
+
+// Create Todo:
+router.post("/todo", async (req, res) => {
+  const result = await Todo.create({
+    title: "title-1",
+    description: "description-1",
+    isDone: false,
+    priority: 0,
+  });
+
+  res.send({
+    error: false,
+    result,
+  });
+});
+
+app.use(router);
 /* ------------------------------------------------------- */
 
 const errorHandler = (err, req, res, next) => {
