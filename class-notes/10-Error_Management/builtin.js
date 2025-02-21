@@ -12,21 +12,11 @@ const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
 
-app.get("/", (req, res) => {
-  req.send({
-    error: false,
-    params: req.params,
-    query: req.query,
-    headers: req.headers,
-    body: req.body,
-  });
-});
-
-/* ------------------------------------------------------- */
-
 //? Data receiving
 //* Read & Parse json data
+//* Frontend'ten gelen datayi parse yardimiyla objeye ceviriyoruz ve Body JSON'daki datayi tirnaklardan kurtarip app.use(express.json()) ile Response'a yazdiriyoruz. Gelen json veriyi hem okumaya hem de parse yapmayi sagliyor.
 app.use(express.json());
+
 
 //* Read text data
 app.use(express.text());
@@ -34,7 +24,7 @@ app.use(express.text());
 //* Read form data
 app.use(express.urlencoded({ extended: true }));
 
-app.all("/", (req, res) => {
+app.all("/:id", (req, res) => {
   res.send({
     error: false,
     params: req.params,
@@ -43,6 +33,8 @@ app.all("/", (req, res) => {
     body: req.body,
   });
 });
+
+//* req Body denildiginde Frontend'in bize gönderdigi bir data oldugunu anlayacagiz.
 
 /* ------------------------------------------------------- */
 
