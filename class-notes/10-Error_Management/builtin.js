@@ -12,6 +12,18 @@ const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
 
+app.get("/", (req, res) => {
+  req.send({
+    error: false,
+    params: req.params,
+    query: req.query,
+    headers: req.headers,
+    body: req.body,
+  });
+});
+
+/* ------------------------------------------------------- */
+
 //? Data receiving
 //* Read & Parse json data
 app.use(express.json());

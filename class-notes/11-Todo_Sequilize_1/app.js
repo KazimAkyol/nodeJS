@@ -66,19 +66,22 @@ const Todo = sequelize.define("todos", {
     defaultValue: 0,
   },
 
-  // newField: DataTypes.TEXT
+  newField: DataTypes.TEXT,
 
   // No need define createdAt & updateAt fields. They are default created.
 });
 
 //* Synchorization:
-sequelize.sync(); // Create table
+// sequelize.sync(); // Create table
+// sequelize.sync({ force: true }); // Drop Table & Crate Table
+sequelize.sync({ alter: true }); // Drop Table & Crate Table
 
 //* DB Connection:
 sequelize
   .authenticate()
   .then(() => console.log("* DB Connected *"))
   .catch(() => console.log("! DB Not Connected !"));
+
 /* ------------------------------------------------------- */
 
 //* Routers
@@ -110,6 +113,7 @@ router.post("/todo", async (req, res) => {
 });
 
 app.use(router);
+
 /* ------------------------------------------------------- */
 
 const errorHandler = (err, req, res, next) => {
