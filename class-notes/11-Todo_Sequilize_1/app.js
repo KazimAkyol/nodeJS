@@ -33,17 +33,18 @@ const { Sequelize, DataTypes } = require("sequelize");
 //* where is DB(DB Connection Detail)
 const sequelize = new Sequelize("sqlite:./db.sqlite3");
 
+//* MODEL:
 //* sequelize.define('tableName', {columns})
 const Todo = sequelize.define("todos", {
-  id: {
-    type: DataTypes.INTEGER,
-    // allowNull: false, // default:true
-    unique: true,
-    field: "custom_name",
-    comment: "description or comment",
-    primaryKey: true,
-    autoIncrement: true,
-  },
+  //   id: { //* No need to define ID field, it will be created auto.
+  //     type: DataTypes.INTEGER,
+  //     // allowNull: false, // default:true
+  //     unique: true,
+  //     field: "custom_name",
+  //     comment: "description or comment",
+  //     primaryKey: true,
+  //     autoIncrement: true,
+  //   },
 
   title: {
     type: DataTypes.STRING(256), // varchar(256)
@@ -64,8 +65,18 @@ const Todo = sequelize.define("todos", {
     allowNull: false,
     defaultValue: 0,
   },
+
+  // No need define createdAt & updateAt fields. They are default created.
 });
 
+//* Synchorization:
+sequelize.sync(); // Create table
+
+//* DB Connection:
+sequelize
+  .authenticate()
+  .then(() => console.log("* DB Connected *"))
+  .catch(() => console.log("! DB Not Connected !"));
 /* ------------------------------------------------------- */
 
 const errorHandler = (err, req, res, next) => {
