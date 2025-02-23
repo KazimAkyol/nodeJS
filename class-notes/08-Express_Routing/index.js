@@ -1,23 +1,24 @@
 "use strict";
 
 /* ------------------------------------------------------------------------ *
-                    Express & Routing
+                               EXPRESS & ROUTING
 /* ------------------------------------------------------------------------ */
-//* npm init -y => create package.json
-//* npm i express dotenv
 
-/* Express Start */
+// $ npm init -y => create package.json
+// npm i express dotenv
+
+//* Express Start
 
 const express = require("express"); // Express değişkenine express Framework atadik.
 
 const app = express(); // Run application on express.
-//? Env
+//* Env
 require("dotenv").config();
 const PORT = process.env.PORT;
 
-/* ------------------------------------------------------------------------ *
+/* ------------------------------------------------------------------------ */
 
-//? HTTP_METHODS & URLS:
+//* HTTP_METHODS & URLS:
 app.get("/", (req, res) => res.end("called in 'get' method."));
 app.post("/", (req, res) => res.end("called in 'post' method."));
 app.put("/", (req, res) => res.end("called in 'put' method."));
@@ -35,8 +36,8 @@ app
   .put((req, res) => res.send("put"))
   .delete((req, res) => res.send("delete"));
 
-/* ------------------------------------------------------------------------ *
-//? URL(Path) Options:
+/* ------------------------------------------------------------------------ */
+//* URL(Path) Options:
 
 app.get("/", (req, res) => res.send("in 'root' path")); // == root
 app.get("/path", (req, res) => res.send("in path")); // path == '/path/'
@@ -51,8 +52,8 @@ app.get("/abc*123", (req, res) => res.send("in abc*123")); // abc123 or abc(ANY)
 // app.get(/^\/xyz/, (req, res) => res.send("regexp /^xyz/")); // url starts with ='xyz'
 app.get(/xyz$/, (req, res) => res.send("regexp /xyz$/")); // url ends with ='xyz'
 
-/* ------------------------------------------------------------------------ *
-//? URL Parameters:
+/* ------------------------------------------------------------------------ */
+//* URL Parameters:
 app.get("/blogs/:blogId/:author/search/*", (req, res) => {
   //   console.log(req); // request bir obje yapisindadir ve icindeki degerlere nokta '.' notasyonuyla ulasabiliriz.
 
@@ -79,9 +80,9 @@ app.get("/user/:userId(\\d+)", (req, res) => {
   });
 });
 
-/* ------------------------------------------------------------------------ *
+/* ------------------------------------------------------------------------ */
 
-//? Response Methods:
+//* Response Methods:
 app.get("/", (req, res) => {
   //* sendStatus()
   //   res.sendStatus(401);
