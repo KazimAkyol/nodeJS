@@ -3,7 +3,7 @@
            EXPRESSJS - TODO Project with Sequelize
 ------------------------------------------------------- */
 
-//? Sequelize
+//* Sequelize
 
 const { Sequelize, DataTypes, where } = require("sequelize");
 
@@ -58,3 +58,5 @@ sequelize
   .authenticate()
   .then(() => console.log("* DB Connected *"))
   .catch(() => console.log("! DB Not Connected !"));
+
+module.exports = Todo;
