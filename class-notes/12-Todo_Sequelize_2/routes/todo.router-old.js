@@ -1,10 +1,10 @@
 "use strict";
 
+const { Router } = require("express");
+
 /* -------------------------------------------------------
            EXPRESSJS - TODO Project with Sequelize
 ------------------------------------------------------- */
-
-const { Router } = require("express");
 
 //* Routers
 
@@ -15,7 +15,15 @@ const router = require("express").Router();
 require("../models/todo.model");
 
 // List Todos:
-router.get("/todo", );
+router.get("/todo", async (req, res) => {
+  const result = await Todo.findAll(); // Select * From todos
+  // findAndCountAll()
+
+  res.send({
+    error: false,
+    result,
+  });
+});
 
 // Create Todo:
 router.post("/todo", async (req, res) => {
