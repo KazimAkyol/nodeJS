@@ -29,7 +29,7 @@ app.all("/", (req, res) => {
 /* ------------------------------------------------------- */
 //? Sequelize
 
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, where } = require("sequelize");
 
 // Where is DB (DB Connnection Detail)
 const sequelize = new Sequelize("sqlite:./db.sqlite3");
@@ -109,13 +109,45 @@ router.post("/todo", async (req, res) => {
 
   const result = await Todo.create(req.body);
 
-  res.send({
+  res.status(201).send({
     error: false,
     result,
   });
 });
 
-//TODO => READ - UPDATE - DELETE
+//* TODO => READ - UPDATE - DELETE
+
+//* Read Todo:
+
+router.get("/todo/:id", async (req, res) => {
+  //   const result = await Todo.findOne({ where: { id: req.params.id } });
+
+  const result = await Todo.findByPk(req.params.id);
+
+  res.status(202).send({
+    error: false,
+    result,
+  });
+});
+
+//* Update Todo:
+
+router.put("/todo/:id", async (req, res) => {
+  //   const result = await Todo.update({ ...newData }, { ...where }); => [1]:success, [0]:failed
+  //   const result = await Todo.update(
+  //     { title: "title-updated-5" },
+  //     { where: { id: 10 } }
+  //   );
+  const result = await Todo.update(
+    { title: req.body },
+    { where: { id: req.params.id } }
+  );
+
+  res.status(202).send({
+    error: false,
+    result,
+  });
+});
 
 app.use(router);
 /* ------------------------------------------------------- */
