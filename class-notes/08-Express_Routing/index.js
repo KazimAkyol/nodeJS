@@ -6,6 +6,7 @@
 
 // $ npm init -y => create package.json
 // npm i express dotenv
+// nodemon
 
 //* Express Start
 
@@ -17,9 +18,9 @@ const app = express(); // Run application on express.
 require("dotenv").config();
 const PORT = process.env.PORT;
 
-/* ------------------------------------------------------------------------ */
-
+/* ------------------------------------------------------------------------ *
 //* HTTP_METHODS & URLS:
+
 app.get("/", (req, res) => res.end("called in 'get' method."));
 app.post("/", (req, res) => res.end("called in 'post' method."));
 app.put("/", (req, res) => res.end("called in 'put' method."));
@@ -29,7 +30,7 @@ app.delete("/", (req, res) => res.end("called in 'delete' method."));
 //* Tüm methodlara izin ver;
 app.all("/", (req, res) => res.end("called in 'all' method."));
 
-//* app.route('url)
+//* app.route('url')
 app
   .route("/")
   .get((req, res) => res.send("get"))
@@ -37,7 +38,7 @@ app
   .put((req, res) => res.send("put"))
   .delete((req, res) => res.send("delete"));
 
-/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
 //* URL(Path) Options:
 
 app.get("/", (req, res) => res.send("in 'root' path")); // == root
@@ -53,8 +54,9 @@ app.get("/abc*123", (req, res) => res.send("in abc*123")); // abc123 or abc(ANY)
 // app.get(/^\/xyz/, (req, res) => res.send("regexp /^xyz/")); // url starts with ='xyz'
 app.get(/xyz$/, (req, res) => res.send("regexp /xyz$/")); // url ends with ='xyz'
 
-/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
 //* URL Parameters:
+
 app.get("/blogs/:blogId/:author/search/*", (req, res) => {
   //   console.log(req); // request bir obje yapisindadir ve icindeki degerlere nokta '.' notasyonuyla ulasabiliriz.
 
@@ -81,9 +83,10 @@ app.get("/user/:userId(\\d+)", (req, res) => {
   });
 });
 
-/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
 
 //* Response Methods:
+
 app.get("/", (req, res) => {
   //* sendStatus()
   //   res.sendStatus(401);
@@ -99,31 +102,33 @@ app.get("/", (req, res) => {
   });
 });
 
-//* Status Codes
-app.get("/status-codes", (req, res) => res.send({ message: "OK" })); // default status code: 200
+//* Status Codes:
+
+app.get("/status-codes", (req, res) => res.send({ message: "OK" })); // default statusCode:200
 app.post("/status-codes", (req, res) =>
   res.status(201).send({ message: "Created" })
 ); // post - 201
 app.put("/status-codes", (req, res) =>
   res.status(202).send({ message: "Accepted" })
-); // put - 202
+); // put:202
 app.delete("/status-codes", (req, res) =>
   res.status(204).send({ message: "No Content" })
-); // delete - 202
+); // delete:202
 
 /* ------------------------------------------------------------------------ */
 
-//? Download File:
+//* Download File:
+
 app.get("/download", (req, res) =>
   res.download(".index.js", "changendName.txt")
 );
 
 //? Redirect:
 app.get("/redirect", (req, res) =>
-  res.redirect(301, "https://www.clarsway.com")
+  res.redirect(301, "https://www.clarusway.com")
 );
 app.get("/redirect-temp", (req, res) =>
-  res.redirect(302, "https://www.clarsway.com")
+  res.redirect(302, "https://www.clarusway.com")
 );
-/* ------------------------------------------------------------------------ */
+
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));

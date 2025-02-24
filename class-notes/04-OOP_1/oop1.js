@@ -5,7 +5,7 @@
 
 /* ---------------------------------------- * // alt + shift + a
                     OBJECTS
-/* ---------------------------------------- *
+/* ---------------------------------------- */
 
 // Direkt objeleri isimlendirirken PascalCase veya camelCase kullanabiliriz.
 const exampleObject = {
