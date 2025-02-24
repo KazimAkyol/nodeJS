@@ -146,6 +146,20 @@ router.put("/todo/:id", async (req, res) => {
   res.status(202).send({
     error: false,
     result,
+    new: await Todo.findByPk(req.params.id),
+  });
+});
+
+//* Delete Todo:
+
+router.delete("/todo/:id", async (req, res) => {
+  //   await Todo.destroy({ ...where });
+  const result = await Todo.destroy({ where: { id: params.id } });
+
+  // 204 status code does not display and response
+  res.status(204).send({
+    error: false,
+    result,
   });
 });
 
