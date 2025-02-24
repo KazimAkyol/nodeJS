@@ -12,6 +12,7 @@
 const express = require("express"); // Express değişkenine express Framework atadik.
 
 const app = express(); // Run application on express.
+
 //* Env
 require("dotenv").config();
 const PORT = process.env.PORT;
