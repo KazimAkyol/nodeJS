@@ -10,17 +10,17 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
 /* ------------------------------------------------------------------------ *
-//? Middleware functions must has three parameters.
-//? Last parameter is for next()
+//* Middleware functions must has three parameters.
+//* Last parameter is for next()
 
-// Route-Middleware
+//* Route-Middleware
 app.get('/', (req, res, next) => {
 
     console.log('Middlware started.');
     next();
 });
 
-// Route-Path;
+//* Route-Path;
 app.get('/', (req, res) => {
 
     console.log('Route started');
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
 /* ------------------------------------------------------------------------ *
 
-// Sending data from middleware to others routes.
+//* Sending data from middleware to others routes.
 app.get("/", (req, res, next) => {
   if (req.query.username) {
     req.username = req.query?.username;
@@ -45,7 +45,7 @@ app.get("/", (req, res, next) => {
   }
 });
 
-// Route
+//* Route
 app.get("/", (req, res) => {
   res.send({ message: "Hello" });
 });

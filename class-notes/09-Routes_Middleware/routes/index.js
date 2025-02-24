@@ -1,13 +1,14 @@
 "use strict";
 
-/* --------------------------------------------------------- *
+/* ------------------------------------------------------------------ *
                    EXPRESSJS - ROUTING
-/* --------------------------------------------------------- */
+/* ------------------------------------------------------------------ */
+
 //* express.Router()
 // const express = require("express");
 // const router = express.Router();
 
-const router = require("express").Router(); // shorthand
+const router = require("express").Router(); //* router isminde bir degiskeni require yardimiyla express kütüphanesi dahil edilerek Router methodu cagirilarak tanimlanir.
 
 // router.get("/", (req, res) => res.send({ message: "Home Page" }));
 // router.get("/about", (req, res) => res.send({ message: "About Page" }));
@@ -29,17 +30,17 @@ const router = require("express").Router(); // shorthand
 
 router
   .route("/")
-  .get("/", (req, res) => {
+  .get((req, res) => {
     res.send({ message: "Home Page - GET" });
   })
-  .post("/", (req, res) => {
+  .post((req, res) => {
     res.send({ message: "Home Page - POST" });
   })
-  .put("/", (req, res) => {
+  .put((req, res) => {
     res.send({ message: "Home Page - PUT" });
   })
-  .delete("/", (req, res) => {
+  .delete((req, res) => {
     res.send({ message: "Home Page - DELETE" });
   });
 
-module.exports = router;
+module.exports = router; //*index.js'ten router'in exportu yapilir.
