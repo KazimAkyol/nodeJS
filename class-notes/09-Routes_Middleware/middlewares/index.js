@@ -14,9 +14,10 @@ const middleFn2 = (req, res, next) => {
   next();
 };
 
-module.exports = { middleFn1, middleFn2 };
+module.exports = { middleFn1, middleFn2 }; //* obje icinde birden fazla function export edilebilir.
 
 /* --------------------------------------------------------- *
+
 module.exports.middleFn1 = (req, res, next) => {
   console.log("middleware function 1 started");
   next();

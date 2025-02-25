@@ -10,7 +10,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
 
-/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
 //* Middleware functions must has three parameters.
 //* Last parameter is for next()
 
@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
   });
 });
 
-/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
 
 //* Sending data from middleware to others routes.
 app.get("/", (req, res, next) => {
@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
   res.send({ message: "Hello" });
 });
 
-/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
 
 app.get("/", (req, res, next) => {
   req.message1 = "middleware-1 started.";
@@ -75,7 +75,7 @@ app.get("/", (req, res) => {
     message4: req.message4,
   });
 });
-/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
 
 const middleFn1 = (req, res, next) => {
   console.log("middleware function 1 started");
@@ -103,7 +103,9 @@ app.get("/abc", (req, res) => {
     message: "Hello Cohort DE-10",
   });
 });
+
 /* ------------------------------------------------------------------------ */
+
 //* Import from other file
 
 const { middleFn1, middleFn2 } = require("./middlewares"); // in object
@@ -115,7 +117,5 @@ app.post("/abc", (req, res) => {
     message: "Hello Cohort DE-10",
   });
 });
-
-/* ------------------------------------------------------------------------ */
 
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));

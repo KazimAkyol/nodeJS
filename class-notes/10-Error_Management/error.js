@@ -4,10 +4,10 @@
 ------------------------------------------------------- */
 
 // $ npm init -y => create package.json
-// npm i express dotenv
-// echo PORT=8000 > .env
+// $ npm i express dotenv
+// $ echo PORT=8000 > .env
 // cat > .gitignore && paste gitignore content & ctrl+c
-// nodemon
+// $ nodemon
 
 const express = require("express");
 const app = express();
@@ -15,7 +15,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
-/* ------------------------------------------------------- *
+/* ------------------------------------------------------- */
 //* throw
 
 //* 1- json veri göndermemiz lazim
