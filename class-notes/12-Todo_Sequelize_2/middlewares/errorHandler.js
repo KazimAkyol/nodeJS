@@ -13,5 +13,3 @@ module.exports = (err, req, res, next) => {
     // stack: err.stack, // error details
   });
 };
-
-// module.exports = errorHandler;

@@ -13,7 +13,7 @@ module.exports = {
     const result = await Todo.findAll(); // Select * From todos
     // findAndCountAll()
 
-    res.send({
+    res.status(200).send({
       error: false,
       result,
     });
