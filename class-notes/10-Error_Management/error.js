@@ -15,7 +15,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 //* throw
 
 //* 1- json veri göndermemiz lazim
@@ -61,8 +61,8 @@ app.get("/user/:id", (req, res, next) => {
 });
 
 //* middleware fonksiyonunun calismasi icin try-catch blogunda next(err) yazarak errorHandler'a yönlendirme yapilarak(middleware fonksiyonunun calisma sistemi) Terminal'de console'a yazilan yazi görülür. Burada 'error handler worked' yazdirildi.
-/* ------------------------------------------------------- *
 
+/* ------------------------------------------------------- *
 //* async-functions
 
 const asyncFn = async () => {
@@ -74,10 +74,9 @@ app.get("/async", async (req, res, next) => {
 });
 
 /* ------------------------------------------------------- */
-
 //* express-async-errors
 
-//* Proje durdurulur ve npm adresinden express-async-errors kurulumu Terminal'de yapildiktan sonra nodemon ile tekrar calistirilir.
+//* Proje durdurulur ve npm adresinden express-async-errors kurulumu (npm i express-async-errors) Terminal'de yapildiktan sonra nodemon ile tekrar calistirilir.
 //* This module helps errorHandler to catch async errors.
 
 require("express-async-errors");
@@ -88,7 +87,6 @@ app.get("/async", async (req, res, next) => {
 });
 
 /* ------------------------------------------------------- */
-
 //* Error Handler Middleware
 
 //* throw atilarak, try-catch blogu olmadan da calisir. Bu errorHandler'in gücünü gösterir.
@@ -114,4 +112,5 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler);
 
 /* ------------------------------------------------------- */
+
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));

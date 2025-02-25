@@ -71,4 +71,6 @@ const app = http.createServer((req, res) => {
   }
 });
 
+/* --------------------------------------------------------------------------- */
+
 app.listen(PORT, () => console.log(`server running: http://${HOST}:${PORT}`)); // Belirtilen HOST ve POST üzerinden sunucuyu baslatir.
