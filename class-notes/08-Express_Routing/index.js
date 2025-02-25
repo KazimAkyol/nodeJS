@@ -5,8 +5,8 @@
 /* ------------------------------------------------------------------------ */
 
 // $ npm init -y => create package.json
-// npm i express dotenv
-// nodemon
+// $ npm i express dotenv
+// $ nodemon
 
 //* Express Start
 

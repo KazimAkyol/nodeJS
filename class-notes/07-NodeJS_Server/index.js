@@ -1,6 +1,8 @@
 "use strict";
 
+// $ npm init -y
 // $ npm install dotenv
+// $ nodemon
 
 //* .env dosyasindaki verileri process.env icine yükler.
 require("dotenv").config();

@@ -1,8 +1,8 @@
 "use strict";
 const { error } = require("console");
 /* -------------------------------------------------------
-           EXPRESSJS - BUILTIN MIDDLEWARES
-------------------------------------------------------- */
+              EXPRESSJS - BUILTIN MIDDLEWARES
+--------------------------------------------------------- */
 
 const express = require("express");
 const app = express();
@@ -11,10 +11,9 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
-
-//? Data receiving
+//? Data Receiving
 //* Read & Parse json data
-//* Frontend'ten gelen datayi parse yardimiyla objeye ceviriyoruz ve Body JSON'daki datayi tirnaklardan kurtarip app.use(express.json()) ile Response'a yazdiriyoruz. Gelen json veriyi hem okumaya hem de parse yapmayi sagliyor.
+//* Front-end'ten gelen datayi parse yardimiyla objeye ceviriyoruz ve Body JSON'daki datayi tirnaklardan kurtarip app.use(express.json()) ile Response'a yazdiriyoruz. Gelen json veriyi hem okumayi hem de parse yapmayi saglar.
 app.use(express.json());
 
 //* Read text data
@@ -38,11 +37,14 @@ app.all("/:id", (req, res) => {
 //* req Body denildiginde Frontend'in bize gönderdigi bir data oldugunu anlayacagiz.
 
 /* ------------------------------------------------------- */
-
 //* Static Files
-//* url'i bizim Backend tarafindaki folder structure'mizla eslesiyorsa ve eslesen veriyi cekmek istiyorsak bunlara Static Files denir. Genelde resim olarak görülür.
+//* url'i bizim Back-end tarafindaki folder structure'mizla eslesiyorsa ve eslesen veriyi cekmek istiyorsak bunlara Static Files denir. Genelde resim olarak gärülür.
 
 // app.use("/images", express.static("./images"));
 app.use("/public", express.static("./images"));
+
+//* Browser'a localhost:8000/public/nodejs.png yazinca elimizdeki resim ekrana bastirilir.
+
+/* ------------------------------------------------------- */
 
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));

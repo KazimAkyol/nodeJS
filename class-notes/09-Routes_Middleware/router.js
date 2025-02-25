@@ -37,10 +37,13 @@ router.get("/user/:id", (req, res) => res.send({ message: req.params.id }));
 app.use(router); //* router application'ini app application'a tanimladik.
 
 /* ------------------------------------------------------------------ */
+
 // const router = require("./routes/index.js"); //* index.js'ten export edilen router import edilir.
 // const router = require("./routes/index");
 // const router = require("./routes/");
 // app.use(router);
 app.use(require("./routes/"));
+
+/* ------------------------------------------------------------------ */
 
 app.listen(PORT, () => console.log("Running at: http://127.0.0.1:" + PORT));
