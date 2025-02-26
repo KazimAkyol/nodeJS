@@ -1,13 +1,14 @@
 "use strict";
+
 /* -------------------------------------------------------
          EXPRESSJS - TODO Project with Sequelize
 ------------------------------------------------------- */
 
 // $ npm init -y
-// npm i express dotenv express-async-errors
-// echo PORT=8000 > .env
-// npm i sequelize sqlite3
-// nodemon
+// $ npm i express dotenv express-async-errors
+// $ echo PORT=8000 > .env
+// $ npm i sequelize sqlite3
+// $ nodemon
 
 const express = require("express");
 const app = express();
@@ -126,5 +127,7 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 app.use(errorHandler);
+
 /* ------------------------------------------------------- */
+
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
