@@ -1,6 +1,7 @@
 "use strict";
-
-/* --- EXPRESSJS */
+/* -------------------------------------------------------
+    EXPRESSJS - BLOG Project with Mongoose
+------------------------------------------------------- */
 
 /* ----------------------------------------------------------------------- */
 
@@ -30,7 +31,9 @@ const BlogCategory = mongoose.model("BlogCategory", blogCategorySchema);
 /* ----------------------------------------------------------------------- */
 //* BlogPost Schema
 
-const blogPostSchema = new mongoose(
+// Create Schema
+
+const blogPostSchema = new mongoose.Schema(
   {
     // _id: ,
 
@@ -39,6 +42,7 @@ const blogPostSchema = new mongoose(
       type: mongoose.Schema.Types.ObjectId,
       ref: "BlogCategory",
       required: true,
+      // unique:true // convert to OneToOne Relation.
     },
 
     title: {
@@ -62,6 +66,7 @@ const blogPostSchema = new mongoose(
   }
 );
 
+// Set Model
 const BlogPost = mongoose.model("BlogPost", blogPostSchema);
 
 /* ----------------------------------------------------------------------- */

@@ -16,9 +16,10 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
-
+// Parse data
 app.use(express.json());
 
+// Catch error from async
 require("express-async-errors");
 
 //* DB Connection
@@ -26,6 +27,7 @@ require("express-async-errors");
 // dbConnection();
 require("./src/dbConnection")();
 
+/* ------------------------------------------------------- */
 //* Routes
 
 // Main route
@@ -36,7 +38,7 @@ app.all("/", (req, res) => {
 // Blog route
 app.use(require("./src/routes/blogRouter"));
 
-// Catch Errors:
+// Error Handler:
 app.use(require("./src/middlewares/errorHandler"));
 
 /* ------------------------------------------------------- */
