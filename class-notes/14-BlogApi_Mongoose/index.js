@@ -26,11 +26,15 @@ require("express-async-errors");
 // dbConnection();
 require("./src/dbConnection")();
 
+//* Routes
+
+// Main route
 app.all("/", (req, res) => {
   res.send("WELCOME TO BLOG API");
 });
 
-// continue from here...
+// Blog route
+app.use(require("./src/routes/blogRouter"));
 
 // Catch Errors:
 app.use(require("./src/middlewares/errorHandler"));

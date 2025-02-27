@@ -5,8 +5,12 @@ const { BlogCategory, BlogPost } = require("../models/blogModel");
 
 module.exports = {
   list: async (req, res) => {
+
+    const result = await BlogCategory.find()
+
     res.status().send({
       error: false,
+      result
     });
   },
 
