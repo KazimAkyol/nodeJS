@@ -25,8 +25,7 @@ app.all("/", (req, res) => {
 });
 
 /* ------------------------------------------------------- */
-
-//* Sequilize
+//* Sequelize
 
 const { Sequelize, DataTypes } = require("sequelize");
 
