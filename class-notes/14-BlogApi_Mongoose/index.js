@@ -44,3 +44,6 @@ app.use(require("./src/middlewares/errorHandler"));
 /* ------------------------------------------------------- */
 
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
+
+//* Backend boyunca takip edilecek yol:
+//* Model olustur, bu Model icin Controller olustur, Controller'i Router'a bagla, Router olusturduktan sonra export et ve bu Router'i da index.js'e bagla.
