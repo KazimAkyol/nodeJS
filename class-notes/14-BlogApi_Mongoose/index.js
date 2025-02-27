@@ -28,7 +28,7 @@ app.all("/", (req, res) => {
 // continue from here...
 
 // Catch Errors:
-app.use(require("./src/errorHandler"));
+app.use(require("./src/middlewares/errorHandler"));
 
 /* ------------------------------------------------------- */
 

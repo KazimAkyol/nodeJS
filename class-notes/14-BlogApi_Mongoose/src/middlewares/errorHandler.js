@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-           EXPRESSJS - TODO Project with Sequelize
+               EXPRESSJS - ErrorHandler
 ------------------------------------------------------- */
 
 module.exports = (err, req, res, next) => {
