@@ -34,6 +34,13 @@ const blogPostSchema = new mongoose(
   {
     // _id: ,
 
+    categoryId: {
+      // default relation : ManyToOne
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "BlogCategory",
+      required: true,
+    },
+
     title: {
       type: String,
       trim: true,
@@ -60,7 +67,7 @@ const BlogPost = mongoose.model("BlogPost", blogPostSchema);
 /* ----------------------------------------------------------------------- *
 //* Sample
 //* Create Schema
-// new mongoose.Schema({ fields }, { options });
+//* new mongoose.Schema({ fields }, { options });
 
 const nameSchema = new mongoose.Schema(
   {
@@ -99,7 +106,8 @@ const nameSchema = new mongoose.Schema(
 
 //* Database ile iletisime gecebilmek icin Schema'yi Model'e cevirmeliyiz.
 //* Convert Schema to Model
-// mongoose.model("ModelName", nameSchema);
+//* mongoose.model("ModelName", nameSchema);
+
 const ModelName = mongoose.model("ModelName", nameSchema);
 
 /* ----------------------------------------------------------------------- */
