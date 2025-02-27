@@ -64,6 +64,9 @@ const blogPostSchema = new mongoose(
 
 const BlogPost = mongoose.model("BlogPost", blogPostSchema);
 
+/* ----------------------------------------------------------------------- */
+module.exports = { BlogCategory, BlogPost };
+
 /* ----------------------------------------------------------------------- *
 //* Sample
 //* Create Schema
