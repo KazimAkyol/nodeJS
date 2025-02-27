@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
+         EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
 // $ npm init -y => create package.json
@@ -20,6 +20,11 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json());
 
 require("express-async-errors");
+
+//* DB Connection
+// const dbConnection = require("./src/dbConnection");
+// dbConnection();
+require("./src/dbConnection")();
 
 app.all("/", (req, res) => {
   res.send("WELCOME TO BLOG API");
