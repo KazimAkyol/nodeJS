@@ -13,7 +13,7 @@ const user = require("../controllers/userController");
 router.route("/category").get(user.list).post(user.create);
 
 router
-  .route("/user/:userId")
+  .route("/:userId")
   .get(user.read)
   .put(user.update)
   .delete(user.delete);
