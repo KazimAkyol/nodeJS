@@ -69,8 +69,8 @@ module.exports = { BlogCategory, BlogPost };
 
 /* -------------------------------------------------------*
 //* Sample
-// Create Schema
-// new mongoose.Schema({fields}, {options})
+//* Create Schema
+//* new mongoose.Schema({fields}, {options})
 
 const nameSchema = new mongoose.Schema({
 
@@ -102,8 +102,8 @@ const nameSchema = new mongoose.Schema({
     timestamps: true // createdAt & updatedAt
 });
 
-// Conver Schema to Model
-// mongoose.model('ModelName', nameSchema)
+//* Conver Schema to Model
+//* mongoose.model('ModelName', nameSchema)
 
 const ModelName = mongoose.model('ModelName', nameSchema);
 /*------------------------------------------------------- */
