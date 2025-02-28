@@ -15,7 +15,8 @@ router.route("/blog").get(blogCategory.list).post(blogCategory.create);
 router
   .route("/blog/:categoryId")
   .get(blogCategory.read)
-  .put(blogCategory.update);
+  .put(blogCategory.update)
+  .delete(blogCategory.delete);
 
 /* ------------------------------------------------------- */
 module.exports = router;
