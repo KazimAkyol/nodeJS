@@ -32,6 +32,7 @@ app.all("/", (req, res) => {
 
 // Blog route
 app.use(require("./src/routes/blogRouter"));
+app.use("user", require("./src/routes/userRouter"));
 
 // Error Handler:
 app.use(require("./src/middlewares/errorHandler"));
