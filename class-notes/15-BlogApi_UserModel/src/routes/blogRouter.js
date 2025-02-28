@@ -1,17 +1,21 @@
 "use strict";
 /* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
+           EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-const router = require('express').Router()
+const router = require("express").Router();
 
-const blogCategory = require('../controllers/blogController')
+const blogCategory = require("../controllers/blogController");
 
 /* ------------------------------------------------------- */
 // URL: /blog ->
 
-router.route('/blog')
-    .get(blogCategory.list)
+router.route("/blog").get(blogCategory.list).post(blogCategory.create);
+
+router
+  .route("/blog/:categoryId")
+  .get(blogCategory.read)
+  .put(blogCategory.update);
 
 /* ------------------------------------------------------- */
 module.exports = router;

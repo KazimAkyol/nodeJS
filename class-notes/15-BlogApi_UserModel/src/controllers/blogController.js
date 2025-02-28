@@ -1,50 +1,59 @@
 "use strict";
 /* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
+             EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
 // Call Models:
-const { BlogCategory, BlogPost } = require('../models/blogModel');
+const { BlogCategory, BlogPost } = require("../models/blogModel");
 
 module.exports = {
+  list: async (req, res) => {
+    const result = await BlogCategory.find();
 
-    list: async (req, res) => {
+    res.status(200).send({
+      error: false,
+      result,
+    });
+  },
 
-        const result = await BlogCategory.find();
+  // CRUD ->
 
-        res.status(200).send({
-            error: false,
-            result
-        })
-    },
+  create: async (req, res) => {
+    const result = await BlogCategory.create(req.body);
 
-    //TODO: Finish crud oparations.
+    res.status(201).send({
+      error: false,
+      result,
+    });
+  },
 
-    create: async (req, res) => {
+  read: async (req, res) => {
+    // await BlogCategory.findOne({...filter})
+    // const result = await BlogCategory.findOne({ _id: req.params.categoryId });
+    const result = await BlogCategory.findById(req.params.categoryId);
 
-        res.status().send({
-            error: false
-        })
-    },
+    res.status(200).send({
+      error: false,
+      result,
+    });
+  },
 
-    read: async (req, res) => {
+  update: async (req, res) => {
+    // const result = await BlogCategory.updateOne({ ...filter }, { data });
+    const result = await BlogCategory.updateOne(
+      { _id: req.params.categoryId },
+      req.body
+    );
 
-        res.status().send({
-            error: false
-        })
-    },
+    res.status(202).send({
+      error: false,
+      result,
+    });
+  },
 
-    update: async (req, res) => {
-
-        res.status().send({
-            error: false
-        })
-    },
-
-    delete: async (req, res) => {
-
-        res.status().send({
-            error: false
-        })
-    },
-}
+  delete: async (req, res) => {
+    res.status().send({
+      error: false,
+    });
+  },
+};
