@@ -3,67 +3,69 @@
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 /* -------------------------------------------------------*/
 //* BlogCategory Schema
 
 // Create Shcema
-const blogCategorySchema = new mongoose.Schema({
-
+const blogCategorySchema = new mongoose.Schema(
+  {
     // _id
 
     name: {
-        type: String,
-        trim: true,
-        required: true
-    }
-
-}, { collection: 'blogCategories' });
+      type: String,
+      trim: true,
+      required: true,
+    },
+  },
+  { collection: "blogCategories" }
+);
 
 // Set Model
-const BlogCategory = mongoose.model('BlogCategory', blogCategorySchema);
+const BlogCategory = mongoose.model("BlogCategory", blogCategorySchema);
 
 /* -------------------------------------------------------*/
 //* BlogPost Schema
 
-const blogPostSchema = new mongoose.Schema({
-
+const blogPostSchema = new mongoose.Schema(
+  {
     // _id // hexadecimal type
 
-    categoryId: { // default relation; ManyToOne
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'BlogCategory',
-        required: true, 
-        // unique:true // convert to OneToOne Relation.
+    categoryId: {
+      // default relation; ManyToOne
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "BlogCategory",
+      required: true,
+      // unique:true // convert to OneToOne Relation.
     },
 
     title: {
-        type: String,
-        trim: true,
-        required: true
+      type: String,
+      trim: true,
+      required: true,
     },
 
     content: {
-        type: String,
-        trim: true,
-        required: true
+      type: String,
+      trim: true,
+      required: true,
     },
 
     // createdAt
     // updatedAt
-
-}, {
-    collection: 'blogPosts',
-    timestamps: true
-});
+  },
+  {
+    collection: "blogPosts",
+    timestamps: true,
+  }
+);
 
 // Set Model
-const BlogPost = mongoose.model('BlogPost', blogPostSchema);
+const BlogPost = mongoose.model("BlogPost", blogPostSchema);
 
 /* -------------------------------------------------------*/
-module.exports = { BlogCategory, BlogPost }
-
+module.exports = { BlogCategory, BlogPost };
 
 /* -------------------------------------------------------*
 //* Sample

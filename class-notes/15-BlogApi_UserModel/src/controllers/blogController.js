@@ -43,8 +43,7 @@ module.exports.BlogCategory = {
   update: async (req, res) => {
     // const result = await BlogCategory.updateOne({ ...filter }, { data });
 
-    //* response from updateOne :
-    // Thunder Document:
+    //* response from updateOne (Thunder document reading) :
     //     "result": {
     //     "acknowledged": true, // if update methods ends successfuly
     //     "modifiedCount": 1, // if returns 0 : no any data updated cause data is already up to date.
@@ -68,8 +67,7 @@ module.exports.BlogCategory = {
   delete: async (req, res) => {
     // await BlogCategory.deleteOne({...filter})
 
-    //* response from deleteOne :
-    // Thunder Document
+    //* response from deleteOne (Thunder document reading) :
     //     "result": {
     //     "acknowledged": true, // if delete methods ends succesfuly
     //     "deletedCount": 1 // if returns 0 : no any data delete cause data is not found or already deleted.
@@ -94,6 +92,11 @@ module.exports.BlogCategory = {
 // BlogPost Controller:
 module.exports.blogPost = {
   list: async (req, res) => {
+    // await BlogPost.find({...filter},{...select})
+    // const result = await BlogPost.find();
+
+    //* the field you want display give true value. _id default is true
+    //* the field you want to expand with more detail, send the name of in populate method.
     const result = await BlogPost.find();
 
     res.status(200).send({
@@ -127,7 +130,7 @@ module.exports.blogPost = {
   update: async (req, res) => {
     // await BlogPost.updateOne({...filter},{...data})
 
-    //* response from updateOne : {
+    //* response from updateOne (Thunder document reading) : {
     // "acknowledged": true, // if update methods ends successfuly
     // "modifiedCount": 1, // if returns 0 : no any data updated cause data is already up to date.
     // "upsertedId": null,
@@ -150,7 +153,7 @@ module.exports.blogPost = {
   delete: async (req, res) => {
     // await BlogPost.deleteOne({...filter})
 
-    //* response from deleteOne : {
+    //* response from deleteOne (Thunder document reading) : {
     // "acknowledged": true, // if delete methods ends successfuly
     // "deletedCount": 1, // if returns 0 : no any data delete cause data is not found or already deleted.
     // }
