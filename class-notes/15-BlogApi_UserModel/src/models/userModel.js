@@ -50,7 +50,19 @@ const userSchema = new mongoose(
       // set:(password) => {return 'clarusway'} // whatever value set method returns it will be save to DB.
 
       //* Using crpto module in set method
+      set: (password) => {
+        // console.log(passwordEncrypte(password));
+        return passwordEncrypte(password);
+      },
+      set: passwordEncrypte,
+      //! validation
     },
+
+    firstName: String,
+
+    lastName: String,
   },
-  {}
+  { collection: "users" }
 );
+
+module.exports = mongoose.model("User", userSchema);

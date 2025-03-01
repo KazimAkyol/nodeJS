@@ -8,7 +8,7 @@ const { BlogCategory, BlogPost } = require("../models/blogModel");
 
 /* ---------------------------------------------------- */
 // BlogCategory Controller:
-module.exports.BlogCategory = {
+module.exports.blogCategory = {
   list: async (req, res) => {
     const result = await BlogCategory.find();
 

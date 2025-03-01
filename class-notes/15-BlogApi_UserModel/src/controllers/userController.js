@@ -1,14 +1,14 @@
 "use strict";
 /* -------------------------------------------------------
-             EXPRESSJS - BLOG Project with Mongoose
+            EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-// Call Models:
+// Call Model:
 const User = require("../models/blogModel");
 
 /* ------------------------------------------------------*/
 
-module.exports.User = {
+module.exports = {
   list: async (req, res) => {
     const result = await User.find();
 
@@ -77,10 +77,5 @@ module.exports.User = {
       res.errorStatusCode = 404;
       throw new Error("Data is not found or already deleted.");
     }
-
-    res.status(200).send({
-      error: false,
-      result,
-    });
   },
 };

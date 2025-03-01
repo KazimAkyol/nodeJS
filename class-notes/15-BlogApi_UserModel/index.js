@@ -30,7 +30,7 @@ app.all("/", (req, res) => {
   res.send("WELCOME TO BLOG API");
 });
 
-// Blog route
+// Blog & User routes
 app.use("/blog", require("./src/routes/blogRouter"));
 app.use("user", require("./src/routes/userRouter"));
 
