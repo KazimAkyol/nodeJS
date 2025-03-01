@@ -8,7 +8,7 @@ const { BlogCategory, BlogPost } = require("../models/blogModel");
 
 module.exports = {
   list: async (req, res) => {
-    const result = await BlogCategory.find();
+    const result = await BlogCategory.find(); //* DB'deki tüm verileri listelememizi sagliyor.
 
     res.status(200).send({
       error: false,

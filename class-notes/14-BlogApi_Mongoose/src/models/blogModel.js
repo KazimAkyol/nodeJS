@@ -72,7 +72,7 @@ const BlogPost = mongoose.model("BlogPost", blogPostSchema);
 /* ----------------------------------------------------------------------- */
 module.exports = { BlogCategory, BlogPost };
 
-/* ----------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------- *
 //* Sample
 //* Create Schema
 //* new mongoose.Schema({ fields }, { options });
@@ -85,10 +85,10 @@ const nameSchema = new mongoose.Schema(
     fieldName2: Boolean,
 
     fieldName3: {
-      type: String,
+      type: String, // JS Data Type
       default: null,
-      trim: true,
-      unique: true,
+      trim: true, // Cuts the space before & after.
+      unique: true, // Make it faster reachable in search.
       select: false, // if we don't want to send this field.
       index: true,
       // required: true,
@@ -97,7 +97,7 @@ const nameSchema = new mongoose.Schema(
       // enum: [1,2,3],
       enum: [[1, 2, 3], "custom error message"],
       // validate: ()=>true, // if return false it will throw a validation error.
-      validate: [() => true, "cutom error message"],
+      validate: [() => true, "custom error message"],
       get: () => {
         return data;
       }, // it works default when we do read operation
@@ -113,6 +113,7 @@ const nameSchema = new mongoose.Schema(
 );
 
 //* Database ile iletisime gecebilmek icin Schema'yi Model'e cevirmeliyiz.
+
 //* Convert Schema to Model
 //* mongoose.model("ModelName", nameSchema);
 
