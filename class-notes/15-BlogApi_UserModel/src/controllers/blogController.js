@@ -71,7 +71,8 @@ module.exports.blogCategory = {
     //     "result": {
     //     "acknowledged": true, // if delete methods ends succesfuly
     //     "deletedCount": 1 // if returns 0 : no any data delete cause data is not found or already deleted.
-    //   }
+    //   },
+
     const result = await BlogCategory.deleteOne({ _id: req.params.categoryId });
 
     if (result.deletedCount) {
@@ -80,11 +81,6 @@ module.exports.blogCategory = {
       res.errorStatusCode = 404;
       throw new Error("Data is not found or already deleted.");
     }
-
-    res.status(200).send({
-      error: false,
-      result,
-    });
   },
 };
 

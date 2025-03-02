@@ -3,6 +3,12 @@
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
+// $ npm init -y => create package.json
+// $ npm i express dotenv express-async-errors mongoose
+// $ echo PORT=8000 > .env
+// cat > .gitignore && paste gitignore content & ctrl+c
+// $ nodemon
+
 const express = require("express");
 const app = express();
 
