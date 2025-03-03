@@ -36,9 +36,9 @@ app.all("/", (req, res) => {
   res.send("WELCOME TO BLOG API");
 });
 
-// Blog & User routes
+// blog & user routes
 app.use("/blog", require("./src/routes/blogRouter"));
-app.use("user", require("./src/routes/userRouter"));
+app.use("/user", require("./src/routes/userRouter"));
 
 // Error Handler:
 app.use(require("./src/middlewares/errorHandler"));

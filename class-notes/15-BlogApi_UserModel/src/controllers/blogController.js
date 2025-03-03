@@ -10,12 +10,7 @@ const { BlogCategory, BlogPost } = require("../models/blogModel");
 // BlogCategory Controller:
 module.exports.blogCategory = {
   list: async (req, res) => {
-    // await BlogPost.find({ ...filter }, { ...select });
-    // const result = await BlogCategory.find();
-    const result = await BlogCategory.find(
-      {},
-      { categoryId: true, title: true, content: true }
-    ); // _id default true
+    const result = await BlogCategory.find();
 
     res.status(200).send({
       error: false,
@@ -98,7 +93,10 @@ module.exports.blogPost = {
 
     //* the field you want display give true value. _id default is true
     //* the field you want to expand with more detail, send the name of in populate method.
-    const result = await BlogPost.find();
+    const result = await BlogPost.find(
+      {},
+      { categoryId: true, title: true, content: true }
+    ).populate("categoryId");
 
     res.status(200).send({
       error: false,
@@ -120,7 +118,9 @@ module.exports.blogPost = {
   read: async (req, res) => {
     // await BlogPost.findOne({...filter})
     // const result = await BlogPost.findOne({ _id: req.params.blogId });
-    const result = await BlogPost.findById(req.params.blogId);
+    const result = await BlogPost.findById(req.params.postId).populate(
+      "categoryId"
+    );
 
     res.status(200).send({
       error: false,

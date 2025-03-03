@@ -18,7 +18,7 @@ module.exports = {
     });
   },
 
-  // CRUD ->
+  //* CRUD ->
 
   create: async (req, res) => {
     const result = await User.create(req.body);
@@ -68,7 +68,8 @@ module.exports = {
     //     "result": {
     //     "acknowledged": true, // if delete methods ends succesfuly
     //     "deletedCount": 1 // if returns 0 : no any data delete cause data is not found or already deleted.
-    //   }
+    //   },
+
     const result = await User.deleteOne({ _id: req.params.userId });
 
     if (result.deletedCount) {
