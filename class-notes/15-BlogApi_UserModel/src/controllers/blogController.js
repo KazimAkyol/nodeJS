@@ -10,7 +10,12 @@ const { BlogCategory, BlogPost } = require("../models/blogModel");
 // BlogCategory Controller:
 module.exports.blogCategory = {
   list: async (req, res) => {
-    const result = await BlogCategory.find();
+    // await BlogPost.find({ ...filter }, { ...select });
+    // const result = await BlogCategory.find();
+    const result = await BlogCategory.find(
+      {},
+      { categoryId: true, title: true, content: true }
+    ); // _id default true
 
     res.status(200).send({
       error: false,

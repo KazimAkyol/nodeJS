@@ -19,7 +19,6 @@ router
   .delete(blogCategory.delete);
 
 /* ------------------------------------------------------- */
-
 // URL: /blog/post ->
 
 router.route("/post").get(blogPost.list).post(blogPost.create);

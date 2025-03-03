@@ -29,7 +29,7 @@ module.exports = {
 
         if (req.body.remindMe == true) {
           req.session.remindMe = true;
-          req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 2; // set maxAge
+          req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 2; // set maxAge to 2 days
         }
 
         /* COOKIE */

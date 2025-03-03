@@ -93,7 +93,10 @@ module.exports.blogPost = {
 
     //* the field you want display give true value. _id default is true
     //* the field you want to expand with more detail, send the name of in populate method.
-    const result = await BlogPost.find();
+    const result = await BlogPost.find(
+      {},
+      { categoryId: true, title: true, content: true, userId: true }
+    ).populate(["categoryId", "userId"]);
 
     res.status(200).send({
       error: false,
@@ -104,8 +107,7 @@ module.exports.blogPost = {
   //* CRUD ->
 
   create: async (req, res) => {
-    
-    console.log(req.user);
+    req.body.userId = req.user._id;
 
     const result = await BlogPost.create(req.body);
 
