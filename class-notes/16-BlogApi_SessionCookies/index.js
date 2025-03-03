@@ -29,11 +29,20 @@ require("express-async-errors");
 require("./src/dbConnection")();
 
 /* ------------------------------------------------------- */
+//* SessionCookies
+// $ npm i cookie-session
+
+const session = require("cookie-session");
+/* ------------------------------------------------------- */
 //* Routes
 
 // Main route
 app.all("/", (req, res) => {
-  res.send("WELCOME TO BLOG API");
+  res.send({
+    error: false,
+    message: "Welcome to Blog API",
+    session: req.session,
+  });
 });
 
 // Blog & User routes
