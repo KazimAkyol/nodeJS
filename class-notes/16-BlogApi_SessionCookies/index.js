@@ -44,6 +44,9 @@ app.use(
   })
 );
 
+//* Authentication Middleware
+app.use(require("./src/middlewares/userControl"));
+
 /* ------------------------------------------------------- */
 //* Routes
 

@@ -42,6 +42,12 @@ const blogPostSchema = new mongoose.Schema(
       // unique:true // convert to OneToOne Relation.
     },
 
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
     title: {
       type: String,
       trim: true,
