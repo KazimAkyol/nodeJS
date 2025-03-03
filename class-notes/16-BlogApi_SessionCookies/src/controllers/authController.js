@@ -13,6 +13,27 @@ module.exports = {
       const user = await User.findOne({ email, password }); // findOne runs set method as a default
 
       if (user) {
+        // /* SESSION */
+
+        // req.session = {
+        //   email: user.email,
+        //   password: user.password,
+        // };
+
+        req.session._id = user._id;
+        req.session.password = user.password;
+
+        // /* SESSION */
+
+        /* COOKIE */
+
+        if (req.body.remindMe == true) {
+          req.session.remindMe = true;
+          req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 2;
+        }
+
+        /* COOKIE */
+
         res.send({
           error: false,
           message: "login OK",
