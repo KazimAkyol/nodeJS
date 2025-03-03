@@ -104,6 +104,9 @@ module.exports.blogPost = {
   //* CRUD ->
 
   create: async (req, res) => {
+    
+    console.log(req.user);
+
     const result = await BlogPost.create(req.body);
 
     res.status(201).send({
