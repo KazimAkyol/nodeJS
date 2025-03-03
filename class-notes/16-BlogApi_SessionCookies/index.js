@@ -40,7 +40,7 @@ app.use(
   session({
     // Option
     secret: process.env.SECRET_KEY, // to encyrpte cookies and session
-    maxAge: 1000 * 60 * 60 * 60 * 24 * 2, // miliSeconds // 2 days
+    // maxAge: 1000 * 60 * 60 * 60 * 24 * 2, // miliSeconds // 2 days
   })
 );
 

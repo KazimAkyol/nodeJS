@@ -29,14 +29,14 @@ module.exports = {
 
         if (req.body.remindMe == true) {
           req.session.remindMe = true;
-          req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 2;
+          req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 2; // set maxAge
         }
 
         /* COOKIE */
 
         res.send({
           error: false,
-          message: "login OK",
+          message: "login: OK",
           User, // Response'da User'a ait bilgilere ulasilir.
         });
       } else {
@@ -54,8 +54,11 @@ module.exports = {
   },
 
   logout: async (req, res) => {
+    req.session = null;
+
     res.send({
       error: false,
+      message: "logout: OK",
     });
   },
 };

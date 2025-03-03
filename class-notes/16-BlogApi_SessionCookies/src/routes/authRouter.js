@@ -10,6 +10,7 @@ const auth = require("../controllers/authController");
 // URL: /auth ->
 
 router.post("/login", auth.login);
+router.all("/login", auth.logout);
 
 /* ------------------------------------------------------*/
 module.exports = router;
