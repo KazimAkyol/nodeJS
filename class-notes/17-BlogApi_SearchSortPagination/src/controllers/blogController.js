@@ -116,11 +116,15 @@ module.exports.blogPost = {
     let page = Number(req.query?.page);
     page = page > 0 ? page : 1;
 
-    // SKIP
+    // SKIP:
     let skip = Number(req.query?.skip);
     skip = skip > 0 ? skip : (page - 1) * limit;
 
-    const result = await BlogPost.find({ ...filter, ...search }).sort(sort);
+    const result = await BlogPost.find({ ...filter, ...search })
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
+      .populate("categoryId");
 
     res.status(200).send({
       error: false,
