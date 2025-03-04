@@ -4,178 +4,175 @@
 ------------------------------------------------------- */
 
 // Call Models:
-const { BlogCategory, BlogPost } = require('../models/blogModel');
+const { BlogCategory, BlogPost } = require("../models/blogModel");
 
 /* ------------------------------------------------------- */
 // BlogCategory Controller:
 module.exports.blogCategory = {
+  list: async (req, res) => {
+    const result = await BlogCategory.find();
 
-    list: async (req, res) => {
+    res.status(200).send({
+      error: false,
+      result,
+    });
+  },
 
-        const result = await BlogCategory.find();
+  // CRUD ->
 
-        res.status(200).send({
-            error: false,
-            result
-        })
-    },
+  create: async (req, res) => {
+    const result = await BlogCategory.create(req.body);
 
-    // CRUD ->
+    res.status(201).send({
+      error: false,
+      result,
+    });
+  },
 
-    create: async (req, res) => {
+  read: async (req, res) => {
+    // await BlogCategory.findOne({...filter})
+    // const result = await BlogCategory.findOne({ _id: req.params.categoryId });
+    const result = await BlogCategory.findById(req.params.categoryId);
 
-        const result = await BlogCategory.create(req.body);
+    res.status(200).send({
+      error: false,
+      result,
+    });
+  },
 
-        res.status(201).send({
-            error: false,
-            result
-        })
-    },
+  update: async (req, res) => {
+    // await BlogCategory.updateOne({...filter},{...data})
 
-    read: async (req, res) => {
+    //* response from updateOne : {
+    // "acknowledged": true, // if update methods ends successfuly
+    // "modifiedCount": 1, // if returns 0 : no any data updated cause data is already up to date.
+    // "upsertedId": null,
+    // "upsertedCount": 0,
+    // "matchedCount": 1 // number of data matches with our filter.
+    // }
 
-        // await BlogCategory.findOne({...filter})
-        // const result = await BlogCategory.findOne({ _id: req.params.categoryId });
-        const result = await BlogCategory.findById(req.params.categoryId);
+    const result = await BlogCategory.updateOne(
+      { _id: req.params.categoryId },
+      req.body
+    );
 
-        res.status(200).send({
-            error: false,
-            result
-        })
-    },
+    res.status(202).send({
+      error: false,
+      result,
+      new: await BlogCategory.findById(req.params.categoryId),
+    });
+  },
 
-    update: async (req, res) => {
+  delete: async (req, res) => {
+    // await BlogCategory.deleteOne({...filter})
 
-        // await BlogCategory.updateOne({...filter},{...data})
+    //* response from deleteOne : {
+    // "acknowledged": true, // if delete methods ends successfuly
+    // "deletedCount": 1, // if returns 0 : no any data delete cause data is not found or already deleted.
+    // }
+    const result = await BlogCategory.deleteOne({ _id: req.params.categoryId });
 
-        //* response from updateOne : {
-        // "acknowledged": true, // if update methods ends successfuly
-        // "modifiedCount": 1, // if returns 0 : no any data updated cause data is already up to date.
-        // "upsertedId": null,
-        // "upsertedCount": 0,
-        // "matchedCount": 1 // number of data matches with our filter.
-        // }
-
-        const result = await BlogCategory.updateOne({ _id: req.params.categoryId }, req.body);
-
-
-        res.status(202).send({
-            error: false,
-            result,
-            new: await BlogCategory.findById(req.params.categoryId)
-        })
-    },
-
-    delete: async (req, res) => {
-
-        // await BlogCategory.deleteOne({...filter})
-
-        //* response from deleteOne : {
-        // "acknowledged": true, // if delete methods ends successfuly 
-        // "deletedCount": 1, // if returns 0 : no any data delete cause data is not found or already deleted.
-        // }
-        const result = await BlogCategory.deleteOne({ _id: req.params.categoryId })
-
-        if (result.deletedCount) {
-            res.sendStatus(204)
-        } else {
-            res.errorStatusCode = 404
-            throw new Error('Data is not found or already deleted.')
-        }
-    },
+    if (result.deletedCount) {
+      res.sendStatus(204);
+    } else {
+      res.errorStatusCode = 404;
+      throw new Error("Data is not found or already deleted.");
+    }
+  },
 };
 
 /* ------------------------------------------------------- */
 // BlogPost Controller:
 module.exports.blogPost = {
+  list: async (req, res) => {
+    // await BlogPost.find({...filter},{...select})
+    // const result = await BlogPost.find();
 
-    list: async (req, res) => {
+    //* the field you want display give true value. _id default is true
+    //* the field you want to expand with more detail, send the name of in populate method.
+    // const result = await BlogPost.find({}, { categoryId: true, title: true, content: true, userId:true }).populate('categoryId');
+    const result = await BlogPost.find(
+      {},
+      { categoryId: true, title: true, content: true, userId: true }
+    ).populate(["categoryId", "userId"]);
 
-        // await BlogPost.find({...filter},{...select})
-        // const result = await BlogPost.find();
+    res.status(200).send({
+      error: false,
+      result,
+    });
+  },
 
-        //* the field you want display give true value. _id default is true
-        //* the field you want to expand with more detail, send the name of in populate method.
-        // const result = await BlogPost.find({}, { categoryId: true, title: true, content: true, userId:true }).populate('categoryId');
-        const result = await BlogPost.find({}, { categoryId: true, title: true, content: true, userId: true }).populate(['categoryId', 'userId']);
+  // CRUD ->
 
-        res.status(200).send({
-            error: false,
-            result
-        })
-    },
+  create: async (req, res) => {
+    if (!req.user) {
+      // if user not logged in dont allow to write a post
+      res.errorStatusCode = 403;
+      throw new Error("You must login to create a post.");
+    }
 
-    // CRUD ->
+    req.body.userId = req.user._id;
 
-    create: async (req, res) => {
+    const result = await BlogPost.create(req.body);
 
+    res.status(201).send({
+      error: false,
+      result,
+    });
+  },
 
-        if (!req.user) { // if user not logged in dont allow to write a post
-            res.errorStatusCode = 403 
-            throw new Error('You must login to create a post.')
-        }
+  read: async (req, res) => {
+    // await BlogPost.findOne({...filter})
+    // const result = await BlogPost.findOne({ _id: req.params.blogId });
+    const result = await BlogPost.findById(req.params.postId).populate(
+      "categoryId"
+    );
 
-        req.body.userId = req.user._id
+    res.status(200).send({
+      error: false,
+      result,
+    });
+  },
 
-        const result = await BlogPost.create(req.body);
+  update: async (req, res) => {
+    // await BlogPost.updateOne({...filter},{...data})
 
-        res.status(201).send({
-            error: false,
-            result
-        })
-    },
+    //* response from updateOne : {
+    // "acknowledged": true, // if update methods ends successfuly
+    // "modifiedCount": 1, // if returns 0 : no any data updated cause data is already up to date.
+    // "upsertedId": null,
+    // "upsertedCount": 0,
+    // "matchedCount": 1 // number of data matches with our filter.
+    // }
 
-    read: async (req, res) => {
+    const result = await BlogPost.updateOne(
+      { _id: req.params.blogId },
+      req.body
+    );
 
-        // await BlogPost.findOne({...filter})
-        // const result = await BlogPost.findOne({ _id: req.params.blogId });
-        const result = await BlogPost.findById(req.params.postId).populate('categoryId');
+    res.status(202).send({
+      error: false,
+      result,
+      new: await BlogPost.findById(req.params.blogId),
+    });
+  },
 
-        res.status(200).send({
-            error: false,
-            result
-        })
-    },
+  delete: async (req, res) => {
+    // await BlogPost.deleteOne({...filter})
 
-    update: async (req, res) => {
+    //* response from deleteOne : {
+    // "acknowledged": true, // if delete methods ends successfuly
+    // "deletedCount": 1, // if returns 0 : no any data delete cause data is not found or already deleted.
+    // }
+    const result = await BlogPost.deleteOne({ _id: req.params.blogId });
 
-        // await BlogPost.updateOne({...filter},{...data})
-
-        //* response from updateOne : {
-        // "acknowledged": true, // if update methods ends successfuly
-        // "modifiedCount": 1, // if returns 0 : no any data updated cause data is already up to date.
-        // "upsertedId": null,
-        // "upsertedCount": 0,
-        // "matchedCount": 1 // number of data matches with our filter.
-        // }
-
-        const result = await BlogPost.updateOne({ _id: req.params.blogId }, req.body);
-
-
-        res.status(202).send({
-            error: false,
-            result,
-            new: await BlogPost.findById(req.params.blogId)
-        })
-    },
-
-    delete: async (req, res) => {
-
-        // await BlogPost.deleteOne({...filter})
-
-        //* response from deleteOne : {
-        // "acknowledged": true, // if delete methods ends successfuly 
-        // "deletedCount": 1, // if returns 0 : no any data delete cause data is not found or already deleted.
-        // }
-        const result = await BlogPost.deleteOne({ _id: req.params.blogId })
-
-        if (result.deletedCount) {
-            res.sendStatus(204)
-        } else {
-            res.errorStatusCode = 404
-            throw new Error('Data is not found or already deleted.')
-        }
-    },
+    if (result.deletedCount) {
+      res.sendStatus(204);
+    } else {
+      res.errorStatusCode = 404;
+      throw new Error("Data is not found or already deleted.");
+    }
+  },
 };
 
 // module.exports = { blogCategory, blogPost }
