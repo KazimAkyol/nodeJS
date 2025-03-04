@@ -41,6 +41,9 @@ app.use(
 //* Authentication Middleware
 app.use(require("./src/middlewares/userControl"));
 
+//* Query Handler Middleware
+app.use(require("./src/middlewares/findSearchSortPage"));
+
 /* ------------------------------------------------------- */
 //* Routes
 
