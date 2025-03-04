@@ -8,7 +8,7 @@
 
 const crypto = require("node:crypto");
 
-const salt = "asdfasdfg283rsadfkasdfasiurwasfsa";
+const salt = process.env.SECRET_KEY;
 const iterations = 10000;
 const keylen = 32; // write 32 for 64
 const digest = "sha512";
