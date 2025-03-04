@@ -37,7 +37,6 @@ const blogPostSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "BlogCategory",
       required: true,
-      // unique:true // convert to OneToOne Relation.
     },
 
     userId: {
@@ -56,6 +55,11 @@ const blogPostSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
+    },
+
+    published: {
+      type: Boolean,
+      default: false,
     },
 
     // createdAt

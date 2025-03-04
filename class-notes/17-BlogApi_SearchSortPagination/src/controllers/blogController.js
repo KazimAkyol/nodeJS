@@ -85,16 +85,12 @@ module.exports.blogCategory = {
 // BlogPost Controller:
 module.exports.blogPost = {
   list: async (req, res) => {
-    // await BlogPost.find({...filter},{...select})
-    // const result = await BlogPost.find();
+    
+    //* FILTERING & SEARCHING & SORTING & PAGINATION
+    //* Filter mutlak esitlik arar.
+    //* Search: kismi esitlik arar.
 
-    //* the field you want display give true value. _id default is true
-    //* the field you want to expand with more detail, send the name of in populate method.
-    // const result = await BlogPost.find({}, { categoryId: true, title: true, content: true, userId:true }).populate('categoryId');
-    const result = await BlogPost.find(
-      {},
-      { categoryId: true, title: true, content: true, userId: true }
-    ).populate(["categoryId", "userId"]);
+    const result = await BlogPost.find();
 
     res.status(200).send({
       error: false,
