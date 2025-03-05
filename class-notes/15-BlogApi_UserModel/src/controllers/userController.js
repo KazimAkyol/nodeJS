@@ -21,6 +21,14 @@ module.exports = {
   //* CRUD ->
 
   create: async (req, res) => {
+    console.log(req.body);
+    if (req.body.password.length < 8) {
+      res.errorStatusCode = 400;
+      throw new Error("The password must be more than 8 character.");
+    }
+
+    //* Body-JSON'da yazilan password en az 8 karakter olarak gönderilmediginde (yani if blogu icinde istenen sart saglanamadigindan) bize bir throw new Error döner ve hata mesaji yazdirilir.
+
     const result = await User.create(req.body);
 
     res.status(201).send({

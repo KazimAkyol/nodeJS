@@ -15,11 +15,13 @@ module.exports = {
       if (user) {
         // /* SESSION */
 
+        // 1.yol:
         // req.session = {
         //   email: user.email,
         //   password: user.password,
         // };
 
+        // 2.yol:
         req.session._id = user._id;
         req.session.password = user.password;
 
