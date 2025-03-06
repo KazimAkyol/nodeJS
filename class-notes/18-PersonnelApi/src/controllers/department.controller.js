@@ -39,8 +39,8 @@ module.exports = {
       { _id: req.params.id },
       req.body,
       {
-        runValidators: true,
-        new: true,
+        runValidators: true, // to run validation method
+        new: true, // return updated data
       }
     );
 
