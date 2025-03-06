@@ -6,20 +6,35 @@
 const Personnel = require("../models/personnel.model");
 
 module.exports = {
+  login: async (req, res) => {
+    const { username, email, password } = req.body;
 
-    login : async (req,res) => {
+    if ((username || email) && password) {
+      const user = await Personnel.findOne({
+        $or: [{ username }, { email }],
+        password,
+      });
 
-        const {username, email,password} = req.body
+      if (user) {
+        if (user.isActive) {
 
-        if ((username || email) &&  password) {
-            res.status(200).send({
-                error: false,
-            })
+            // Set Session:
+            req.session = {id: user._id, }
+
+          res.status(200).send({
+            error: false,
+          });
         } else {
-            res.errorStatusCode = 401
-            throw new Error('Please enter usernam/email and password')
+          res.errorStatusCode = 401;
+          throw new Error("The user status is not active");
         }
-        
-        
+      } else {
+        res.errorStatusCode = 401;
+        throw new Error("Wrong email/username or password");
+      }
+    } else {
+      res.errorStatusCode = 401;
+      throw new Error("Please enter username/email and password");
     }
-}
+  },
+};
