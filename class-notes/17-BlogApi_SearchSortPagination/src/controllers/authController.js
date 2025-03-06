@@ -1,26 +1,36 @@
 "use strict";
 /* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
+         EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 // Call Model;
+
 const User = require("../models/userModel");
 
 module.exports = {
+  //* User login oldugunda buradaki login controller calisacak.
   login: async (req, res) => {
     const { email, password } = req.body;
 
+    //* email ve password'ü gönderip göndermedigini kontrol etmek icin:
+
     if (email && password) {
-      const user = await User.findOne({ email, password }); // findOne runs set method as a default;
+      const user = await User.findOne({ email, password }); // findOne runs set method as a defult
+
+      //* Gönderilen Email ve Password DB ile eslesiyor mu? Register islemi yapan kullanici icin Login islemi basarilidir. Daha önce Register islemi yapmamis kullanici DB'de bulunamaz.
 
       if (user) {
         /* SESSION */
 
+        // 1.yol:
         // req.session = {
-        //     email: user.email,
-        //     password: user.password
-        // }
+        //   email: user.email,
+        //   password: user.password,
+        // };
+
+        // 2.yol:
         req.session._id = user._id;
         req.session.password = user.password;
+
         /* SESSION */
 
         /* COOKIE */
@@ -29,12 +39,13 @@ module.exports = {
           req.session.remindMe = true;
           req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 2; // set maxAge to 2 days
         }
+
         /* COOKIE */
 
         res.send({
           error: false,
-          message: "login: OK",
-          user,
+          message: "login. OK",
+          User, // Response'da User'a ait bilgilere ulasilir.
         });
       } else {
         res.errorStatusCode = 401;
@@ -42,7 +53,7 @@ module.exports = {
       }
     } else {
       res.errorStatusCode = 401;
-      throw new Error("Email and Password are required.");
+      throw new Error("Email and Password required.");
     }
   },
 
@@ -51,7 +62,7 @@ module.exports = {
 
     res.send({
       error: false,
-      message: "Logout: OK",
+      message: "logout: OK",
     });
   },
 };

@@ -1,7 +1,9 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
+
+const Personnel = require("../models/personnel.model");
 
 module.exports = {
   list: async (req, res) => {
@@ -33,14 +35,10 @@ module.exports = {
   },
 
   update: async (req, res) => {
-    const result = await Personnel.updateOne(
-      { _id: req.params.id },
-      req.body,
-      {
-        runValidators: true, // to run validation method
-        new: true, // return updated data
-      }
-    );
+    const result = await Personnel.updateOne({ _id: req.params.id }, req.body, {
+      runValidators: true, // to run validation method
+      new: true, // return updated data
+    });
 
     res.status(202).send({
       error: false,

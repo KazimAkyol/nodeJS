@@ -3,7 +3,7 @@
     EXPRESS - Personnel API
 ------------------------------------------------------- */
 const { mongoose } = require("../configs/dbConnection");
-const { validate } = require("./department.model");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
 /* ------------------------------------------------------- */
 
 const PersonnelSchema = new mongoose.Schema({
