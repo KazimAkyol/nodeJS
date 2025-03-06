@@ -42,6 +42,14 @@ app.all("/", (req, res) => {
 // Department
 app.use("/departments", require("./src/routes/department.router"));
 
+// Not found
+app.all("*", (req, res) => {
+  res.status(404).send({
+    error: true,
+    message: "Route not available.",
+  });
+});
+
 /* ------------------------------------------------------- */
 // ErrorHandler:
 app.use(require("./src/middlewares/errorHandler"));
