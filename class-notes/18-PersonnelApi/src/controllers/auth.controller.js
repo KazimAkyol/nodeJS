@@ -17,9 +17,14 @@ module.exports = {
 
       if (user) {
         if (user.isActive) {
+          // Set Session:
+          req.session = { id: user._id, password: user.password };
 
-            // Set Session:
-            req.session = {id: user._id, }
+          // Set Cookie:
+
+          if (req.body?.rememberMe) {
+            req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3; // 3 days
+          }
 
           res.status(200).send({
             error: false,
@@ -36,5 +41,14 @@ module.exports = {
       res.errorStatusCode = 401;
       throw new Error("Please enter username/email and password");
     }
+  },
+
+  logout: async () => {
+    req.session = null;
+
+    res.send({
+      error: false,
+      maessage: "Logout is completed",
+    });
   },
 };
