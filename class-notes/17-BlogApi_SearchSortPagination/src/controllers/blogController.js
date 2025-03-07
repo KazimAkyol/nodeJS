@@ -89,7 +89,7 @@ module.exports.blogCategory = {
 // BlogPost Controller:
 module.exports.blogPost = {
   list: async (req, res) => {
-    /* ------------------------------------------------------- */
+    /* ------------------------------------------------------- *
 
     //* FILTERING & SEARCHING & SORTING & PAGINATION
 

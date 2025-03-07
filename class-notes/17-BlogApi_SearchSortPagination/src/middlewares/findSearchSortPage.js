@@ -1,27 +1,30 @@
 "use strict";
+/* -------------------------------------------------------
+             EXPRESSJS - BLOG Project with Mongoose
+------------------------------------------------------- */
 
 const { populate } = require("../models/userModel");
 
-/* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
-------------------------------------------------------- */
-//* QUERY HANDLER MIDDLEWARE;
+//* QUERY HANDLER MIDDLEWARE:
 
-module.exports = async (req, resizeBy, next) => {
+module.exports = async (req, res, next) => {
   //* FILTERING & SEARCHING & SORTING & PAGINATION
 
   //* Filter: mutlak esitlik arar.
   //* Search: kismi esitlik arar.
 
   //* FILTERING
-  // URL?filter[fieldName1]=value&filter[fieldName2]=value2
-  const filter = req.query?.filter || {};
+  // URL?filter[fieldName1]=value1&filter[fieldName2]=value2 //* istedigim kadar filtering yapabilirim.
+  const filter = req.query?.filter || {}; //* undefined gelmemesi icin bos obje {} döndürür.
 
   //* SEARCHING
   // URL?search[fieldName1]=value1&search[filedName2]=value2
   // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
   // { "<field>": { "$regex": "pattern" } } -> { title: {"$regex":"test 1"}}
+
   const search = req.query?.search || {};
+
+  //* mongoDb'nin istedigi bir sekilde search-query yazilir:
   for (let key in search) search[key] = { $regex: search[key] };
 
   //* SORTING
