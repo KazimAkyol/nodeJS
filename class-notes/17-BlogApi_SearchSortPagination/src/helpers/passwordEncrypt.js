@@ -8,7 +8,7 @@
 
 const crypto = require("node:crypto");
 
-const salt = process.env.SECRET_KEY;
+const salt = process.env.SECRET_KEY; //* Bir proje süresince sadece bir tane SECRET_KEY'e sahip olacagiz. Bir sikinti cikinca .env'i degistirince sorun cözülmüs olacak.
 const iterations = 10000;
 const keylen = 32; // write 32 for 64
 const digest = "sha512";

@@ -1,16 +1,17 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
 // MongoDB Connection:
 
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const dbConnection = function () {
-    mongoose.connect(process.env.MONGODB)
-        .then(() => console.log('* DB Connected * '))
-        .catch((err) => console.log('! DB Not Connected ! ', err))
-}
+  mongoose
+    .connect(process.env.MONGODB)
+    .then(() => console.log("* DB Connected * "))
+    .catch((err) => console.log("! DB Not Connected ! ", err));
+};
 
 /* ------------------------------------------------------- */
-module.exports = { mongoose, dbConnection } 
+module.exports = { mongoose, dbConnection };
