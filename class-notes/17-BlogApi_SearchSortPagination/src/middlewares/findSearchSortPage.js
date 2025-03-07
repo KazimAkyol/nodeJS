@@ -55,7 +55,7 @@ module.exports = async (req, res, next) => {
       .populate(populate);
   };
 
-  // Details:
+  // getModelListDetails:
   res.getModelListDetails = async function (Model) {
     const data = await Model.find({ ...filter, ...search });
 
