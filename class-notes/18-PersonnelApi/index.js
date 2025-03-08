@@ -48,7 +48,7 @@ app.all("/", (req, res) => {
   });
 });
 
-// Department
+// Departments
 app.use("/departments", require("./src/routes/department.router"));
 
 // Personnel
