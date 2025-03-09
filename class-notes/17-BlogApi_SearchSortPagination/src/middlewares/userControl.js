@@ -3,7 +3,6 @@
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-/*------------------------------------------------------- */
 //* Authentication Middleware
 
 const User = require("../models/userModel");

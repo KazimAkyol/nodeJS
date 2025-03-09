@@ -1,37 +1,29 @@
 "use strict";
 /* -------------------------------------------------------
-         EXPRESSJS - BLOG Project with Mongoose
+            EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
-// Call Model;
-
+// Call Model:
 const User = require("../models/userModel");
 
 module.exports = {
-  //* User login oldugunda buradaki login controller calisacak.
   login: async (req, res) => {
     const { email, password } = req.body;
 
-    //* email ve password'ü gönderip göndermedigini kontrol etmek icin:
-
     if (email && password) {
-      const user = await User.findOne({ email, password }); // findOne runs set method as a defult
-
-      //* Gönderilen Email ve Password DB ile eslesiyor mu? Register islemi yapan kullanici icin Login islemi basarilidir. Daha önce Register islemi yapmamis kullanici DB'de bulunamaz.
+      const user = await User.findOne({ email, password }); // findOne runs set method as a default
 
       if (user) {
-        /* SESSION */
+        // /* SESSION */
 
-        // 1.yol:
         // req.session = {
         //   email: user.email,
         //   password: user.password,
         // };
 
-        // 2.yol:
         req.session._id = user._id;
         req.session.password = user.password;
 
-        /* SESSION */
+        // /* SESSION */
 
         /* COOKIE */
 
@@ -44,16 +36,20 @@ module.exports = {
 
         res.send({
           error: false,
-          message: "login. OK",
+          message: "login: OK",
           User, // Response'da User'a ait bilgilere ulasilir.
         });
       } else {
         res.errorStatusCode = 401;
         throw new Error("User credentials are wrong.");
       }
+
+      res.send({
+        error: false,
+      });
     } else {
       res.errorStatusCode = 401;
-      throw new Error("Email and Password required.");
+      throw new Error("Email and Password are required.");
     }
   },
 

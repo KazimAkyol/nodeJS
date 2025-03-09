@@ -1,12 +1,12 @@
 "use strict";
 /* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
+             EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
 // Call Models:
 const { BlogCategory, BlogPost } = require("../models/blogModel");
 
-/* ------------------------------------------------------- */
+/* ---------------------------------------------------- */
 // BlogCategory Controller:
 module.exports.blogCategory = {
   list: async (req, res) => {
@@ -42,7 +42,7 @@ module.exports.blogCategory = {
   },
 
   update: async (req, res) => {
-    // await BlogCategory.updateOne({...filter},{...data})
+    // const result = await BlogCategory.updateOne({ ...filter }, { data });
 
     //* response from updateOne (Thunder document reading) :
     //     "result": {
@@ -95,6 +95,7 @@ module.exports.blogPost = {
 
     //* Filter: mutlak esitlik arar.
     //* Search: kismi esitlik arar.
+    //* filtering, searching, sorting ve pagination islemlerinin en iyi cözüm yöntemleri asagidaki gibidir:
 
     //* FILTERING:
     // URL?filter[fieldName1]=value1&filter[fieldName2]=value2 //* istedigim kadar filtering yapabilirim.
@@ -125,15 +126,16 @@ module.exports.blogPost = {
     let page = Number(req.query?.page);
     page = page > 0 ? page : 1;
 
-    // SKIP
+    // SKIP:
     let skip = Number(req.query?.skip);
     skip = skip > 0 ? skip : (page - 1) * limit;
 
-    const result = await BlogPost.find({ ...filter, ...search })
+    const result = await BlogPost.find({ ...filter }, { ...search })
       .sort(sort)
       .skip(skip)
       .limit(limit)
       .populate("categoryId");
+
     /* ------------------------------------------------------- */
 
     const result = await res.getModelList(BlogPost, "categoryId");
@@ -167,9 +169,7 @@ module.exports.blogPost = {
   read: async (req, res) => {
     // await BlogPost.findOne({...filter})
     // const result = await BlogPost.findOne({ _id: req.params.blogId });
-    const result = await BlogPost.findById(req.params.postId).populate(
-      "categoryId"
-    );
+    const result = await BlogPost.findById(req.params.blogId);
 
     res.status(200).send({
       error: false,

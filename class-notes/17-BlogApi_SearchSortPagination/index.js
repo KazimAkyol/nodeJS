@@ -3,6 +3,12 @@
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
+// $ npm init -y => create package.json
+// $ npm i express dotenv express-async-errors mongoose
+// $ echo PORT=8000 > .env
+// cat > .gitignore && paste gitignore content & ctrl+c
+// $ nodemon
+
 const express = require("express");
 const app = express();
 
@@ -26,15 +32,15 @@ require("./src/dbConnection")();
 //* SessionCookies
 // https://expressjs.com/en/resources/middleware/cookie-session.html
 // https://www.npmjs.com/package/cookie-session
-// npm i cookie-session
+// $ npm i cookie-session
 
 const session = require("cookie-session"); // Session is a middleware
 
 app.use(
   session({
-    // Options
-    secret: process.env.SECRET_KEY, // to ecnyrpte cookies and session
-    // maxAge: 1000 * 60 * 60 * 24 * 2 // miliSeconds // 2 days
+    // Option
+    secret: process.env.SECRET_KEY, // to encyrpte cookies and session
+    // maxAge: 1000 * 60 * 60 * 60 * 24 * 2, // miliSeconds // 2 days
   })
 );
 
@@ -51,15 +57,15 @@ app.use(require("./src/middlewares/findSearchSortPage"));
 app.all("/", (req, res) => {
   res.send({
     error: false,
-    message: "Welcome to blog api",
+    message: "Welcome to Blog API",
     session: req.session,
   });
 });
 
-// Blog & User & Auth routes
+// blog & user & auth routes
 app.use("/blog", require("./src/routes/blogRouter"));
-app.use("/user", require("./src/routes/userRouter"));
-app.use("/auth", require("./src/routes/authRouter"));
+app.use("user", require("./src/routes/userRouter"));
+app.use("auth", require("./src/routes/authRouter"));
 
 // Error Handler:
 app.use(require("./src/middlewares/errorHandler"));

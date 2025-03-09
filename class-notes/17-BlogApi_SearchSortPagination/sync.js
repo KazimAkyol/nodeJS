@@ -5,7 +5,7 @@
 const User = require("./src/models/userModel");
 const { BlogCategory, BlogPost } = require("./src/models/blogModel");
 
-/* ------------------------------------------------------- */
+/* ---------------------------------------------------- */
 
 module.exports = async () => {
   //* Delete All Records:
