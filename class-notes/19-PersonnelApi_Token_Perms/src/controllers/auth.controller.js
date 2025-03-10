@@ -14,6 +14,15 @@ module.exports = {
 
     logout: async (req, res) => {
 
+        if (req.user) {
+            result = await Token.deleteOne({userId: req.user._id})
+        }
+
+        res.status(200).send({
+            error: false,
+            message: 'Logout: OK'
+        })
+
     }
 };
 
