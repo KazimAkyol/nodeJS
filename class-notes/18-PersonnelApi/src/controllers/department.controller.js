@@ -39,8 +39,8 @@ module.exports = {
       { _id: req.params.id },
       req.body,
       {
-        runValidators: true, // to run validation method
-        new: true, // return updated data
+        runValidators: true, //* model'de bir validation islemi varsa update'de tekrardan calistir.
+        new: true, // returns updated data
       }
     );
 

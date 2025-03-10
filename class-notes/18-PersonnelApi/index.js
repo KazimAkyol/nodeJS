@@ -39,7 +39,7 @@ app.use(
 /* ------------------------------------------------------- */
 //* Routes:
 
-// Homepath
+// Home path
 app.all("/", (req, res) => {
   res.send({
     error: false,

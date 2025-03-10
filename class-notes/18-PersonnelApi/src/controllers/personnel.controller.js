@@ -36,7 +36,7 @@ module.exports = {
 
   update: async (req, res) => {
     const result = await Personnel.updateOne({ _id: req.params.id }, req.body, {
-      runValidators: true, // to run validation method
+      runValidators: true, //* model'de bir validation islemi varsa update'de tekrardan calistir.
       new: true, // return updated data
     });
 
