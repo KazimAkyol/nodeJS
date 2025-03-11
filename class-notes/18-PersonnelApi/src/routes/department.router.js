@@ -3,7 +3,6 @@
     EXPRESS - Personnel API
 ------------------------------------------------------- */
 const router = require("express").Router();
-
 const department = require("../controllers/department.controller");
 /* ------------------------------------------------------- */
 // URL: /departments ->

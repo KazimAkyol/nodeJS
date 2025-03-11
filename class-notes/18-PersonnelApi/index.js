@@ -51,7 +51,7 @@ app.all("/", (req, res) => {
 // Departments
 app.use("/departments", require("./src/routes/department.router"));
 
-// Personnel
+// Personnels
 app.use("personnels", require("./src/routes/personnel.router"));
 
 // Not found
