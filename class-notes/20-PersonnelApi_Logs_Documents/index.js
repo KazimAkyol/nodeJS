@@ -2,10 +2,9 @@
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
-/*
-    $ npm i express dotenv mongoose express-async-errors
-    $ npm i cookie-session
-*/
+
+// $ npm i express dotenv mongoose express-async-errors
+// $ npm i cookie-session
 
 const express = require("express");
 const app = express();
@@ -81,6 +80,8 @@ app.use(morgan(customLog, {
     stream: fs.createWriteStream(`./logs/${today}.log`, { flags: 'a+' })
 }));
 /* ------------------------------------------------------- */
+//* Documentation:
+// $ npm i swagger-autogen //* JSON Creator
 
 /* ------------------------------------------------------- */
 //* Routes:
