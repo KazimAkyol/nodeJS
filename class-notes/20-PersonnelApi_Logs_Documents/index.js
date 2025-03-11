@@ -82,6 +82,13 @@ app.use(morgan(customLog, {
 /* ------------------------------------------------------- */
 //* Documentation:
 // $ npm i swagger-autogen //* JSON Creator
+// $ npm i swagger-ui-express
+// $ npm i redoc-express
+
+// JSON
+app.use("/documents/json", (req, res) => {
+  res.sendFile("swagger.json", { root: "." });
+});
 
 /* ------------------------------------------------------- */
 //* Routes:
