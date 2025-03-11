@@ -11,7 +11,7 @@
       "name": "ISC"
     }
   },
-  "host": "127.0.0.1/8000",
+  "host": "127.0.0.1:8000",
   "basePath": "/",
   "schemes": [
     "http",
@@ -28,7 +28,9 @@
   "paths": {
     "/auth/login": {
       "post": {
-        "description": "",
+        "tags": [],
+        "summary": "Login",
+        "description": "Login with username/email and password",
         "parameters": [
           {
             "name": "authorization",
@@ -38,17 +40,17 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "username": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "admin"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "1234"
                 }
               }
             }
@@ -690,7 +692,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1741688956845
+              "example": 1741692920728
             }
           }
         }

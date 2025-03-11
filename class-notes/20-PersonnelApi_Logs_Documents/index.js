@@ -85,10 +85,33 @@ app.use(morgan(customLog, {
 // $ npm i swagger-ui-express
 // $ npm i redoc-express
 
-// JSON
+// Json
 app.use("/documents/json", (req, res) => {
   res.sendFile("swagger.json", { root: "." });
 });
+
+// Swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerJson = require("./swagger.json");
+app.use(
+  "/documents/swagger",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJson, {
+    swaggerOptions: { persistAuthorization: true },
+  })
+);
+
+// Redoc
+const redoc = require("redoc-express");
+app.use(
+  "/documents/redoc",
+  redoc({ specUrl: "/documents/json", title: "Redoc UI" })
+);
+
+app.use(
+  "/documents/redoc",
+  redoc({ specUrl: "/documents/json", title: "Redoc UI" })
+);
 
 /* ------------------------------------------------------- */
 //* Routes:
@@ -100,6 +123,11 @@ app.all("/", (req, res) => {
     message: "Welcome to Personnel API Service",
     // session: req.session
     user: req.user,
+    documents: {
+      swagger: "http://127.0.0.1:8000/documents/swagger",
+      redoc: "http://127.0.0.1:8000/documents/redoc",
+      json: "http://127.0.0.1:8000/documents/json",
+    },
   });
 });
 

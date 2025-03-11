@@ -46,7 +46,7 @@ const document = {
     licence: { name: packageJson.license },
   },
 
-  host: `${HOST}/${PORT}`,
+  host: `${HOST}:${PORT}`,
   basePath: "/",
   schemes: ["http", "https"],
   securityDefinitions: {
