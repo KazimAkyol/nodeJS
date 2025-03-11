@@ -1,7 +1,7 @@
 {
   "name": "personnelapi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Perssonel Management System API Service v.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,8 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Clarusway",
+  "email": "clarusway@gmail.com",
   "license": "ISC",
   "dependencies": {
     "cookie-session": "^2.1.0",
