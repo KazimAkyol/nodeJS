@@ -32,7 +32,11 @@ app.use(require("./src/middlewares/findSearchSortPage"));
 app.use(
   require("cookie-session")({
     secret: process.env.SECRET_KEY,
-    // yorumda maxAge var
+    // cookie: {
+    //     secure: true, // this is accept only https
+    //     httpOnly: false, // this is for XSS Cross Site Scripting
+    //     maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    //   }
   })
 );
 
