@@ -4,11 +4,17 @@
 ------------------------------------------------------- */
 
 const Personnel = require('../models/personnel.model');
+const Token = require('../models/token.model')
+const passwordEncrypt = require('../helpers/passwordEncrypt')
 
 
 module.exports = {
 
     login: async (req, res) => {
+
+        const {username, email, password} = req.body
+
+        
 
     },
 

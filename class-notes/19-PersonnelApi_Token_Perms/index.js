@@ -15,7 +15,7 @@ const PORT = process.env?.PORT || 8000;
 // AsyncErrors to errorHandler:
 require("express-async-errors");
 
-// DB Connection:
+//* DB Connection:
 const { dbConnection } = require("./src/configs/dbConnection");
 dbConnection();
 
