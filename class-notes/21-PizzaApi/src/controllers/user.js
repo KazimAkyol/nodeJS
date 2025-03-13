@@ -84,7 +84,12 @@ module.exports = {
       new: true,
     });
 
-    res.status(200).send({
+    if ((!result, modifiedCount)) {
+      res.errorStatusCode = 404;
+      throw new Error("Data is not updated.");
+    }
+
+    res.status(202).send({
       error: false,
       result,
     });
