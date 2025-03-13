@@ -1,9 +1,14 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
-const router = require('express').Router()
+const router = require("express").Router();
+const auth = require("../controllers/auth");
 /* ------------------------------------------------------- */
+// URL: /auth
+
+router.get("/login", auth.login);
+router.get("/logout", auth.logout);
 
 /* ------------------------------------------------------- */
-module.exports = router
+module.exports = router;
