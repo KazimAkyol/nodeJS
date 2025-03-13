@@ -7,7 +7,7 @@ const auth = require("../controllers/auth");
 /* ------------------------------------------------------- */
 // URL: /auth
 
-router.get("/login", auth.login);
+router.post("/login", auth.login);
 router.get("/logout", auth.logout);
 
 /* ------------------------------------------------------- */

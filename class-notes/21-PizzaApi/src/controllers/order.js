@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 
 const Order = require("../models/order");
+const Pizza = require("../models/pizza");
 
 module.exports = {
   list: async (req, res) => {
@@ -35,6 +36,19 @@ module.exports = {
             #swagger.tags = ['Orders']
             #swagger.summary = 'Create Order'
         */
+
+    //* adding loggend in user's id to req,body as userId field
+    req.body.userId = req.user._id;
+
+    //* find pizza price using pizzaId field
+    const pizza = await Pizza.findOne({ _id: req.body.pizzaId });
+
+    if (!pizza) {
+      res.errorStatusCode = 404;
+      throw new Error("Pizza not found");
+    }
+
+    req.body.price = pizza.price;
 
     const result = await Order.create(req.body);
 
