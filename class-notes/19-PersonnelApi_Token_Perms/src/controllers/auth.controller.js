@@ -19,10 +19,10 @@ module.exports = {
 
       if (user) {
         if (user.isActive) {
-          // Token ?
+          //* Token (var mi yok mu?)
           let tokenData = await Token.findOne({ userId: user._id });
 
-          // Create Token
+          //* Create Token
           if (!tokenData) {
             tokenData = await Token.create({
               userId: user._id,
@@ -41,7 +41,7 @@ module.exports = {
         }
       } else {
         res.errorStatusCode = 401;
-        throw new Error("Wrong email/username or password");
+        throw new Error("Wrong email/username and password");
       }
     } else {
       res.errorStatusCode = 401;
@@ -49,24 +49,7 @@ module.exports = {
     }
   },
 
-  logout: async (req, res) => {
-    // let result;
-
-    // if (req.user) {
-    //   result = await Token.deleteOne({ userId: req.user._id });
-    // } else {
-    //   result = null;
-    // }
-
-    const result = req.user
-      ? await Token.deleteOne({ userId: req.user._id })
-      : null;
-
-    res.status(200).send({
-      error: false,
-      message: "Logout: OK",
-    });
-  },
+  logout: async (req, res) => {},
 };
 
 /* ------------------------------------------------------- *
