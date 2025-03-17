@@ -1,15 +1,15 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
 
-const User = require('../models/user');
-const Token = require('../models/token');
-const passwordEncrypt = require('../helpers/passwordEncrypt');
+const User = require("../models/user");
+const Token = require("../models/token");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
 
 module.exports = {
-    login: async (req, res) => {
-        /*
+  login: async (req, res) => {
+    /*
             #swagger.tags = ["Authentication"]
             #swagger.summary = "Login"
             #swagger.description = 'Login with username (or email) and password for get simpleToken and JWT'
@@ -23,52 +23,80 @@ module.exports = {
             }
         */
 
-        const { username, email, password } = req.body
+    const { username, email, password } = req.body;
 
-        if (!((username || email) && password)) {
-            res.errorStatusCode = 401;
-            throw new Error('username/email and password are required.');
-        };
+    if (!((username || email) && password)) {
+      res.errorStatusCode = 401;
+      throw new Error("username/email and password are required.");
+    }
 
-        const user = await User.findOne({ $or: [{ username }, { email }], password });
+    const user = await User.findOne({
+      $or: [{ username }, { email }],
+      password,
+    });
 
-        if (!user) {
-            res.errorStatusCode = 401;
-            throw new Error('Incorrect email/username and password.');
-        };
+    if (!user) {
+      res.errorStatusCode = 401;
+      throw new Error("Incorrect email/username and password.");
+    }
 
-        if (!user.isActive) {
-            res.errorStatusCode = 401;
-            throw new Error('This account is not active.');
-        };
+    if (!user.isActive) {
+      res.errorStatusCode = 401;
+      throw new Error("This account is not active.");
+    }
 
-        let tokenData = await Token.findOne({ userId: user._id });
+    /* Simple Token */
+    //* Bir projede sadece tek bir token türü kullanilir. Simple token ya da JWT.
 
-        if (!tokenData) {
-            tokenData = await Token.create({
-                userId: user._id,
-                token: passwordEncrypt(Date.now() + user._id)
-            });
-        };
+    let tokenData = await Token.findOne({ userId: user._id });
 
-        res.status(200).send({
-            error: false,
-            token: tokenData.token,
-            user
-        });
-    },
+    if (!tokenData) {
+      tokenData = await Token.create({
+        userId: user._id,
+        token: passwordEncrypt(Date.now() + user._id),
+      });
+    }
+    /* Simple Token */
 
-    logout: async (req, res) => {
-        /*
+    /* JWT Token */
+    //* JWT'nin bir ömürleri vardir.
+    //* AccessT - 30 dk, RefreshT - 2 GÜN.
+    //* Her istekte bana AccessT'i gönder diyecegiz
+    //* Backend'ten Frontend'e RefreshT döndürülerek AccessT gönderilir. Güvenlik amaciyla böyle bir yol izlenir.Kötü amacli kullanici(Hacker) AccessT ulasip browser'daki enduser'a ait bilgileri calmak isteyebilir. 30 dk sonra RefreshT döndürülerek yeni AccesT gönderilir. Bu sürecte RefreshT'nin da süresi biterse browser'daki enduser'i logout yapip ondan login olmasi istenerek isleyis en basa alinir.
+
+    //* Access Token:
+    const accessToken = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      isActive: user.isActive,
+      isAdmin: user.isAdmin,
+    };
+
+    /* JWT Token */
+
+    res.status(200).send({
+      error: false,
+      token: tokenData.token,
+      user,
+    });
+  },
+
+  logout: async (req, res) => {
+    /*
            #swagger.tags = ["Tokens"]
            #swagger.summary = "Create Token"
         */
 
-        const result = req.user ? await Token.deleteOne({ userId: req.user._id }) : null
+    const result = req.user
+      ? await Token.deleteOne({ userId: req.user._id })
+      : null;
 
-        res.status(200).send({
-            error: false,
-            message: result?.deletedCount ? 'User logged out and token deleted.' : 'User Logged out.'
-        });
-    }
+    res.status(200).send({
+      error: false,
+      message: result?.deletedCount
+        ? "User logged out and token deleted."
+        : "User Logged out.",
+    });
+  },
 };
