@@ -131,13 +131,36 @@ module.exports = {
 
     if (!refreshData) {
       res.errorStatusCode = 401;
-      throw new Error("JWT Refresh token is wrong.");
+      throw new Error("JWT Refresh data is wrong.");
     }
 
     const user = await User.findOne({ _id: refreshData._id });
 
+    if (!user && user.password !== refreshData.password) {
+      res.errorStatusCode = 401;
+      throw new Error("Wrong id or password.");
+    }
+
+    if (!user.isActive) {
+      res.errorStatusCode = 401;
+      throw new Error("This account is not active.");
+    }
+
+    const accessData = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      isActive: user.isActive,
+      isAdmin: user.isAdmin,
+    };
+
     res.status(200).send({
       error: false,
+      bearer: {
+        access: jwt.sign(accessData, process.env.ACCESS_KEY, {
+          expiresIn: "1m",
+        }),
+      },
     });
   },
 
@@ -147,15 +170,16 @@ module.exports = {
            #swagger.summary = "Create Token"
         */
 
-    const result = req.user
-      ? await Token.deleteOne({ userId: req.user._id })
-      : null;
+    // const result = req.user
+    //   ? await Token.deleteOne({ userId: req.user._id })
+    //   : null;
 
     res.status(200).send({
       error: false,
-      message: result?.deletedCount
-        ? "User logged out and token deleted."
-        : "User Logged out.",
+      //   message: result?.deletedCount
+      //     ? "User logged out and token deleted."
+      //     : "User Logged out.",
+      message: "JWT: No need any process for logout.",
     });
   },
 };
