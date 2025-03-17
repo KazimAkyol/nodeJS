@@ -77,7 +77,7 @@ module.exports = {
     // jwt.sign(payload, secretKey, lifetime);
 
     const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, {
-      expiresIn: "5m",
+      expiresIn: "15m",
     });
 
     //* Refresh Token:
@@ -170,8 +170,8 @@ module.exports = {
            #swagger.summary = "Logout"
         */
 
-    const auth = req.headers?.authorization;
-    const tokenKey = auth ? auth.split("") : null;
+    const auth = req.headers?.authorization; // Token ...tokenKey... || Bearer ...jwtAccess...
+    const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...'] || ['Bearer', '...jwtAccess...']
 
     if (tokenKey[0] == "Token") {
       const result = await Token.deleteOne({ userId: req.user._id });
@@ -181,17 +181,10 @@ module.exports = {
         result,
         message: "Simple Token: Token deleted. Logout success.",
       });
-    } else if (tokenKey)
-      // const result = req.user
-      //   ? await Token.deleteOne({ userId: req.user._id })
-      //   : null;
-
+    } else if (tokenKey[0] == "Bearer")
       res.status(200).send({
         error: false,
-        //   message: result?.deletedCount
-        //     ? "User logged out and token deleted."
-        //     : "User Logged out.",
-        message: "JWT: No need any process for logout.",
+        message: "JWT: No need any process for logout. Logout success.",
       });
   },
 };
