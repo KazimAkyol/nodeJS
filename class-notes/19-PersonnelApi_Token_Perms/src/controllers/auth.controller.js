@@ -8,14 +8,19 @@ const Token = require("../models/token.model");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 
 module.exports = {
+  //* User login oldugunda buradaki login controller calisacak:
   login: async (req, res) => {
     const { username, email, password } = req.body;
+
+    //* username or email ve password'ü gönderip göndermedigini kontrol etmek icin:
 
     if ((username || email) && password) {
       const user = await Personnel.findOne({
         $or: [{ email }, { username }],
         password,
       });
+
+      //* Gönderilen Email ve Password DB ile eslesiyor mu? Register islemi yapan kullanici icin Login islemi basarilidir. Daha önce Register islemi yapmamis kullanici DB'de bulunamaz.
 
       if (user) {
         if (user.isActive) {
@@ -26,8 +31,8 @@ module.exports = {
           if (!tokenData) {
             tokenData = await Token.create({
               userId: user._id,
-              token: passwordEncrypt(Date.now() + user._id),
-            });
+              token: passwordEncrypt(Date.now() + user._id), //* Kisinin sifrelemek istedigi bir string'i bu fonksiyona parametre olarak gönderdiginde sifreli 64 karakterli bir hexadecimal yapi döndürür.
+            }); //* Böylelikle create islemi yaparak benzersiz bir token olusturulur.
           }
 
           res.status(200).send({
@@ -49,7 +54,24 @@ module.exports = {
     }
   },
 
-  logout: async (req, res) => {},
+  logout: async (req, res) => {
+    // let result;
+    // if (req.user) {
+    //   result = awaitToken.deleteOne({ userId: req.user._id });
+    // } else {
+    //   result = null;
+    // }
+
+    const result = req.user
+      ? await Token.deleteOne({ userId: req.user._id })
+      : null;
+
+    res.status(200).send({
+      error: false,
+      message: "Logout OK",
+      result,
+    });
+  },
 };
 
 /* ------------------------------------------------------- *

@@ -48,7 +48,8 @@ app.all("/", (req, res) => {
   res.send({
     error: false,
     message: "Welcome to Personnel API Service",
-    session: req.session,
+    // session: req.session,
+    user: req.user,
   });
 });
 

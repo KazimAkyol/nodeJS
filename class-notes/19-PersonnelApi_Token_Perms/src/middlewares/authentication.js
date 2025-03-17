@@ -2,7 +2,7 @@
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
-//* Authentication control middleware
+//* Authentication Control Middleware:
 
 const Token = require("../models/token.model");
 
@@ -16,22 +16,21 @@ module.exports = async (req, res, next) => {
   // Authorization: X-API-KEY ...tokenKey...
   // Authorization: x-auth-token ...tokenKey...
 
-  // Get token from headers;
-  // console.log(req.headers.authorization.split(' ')[1]);
+  // Get Token from Headers:
+  // console.log(req.headers.authorization.split(" ")[1]); //* console.log atip sirasiyla req.headers yazip Thunder'da yazilana ulasilir, oradan Authorization'da gönderilen value'ya yani Token'a ulasilir. split yazarak bir array olarak yakalanir ve [1] yazarak Token'a en yalin haliyle ulasilir. Bunu kod blogu seklinde yazalim:
 
   const auth = req.headers.authorization || null; // Token ...TokenKey...
-  const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...TokenKey...' ]
+  const tokenKey = auth ? auth.split(" ") : null; // ['Token', ...TokenKey...]
 
   if (tokenKey && tokenKey[0] == "Token") {
     const tokenData = await Token.findOne({ token: tokenKey[1] }).populate(
       "userId"
     );
+
     // console.log(tokenData);
 
     if (tokenData) req.user = tokenData.userId;
   }
-
-  // console.log(req.user);
 
   next();
 };
