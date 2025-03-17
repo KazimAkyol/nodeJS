@@ -6,6 +6,8 @@
 const Token = require("../models/token");
 const jwt = require("jsonwebtoken");
 
+//* User eger Backend'e bir token gönderiyorsa bu Simple Token'dir, ya da Backend'e bir bearer gönderiyorsa bu JWT Token'dir.
+
 module.exports = async (req, res, next) => {
   req.user = null;
 

@@ -166,20 +166,32 @@ module.exports = {
 
   logout: async (req, res) => {
     /*
-           #swagger.tags = ["Tokens"]
-           #swagger.summary = "Create Token"
+           #swagger.tags = ["Authentication"]
+           #swagger.summary = "Logout"
         */
 
-    // const result = req.user
-    //   ? await Token.deleteOne({ userId: req.user._id })
-    //   : null;
+    const auth = req.headers?.authorization;
+    const tokenKey = auth ? auth.split("") : null;
 
-    res.status(200).send({
-      error: false,
-      //   message: result?.deletedCount
-      //     ? "User logged out and token deleted."
-      //     : "User Logged out.",
-      message: "JWT: No need any process for logout.",
-    });
+    if (tokenKey[0] == "Token") {
+      const result = await Token.deleteOne({ userId: req.user._id });
+
+      res.status(200).send({
+        error: false,
+        result,
+        message: "Simple Token: Token deleted. Logout success.",
+      });
+    } else if (tokenKey)
+      // const result = req.user
+      //   ? await Token.deleteOne({ userId: req.user._id })
+      //   : null;
+
+      res.status(200).send({
+        error: false,
+        //   message: result?.deletedCount
+        //     ? "User logged out and token deleted."
+        //     : "User Logged out.",
+        message: "JWT: No need any process for logout.",
+      });
   },
 };
