@@ -94,9 +94,33 @@ module.exports = {
 
     res.status(200).send({
       error: false,
+      bearer: {
+        //* jwt ile beraber kullanilir.
+        acces: accessToken,
+        refresh: refreshToken,
+      },
       token: tokenData.token,
       user,
     });
+  },
+
+  refresh: async (req, res) => {
+    /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "Refresh"
+            #swagger.description = 'Refresh with refreshToken for get accessToken'
+            #swagger.parameters["body"] = {
+                in: "body",
+                required: true,
+                schema: {
+                    "bearer": {
+                    refresh:"...refreshToken..."
+                    },
+                }
+            }
+        */
+
+    const { refresh } = req.body.bearer
   },
 
   logout: async (req, res) => {

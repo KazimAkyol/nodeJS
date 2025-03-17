@@ -1,21 +1,33 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
 
 const Token = require("../models/token");
+const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
+  req.user = null;
 
-    req.user = null;
+  const auth = req.headers?.authorization; // Token ...tokenKey...
+  const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...']
 
-    const auth = req.headers?.authorization; // Token ...tokenKey...
-    const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...']
+  if (tokenKey && tokenKey[0] == "Token") {
+    // Simple Token
+    const tokenData = await Token.findOne({ token: tokenKey[1] }).populate(
+      "userId"
+    );
+    req.user = tokenData ? tokenData.userId : null;
+  } else if (tokenKey && tokenKey[0] == "Bearer") {
+    // JWT
+    // jwt.verify(jwtToken, secretKey, callBackFunction);
+    jwt.verify(tokenKey[1].process.env.ACCESS_KEY, (error, accessData) => {
+      //   console.log("Error:", error);
+      //   console.log("AccessData:", accessData);
 
-    if (tokenKey && tokenKey[0] == "Token") {
-        const tokenData = await Token.findOne({ token: tokenKey[1] }).populate("userId");
-        req.user = tokenData ? tokenData.userId : null;
-    }
+      req.user = accessData ? accessData : null;
+    });
+  }
 
-    next();
+  next();
 };
