@@ -6,6 +6,7 @@
 const User = require("../models/user");
 const Token = require("../models/token");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   login: async (req, res) => {
@@ -65,13 +66,29 @@ module.exports = {
     //* Backend'ten Frontend'e RefreshT döndürülerek AccessT gönderilir. Güvenlik amaciyla böyle bir yol izlenir.Kötü amacli kullanici(Hacker) AccessT ulasip browser'daki enduser'a ait bilgileri calmak isteyebilir. 30 dk sonra RefreshT döndürülerek yeni AccesT gönderilir. Bu sürecte RefreshT'nin da süresi biterse browser'daki enduser'i logout yapip ondan login olmasi istenerek isleyis en basa alinir.
 
     //* Access Token:
-    const accessToken = {
+    const accessData = {
       _id: user._id,
       username: user.username,
       email: user.email,
       isActive: user.isActive,
       isAdmin: user.isAdmin,
     };
+
+    // jwt.sign(payload, secretKey, lifetime);
+
+    const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, {
+      expiresIn: "5m",
+    });
+
+    //* Refresh Token:
+    const refreshData = {
+      _id: user._id,
+      password: user.password,
+    };
+
+    const refreshToken = jwt.sign(refreshData, process.env.REFRESH_KEY, {
+      expiresIn: "1d",
+    });
 
     /* JWT Token */
 
