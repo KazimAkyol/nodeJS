@@ -120,7 +120,25 @@ module.exports = {
             }
         */
 
-    const { refresh } = req.body.bearer
+    const { refresh } = req.body?.bearer;
+
+    if (!refresh) {
+      res.errorStatusCode = 401;
+      throw new Error("Refresh token not found.");
+    }
+
+    const refreshData = jwt.verify(refresh, process.env.REFRESH_KEY);
+
+    if (!refreshData) {
+      res.errorStatusCode = 401;
+      throw new Error("JWT Refresh token is wrong.");
+    }
+
+    const user = await User.findOne({ _id: refreshData._id });
+
+    res.status(200).send({
+      error: false,
+    });
   },
 
   logout: async (req, res) => {
