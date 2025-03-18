@@ -108,7 +108,7 @@ module.exports.blogPost = {
 
     const search = req.query?.search || {};
 
-    //* mongoDb'nin istedigi bir sekilde search query yazilir:
+    //* mongoDB'nin istedigi bir sekilde search query yazilir:
     for (let key in search) search[key] = { $regex: search[key] };
 
     //* SORTING:
