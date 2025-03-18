@@ -3,7 +3,7 @@
           EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-//* Call Models:
+// Call Models:
 const { BlogCategory, BlogPost } = require("../models/blogModel");
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
     });
   },
 
-  //TODO: Finish crud oparations.
+  // CRUD:
 
   create: async (req, res) => {
     res.status().send({
