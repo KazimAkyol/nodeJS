@@ -11,22 +11,19 @@ const { Router } = require("express");
 const router = require("express").Router();
 const todo = require("../controllers/todo.controller");
 
-// //* List Todos:
+//* List Todos:
 // router.get("/todo", todo.list);
 
-// //* Create Todo:
+//* Create Todo:
 // router.post("/todo", todo.create);
 
-// //* Read Todo:
-
+//* Read Todo:
 // router.get("/todo/:id", todo.read);
 
-// //* Update Todo:
-
+//* Update Todo:
 // router.put("/todo/:id", todo.update);
 
-// //* Delete Todo:
-
+//* Delete Todo:
 // router.delete("/todo/:id", todo.delete);
 
 router.route("todo").get(todo.list).post(todo.create);

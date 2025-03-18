@@ -4,9 +4,9 @@
 ------------------------------------------------------- */
 
 // $ npm init -y
-// npm i express dotenv express-async-errors
-// echo PORT=8000 > .env
-// npm i sequelize sqlite3
+// $ npm i express dotenv express-async-errors
+// $ echo PORT=8000 > .env
+// $ npm i sequelize sqlite3
 // nodemon
 
 const express = require("express");
@@ -27,7 +27,7 @@ app.all("/", (req, res) => {
 });
 
 /* ------------------------------------------------------- */
-//? Sequelize
+//* Sequelize
 
 const { Sequelize, DataTypes, where } = require("sequelize");
 

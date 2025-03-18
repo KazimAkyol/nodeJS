@@ -15,6 +15,8 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
+//* Buradan itibaren kodlarimizi ve klasör yapisini MCR mantigiyla yazmaya basladik.
+
 /* ------------------------------------------------------- */
 // Accept json data:
 app.use(express.json());

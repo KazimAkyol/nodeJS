@@ -8,11 +8,11 @@
 // $ npm i express dotenv
 // $ nodemon
 
-//* Express Start
+//* ExpressJS Start
 
-const express = require("express"); // Express değişkenine express Framework atadik.
+const express = require("express"); //* Express değişkenine express Framework atadik.
 
-const app = express(); // Run application on express.
+const app = express(); //* Run application on express.
 
 //* Env
 require("dotenv").config();
@@ -117,8 +117,7 @@ app.delete("/status-codes", (req, res) =>
 
 /* ------------------------------------------------------------------------ */
 
-//* Download File:
-
+//? Download File:
 app.get("/download", (req, res) =>
   res.download(".index.js", "changendName.txt")
 );
