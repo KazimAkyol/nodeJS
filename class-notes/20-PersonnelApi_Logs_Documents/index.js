@@ -43,7 +43,7 @@ app.use(
 // Authentication Middleware
 app.use(require("./src/middlewares/authentication"));
 
-// Logger
+//Logger
 app.use(require("./src/middlewares/logger"));
 
 /* ------------------------------------------------------- *
@@ -51,67 +51,43 @@ app.use(require("./src/middlewares/logger"));
 // $ npm i morgan
 // $ https://expressjs.com/en/resources/middleware/morgan.html
 
-const morgan = require('morgan');
+const morgan = require("morgan");
 
-// app.use(morgan('tiny'));
-// app.use(morgan('short'));
-// app.use(morgan('dev'));
-// app.use(morgan('common'));
-// app.use(morgan('combined'));
+// app.use(morgan("tiny"));
+// app.use(morgan("short"));
+// app.use(morgan("dev"));
+// app.use(morgan("common"));
+// app.use(morgan("combined")); //* Thunder'da departments URL'e bir GET istegi atildiginda Terminal'de ::ffff:127.0.0.1 - - [17/Mar/2025:15:20:39 +0000] "GET /departments/ HTTP/1.1" 403 102 "-" "Thunder Client (https://www.thunderclient.com)" böyle bir sonuca ulasilir.
+//* Biz combined'i kullanacagiz.
 
 // Custom log:
-const customLog = 'TIME=":date[iso]" - URL=":url" - Method=":method" - IP=":remote-addr" - Ref=":referrer" - Status=":status" - Sign=":user-agent" (:response-time[digits] ms)'
+const customLog =
+  'TIME=":date[iso]" - URL= ":url" - Method=":method" - IP=":remote-addr" - Ref="referrer" - Status=":status" - Sign=":user-agent" (:response-time[digits]ms)';
 // app.use(morgan(customLog));
 
-// Write to file;
-// const fs = require('node:fs');
-// app.use(morgan(customLog, {
-//     stream: fs.createWriteStream('./examplelogs.log', { flags: 'a+' })
-// }));
+// Write to file
+// const fs = require("node:fs");
+// app.use(
+//   morgan(customLog, {
+//     stream: fs.createWriteStream("./examplelogs.log", { flags: "a+" }), //* Bir dosyayi yazdirmak icin stream degiskeni kullanilir.
+//   })
+// );
 
+//* Böylelikle bizim yaptigimiz API service'na her bir istek atildiginda log kaydini tutmus olacagiz.
 
 // Write to file - Day by Day;
-const fs = require('node:fs');
+const fs = require("node:fs");
 const now = new Date();
 // console.log(now);
-const today = now.toISOString().split('T')[0]
-// console.log(today)
-app.use(morgan(customLog, {
-    stream: fs.createWriteStream(`./logs/${today}.log`, { flags: 'a+' })
-}));
-/* ------------------------------------------------------- */
-//* Documentation:
-// $ npm i swagger-autogen //* JSON Creator
-// $ npm i swagger-ui-express
-// $ npm i redoc-express
-
-// Json
-app.use("/documents/json", (req, res) => {
-  res.sendFile("swagger.json", { root: "." });
-});
-
-// Swagger
-const swaggerUi = require("swagger-ui-express");
-const swaggerJson = require("./swagger.json");
+const today = now.toISOString().split("T")[0];
+console.log(today);
 app.use(
-  "/documents/swagger",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerJson, {
-    swaggerOptions: { persistAuthorization: true },
+  morgan(customLog, {
+    stream: fs.createWriteStream(`./logs/${today}.log`, { flags: "a+" }),
   })
 );
 
-// Redoc
-const redoc = require("redoc-express");
-app.use(
-  "/documents/redoc",
-  redoc({ specUrl: "/documents/json", title: "Redoc UI" })
-);
-
-app.use(
-  "/documents/redoc",
-  redoc({ specUrl: "/documents/json", title: "Redoc UI" })
-);
+//* Bu kod blogunu yazdiktan sonra dosya ana dizininde logs adinda bir klasör olusturulur ve bundan sonra gün gün tutulacak log kayitlari buraya kaydedilir.
 
 /* ------------------------------------------------------- */
 //* Routes:
@@ -123,11 +99,6 @@ app.all("/", (req, res) => {
     message: "Welcome to Personnel API Service",
     // session: req.session
     user: req.user,
-    documents: {
-      swagger: "http://127.0.0.1:8000/documents/swagger",
-      redoc: "http://127.0.0.1:8000/documents/redoc",
-      json: "http://127.0.0.1:8000/documents/json",
-    },
   });
 });
 
