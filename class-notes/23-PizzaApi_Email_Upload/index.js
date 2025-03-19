@@ -45,20 +45,57 @@ app.use(require("./src/middlewares/logger"));
 
 const nodemailer = require("nodemailer");
 
-// Create Test Account:
-nodemailer.createTestAccount().then((email) => console.log(email));
+/* ------------------------------------------------------- *
 
-/* 
+//* Create Test Account:
+nodemailer.createTestAccount().then((email) => console.log(email)); //* Bu kod blogunu yazip fake bir email adresi olusturulur ve daha sonra sürekli fake emil adresi olusturmasin diye bu kisim yoruma alinir.
+
+
 {
   user: 'j2wgj3mrv4rxhf4k@ethereal.email',
   pass: 'nRdcUyrYCh4dEga3xT',
   smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
   imap: { host: 'imap.ethereal.email', port: 993, secure: true },
-  pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },
+  pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },//* güncel olarak pop3 server'lari kullaniliyor.
   web: 'https://ethereal.email',
   mxEnabled: false
 } 
-*/
+
+
+//* Connect to MailServer
+const transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "j2wgj3mrv4rxhf4k@ethereal.email",
+    pass: "nRdcUyrYCh4dEga3xT",
+  },
+});
+
+// console.log(transporter);
+
+//* Send Mail:
+transporter.sendMail(
+  {
+    from: "smtp.ethereal.email",
+    to: "info@clarusway.com",
+    subject: "Hello Clarusway",
+    text: "Hello there, how are you today?",
+    html: "<p>Hello there, how are you <b>today?<b></p>/",
+  },
+  function (error, success) {
+    success ? console.log("SUCCESS:", success) : console.log("ERROR:", error);
+  }
+);
+
+/* ------------------------------------------------------- */
+
+// GoogleMail (gmail)
+
+const transporter = nodemailer.createTransport;
+
+// Yandex
 
 /* ------------------------------------------------------- */
 //* Routes:
