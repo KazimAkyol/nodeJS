@@ -1,13 +1,13 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
 
-const Pizza = require('../models/pizza');
+const Pizza = require("../models/pizza");
 
 module.exports = {
-    list: async (req, res) => {
-        /* 
+  list: async (req, res) => {
+    /* 
             #swagger.tags = ['Pizzas']
             #swagger.summary = 'List Pizzas'
             #swagger.desription = `
@@ -21,78 +21,91 @@ module.exports = {
             `
         */
 
-        const result = await res.getModelList(Pizza, 'toppingIds');
+    const result = await res.getModelList(Pizza, "toppingIds");
 
-        res.status(200).send({
-            error: false,
-            details: await res.getModelListDetails(Pizza),
-            result
-        })
-    },
+    res.status(200).send({
+      error: false,
+      details: await res.getModelListDetails(Pizza),
+      result,
+    });
+  },
 
-    create: async (req, res) => {
-        /* 
+  create: async (req, res) => {
+    /* 
             #swagger.tags = ['Pizzas']
             #swagger.summary = 'Create Pizza'
         */
 
-        //? if same id sent more than once in the toppingIds field.
-        // console.log([...new Set([1,1,1,2,3,4,4,4,5])])
+    //* if same id sent more than once in the toppingIds field.
+    // console.log([...new Set([1,1,1,2,3,4,4,4,5])])
 
-        req.body.toppingIds = [...new Set(req.body.toppingIds)];
+    req.body.toppingIds = [...new Set(req.body.toppingIds)];
 
-        const result = await Pizza.create(req.body);
+    if (req.file) {
+      req.body.image = req.file.filename;
+    }
 
-        res.status(201).send({
-            error: false,
-            result
-        })
-    },
+    const result = await Pizza.create(req.body);
 
-    read: async (req, res) => {
-        /* 
+    res.status(201).send({
+      error: false,
+      result,
+    });
+  },
+
+  read: async (req, res) => {
+    /* 
             #swagger.tags = ['Pizzas']
             #swagger.summary = 'Get Single Pizza'
         */
 
-        const result = await Pizza.findOne({ _id: req.params.id }).populate('toppingIds')
+    const result = await Pizza.findOne({ _id: req.params.id }).populate(
+      "toppingIds"
+    );
 
-        res.status(200).send({
-            error: false,
-            result
-        })
-    },
+    res.status(200).send({
+      error: false,
+      result,
+    });
+  },
 
-    update: async (req, res) => {
-        /* 
+  update: async (req, res) => {
+    /* 
             #swagger.tags = ['Pizzas']
             #swagger.summary = 'Update Pizza'
         */
 
-        const result = await Pizza.updateOne({ _id: req.params.id }, req.body, { runValidators: true });
+    //* if same id sent more than once in the toppingIds field.
+    if (req.file) {
+      req.body.image = req.file.filename;
+    }
 
-        if (!result.modifiedCount) {
-            res.errorStatusCode = 404
-            throw new Error('Data is not updated.')
-        }
+    const result = await Pizza.updateOne({ _id: req.params.id }, req.body, {
+      runValidators: true,
+    });
 
-        res.status(202).send({
-            error: false,
-            new: await Pizza.findOne({ _id: req.params.id })
-        })
-    },
+    if (!result.modifiedCount) {
+      res.errorStatusCode = 404;
+      throw new Error("Data is not updated.");
+    }
 
-    delete: async (req, res) => {
-        /* 
+    res.status(202).send({
+      error: false,
+      new: await Pizza.findOne({ _id: req.params.id }),
+    });
+  },
+
+  delete: async (req, res) => {
+    /* 
             #swagger.tags = ['Pizzas']
             #swagger.summary = 'Delete Pizza'
         */
 
-        const result = await Pizza.deleteOne({ _id: req.params.id });
+    const result = await Pizza.deleteOne({ _id: req.params.id });
 
-        res.status(result.deletedCount ? 204 : 404).send({
-            error: true,
-            message: 'Data is not found or already deleted.'
-        })
-    }
+    res.status(result.deletedCount ? 204 : 404).send({
+      error: true,
+      message: "Data is not found or already deleted.",
+    });
+  },
 };
