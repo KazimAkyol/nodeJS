@@ -21,7 +21,7 @@ module.exports = {
                     "password": "aA12345.?",
                 }
             }
-        */
+    */
 
     const { username, email, password } = req.body;
 
@@ -33,7 +33,7 @@ module.exports = {
     const user = await User.findOne({
       $or: [{ username }, { email }],
       password,
-    });
+    });  //* Bu sekilde DB'e bir sorgu atildi.
 
     if (!user) {
       res.errorStatusCode = 401;
@@ -44,6 +44,8 @@ module.exports = {
       res.errorStatusCode = 401;
       throw new Error("This account is not active.");
     }
+
+    //* Yukaridaki her iki if blogunda da ünlem isareti(!) kullanarak user degilse ve user.isActive degilse anlami vererek throw ile bir hata attirilir. Hata yoksa kod oldugu gibi calisir.
 
     let tokenData = await Token.findOne({ userId: user._id });
 
@@ -63,9 +65,9 @@ module.exports = {
 
   logout: async (req, res) => {
     /*
-           #swagger.tags = ["Tokens"]
-           #swagger.summary = "Create Token"
-        */
+        #swagger.tags = ["Tokens"]
+        #swagger.summary = "Create Token"
+    */
 
     const result = req.user
       ? await Token.deleteOne({ userId: req.user._id })

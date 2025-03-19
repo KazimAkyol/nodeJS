@@ -4,7 +4,6 @@
 ------------------------------------------------------- */
 
 const Order = require("../models/order");
-const Pizza = require("../models/pizza");
 
 module.exports = {
   list: async (req, res) => {
@@ -20,9 +19,11 @@ module.exports = {
                     <li>URL/?<b>page=2&limit=1</b></li>
                 </ul>
             `
-        */
+    */
+    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde # isareti swagger yazip ici istenildigi gibi doldurulabilir.
 
-    const result = await res.getModelList(Order);
+    const result = await res.getModelList(Order, ["userId", "pizzaId"]); //* Daha detayli islemleri yapabilmek icin getModelList kullanildi.
+    //* Burada oldugu gibi birden fazla id'yi populate etmek icin array icine yazilir.
 
     res.status(200).send({
       error: false,
@@ -33,11 +34,11 @@ module.exports = {
 
   create: async (req, res) => {
     /* 
-            #swagger.tags = ['Orders']
-            #swagger.summary = 'Create Order'
-        */
+        #swagger.tags = ['Orders']
+        #swagger.summary = 'Create Order'
+    */
 
-    //* adding loggend in user's id to req,body as userId field
+    //* adding loggend in user's id to req.body as userId field
     req.body.userId = req.user._id;
 
     //* find pizza price using pizzaId field
@@ -48,7 +49,7 @@ module.exports = {
       throw new Error("Pizza not found");
     }
 
-    req.body.price = pizza.price;
+    req.body.price = pizza?.price;
 
     const result = await Order.create(req.body);
 
@@ -60,11 +61,14 @@ module.exports = {
 
   read: async (req, res) => {
     /* 
-            #swagger.tags = ['Orders']
-            #swagger.summary = 'Get Single Order'
-        */
+        #swagger.tags = ['Orders']
+        #swagger.summary = 'Get Single Order'
+    */
 
-    const result = await Order.findOne({ _id: req.params.id });
+    const result = await Order.findOne({ _id: req.params.id }).populate([
+      "userId",
+      "pizzaId",
+    ]);
 
     res.status(200).send({
       error: false,
@@ -74,35 +78,36 @@ module.exports = {
 
   update: async (req, res) => {
     /* 
-            #swagger.tags = ['Orders']
-            #swagger.summary = 'Update Order'
-        */
+        #swagger.tags = ['Orders']
+        #swagger.summary = 'Update Order'
+    */
 
     const result = await Order.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
 
-    if (!result.modifiedCount) {
+    if (result.modifiedCount) {
       res.errorStatusCode = 404;
-      throw new Error("Data is not updated.");
+      throw new Error("Data is not updated");
     }
 
     res.status(202).send({
       error: false,
-      new: await Order.findOne({ _id: req.params.id }),
+      new: await Order.updateOne({ _id: req.params.id }),
     });
   },
 
   delete: async (req, res) => {
     /* 
-            #swagger.tags = ['Orders']
-            #swagger.summary = 'Delete Order'
-        */
+        #swagger.tags = ['Orders']
+        #swagger.summary = 'Delete Order'
+    */
 
     const result = await Order.deleteOne({ _id: req.params.id });
 
     res.status(result.deletedCount ? 204 : 404).send({
-      error: true,
+      error: false,
+      result,
       message: "Data is not found or already deleted.",
     });
   },

@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
   if (tokenKey && tokenKey[0] == "Token") {
     const tokenData = await Token.findOne({ token: tokenKey[1] }).populate(
       "userId"
-    );
+    ); //* DB'de token'a ait bilgileri saklayan function populate()'tir.
     req.user = tokenData ? tokenData.userId : null;
   }
 

@@ -5,7 +5,7 @@
 const router = require("express").Router();
 const pizza = require("../controllers/pizza");
 /* ------------------------------------------------------- */
-// URL: /tokens
+// URL: /pizzas
 
 router.route("/").get(pizza.list).post(pizza.create);
 

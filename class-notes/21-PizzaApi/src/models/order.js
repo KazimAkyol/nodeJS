@@ -23,7 +23,7 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      enum: ["Small", "Medium", "Large", "XLarge"],
+      enum: ["Small", "Medium", "Large", "XLarge"], //* enum: Kullaniciya sinirli sayida secenek verdigimiz durumlarda kullanilan bir yapidir.
     },
 
     quantity: {
@@ -40,15 +40,18 @@ const OrderSchema = new mongoose.Schema(
       type: Number,
       default: function () {
         // Create
-        return this.quantity * this.price;
+        returnthis.quantity * this.price; //* this keyword'ü ile icinde bulunan objenin degiskeninden bahsediyor.
       },
       transform: function () {
-        //Update
+        // Update
         return this.quantity * this.price;
       },
     },
   },
-  { collection: "orders", timestamps: true }
+  {
+    collection: "orders",
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("Order", OrderSchema);
