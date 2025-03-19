@@ -89,7 +89,7 @@ transporter.sendMail(
   }
 );
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 
 // GoogleMail (gmail)
 // Google -> AccountHome -> Security -> Two-Step-Verify (make it on) -> App-Passwords (if not showing use this link: https://myaccount.google.com/apppasswords)
