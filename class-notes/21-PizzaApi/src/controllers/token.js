@@ -19,9 +19,10 @@ module.exports = {
                     <li>URL/?<b>page=2&limit=1</b></li>
                 </ul>
             `
-        */
+    */
+    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde # isareti swagger yazip ici istenildigi gibi doldurulabilir.
 
-    const result = await res.getModelList(Token);
+    const result = await res.getModelList(Token); //* daha detayli islemleri yapabilmek icin getModelList kullanildi.
 
     res.status(200).send({
       error: false,
@@ -32,15 +33,9 @@ module.exports = {
 
   create: async (req, res) => {
     /* 
-            #swagger.tags = ['Tokens']
-            #swagger.summary = 'Create Token'
-        */
-    {
-      res.errorStatusCode = 401;
-      throw new Error(
-        "Password must be at least 8 characters long and contain at least one special character and  at least one uppercase character"
-      );
-    }
+        #swagger.tags = ['Tokens']
+        #swagger.summary = 'Create Token'
+    */
 
     const result = await Token.create(req.body);
 
@@ -52,9 +47,9 @@ module.exports = {
 
   read: async (req, res) => {
     /* 
-            #swagger.tags = ['Tokens']
-            #swagger.summary = 'Get Single Token'
-        */
+        #swagger.tags = ['Tokens']
+        #swagger.summary = 'Get Single Token'
+    */
 
     const result = await Token.findOne({ _id: req.params.id });
 
@@ -66,35 +61,36 @@ module.exports = {
 
   update: async (req, res) => {
     /* 
-            #swagger.tags = ['Tokens']
-            #swagger.summary = 'Update Token'
-        */
+        #swagger.tags = ['Tokens']
+        #swagger.summary = 'Update Token'
+    */
 
     const result = await Token.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
 
-    if (!result.modifiedCount) {
+    if (result.modifiedCount) {
       res.errorStatusCode = 404;
-      throw new Error("Data is not updated.");
+      throw new Error("Data is not updated");
     }
 
     res.status(202).send({
       error: false,
-      new: await Token.findOne({ _id: req.params.id }),
+      new: await Token.updateOne({ _id: req.params.id }),
     });
   },
 
   delete: async (req, res) => {
     /* 
-            #swagger.tags = ['Tokens']
-            #swagger.summary = 'Delete Token'
-        */
+        #swagger.tags = ['Tokens']
+        #swagger.summary = 'Delete Token'
+    */
 
     const result = await Token.deleteOne({ _id: req.params.id });
 
     res.status(result.deletedCount ? 204 : 404).send({
-      error: true,
+      error: false,
+      result,
       message: "Data is not found or already deleted.",
     });
   },

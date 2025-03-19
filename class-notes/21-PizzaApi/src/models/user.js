@@ -6,7 +6,7 @@ const { mongoose } = require("../configs/dbConnection");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 /* ------------------------------------------------------- */
 
-const UserSchema = new mongoose.Schema(
+const Userschema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -47,4 +47,4 @@ const UserSchema = new mongoose.Schema(
   { collection: "users", timestamps: true }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", Userschema);

@@ -1,8 +1,4 @@
 "use strict";
-const {
-  read,
-  update,
-} = require("../../../18-PersonnelApi/src/controllers/personnel.controller");
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
@@ -23,9 +19,10 @@ module.exports = {
                     <li>URL/?<b>page=2&limit=1</b></li>
                 </ul>
             `
-        */
+    */
+    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde # isareti swagger yazip ici istenildigi gibi doldurulabilir.
 
-    const result = await res.getModelList(User);
+    const result = await res.getModelList(User); //* daha detayli islemleri yapabilmek icin getModelList kullanildi.
 
     res.status(200).send({
       error: false,
@@ -36,8 +33,8 @@ module.exports = {
 
   create: async (req, res) => {
     /* 
-    #swagger.tags = ['Users']
-    #swagger.summary = 'Create User'
+        #swagger.tags = ['Users']
+        #swagger.summary = 'Create User'
     */
 
     if (
@@ -61,8 +58,8 @@ module.exports = {
 
   read: async (req, res) => {
     /* 
-    #swagger.tags = ['Users']
-    #swagger.summary = 'Get Single User'
+        #swagger.tags = ['Users']
+        #swagger.summary = 'Get Single User'
     */
 
     const result = await User.findOne({ _id: req.params.id });
@@ -75,8 +72,8 @@ module.exports = {
 
   update: async (req, res) => {
     /* 
-    #swagger.tags = ['Users']
-    #swagger.summary = 'Update User'
+        #swagger.tags = ['Users']
+        #swagger.summary = 'Update User'
     */
 
     const result = await User.updateOne({ _id: req.params.id }, req.body, {
@@ -97,8 +94,8 @@ module.exports = {
 
   delete: async (req, res) => {
     /* 
-    #swagger.tags = ['Users']
-    #swagger.summary = 'Delete User'
+        #swagger.tags = ['Users']
+        #swagger.summary = 'Delete User'
     */
 
     const result = await User.deleteOne({ _id: req.params.id });

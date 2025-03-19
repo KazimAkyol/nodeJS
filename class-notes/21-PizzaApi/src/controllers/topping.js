@@ -19,9 +19,10 @@ module.exports = {
                     <li>URL/?<b>page=2&limit=1</b></li>
                 </ul>
             `
-        */
+    */
+    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde # isareti swagger yazip ici istenildigi gibi doldurulabilir.
 
-    const result = await res.getModelList(Topping);
+    const result = await res.getModelList(Topping); //* daha detayli islemleri yapabilmek icin getModelList kullanildi.
 
     res.status(200).send({
       error: false,
@@ -32,9 +33,9 @@ module.exports = {
 
   create: async (req, res) => {
     /* 
-            #swagger.tags = ['Toppings']
-            #swagger.summary = 'Create Topping'
-        */
+        #swagger.tags = ['Toppings']
+        #swagger.summary = 'Create Topping'
+    */
 
     const result = await Topping.create(req.body);
 
@@ -46,9 +47,9 @@ module.exports = {
 
   read: async (req, res) => {
     /* 
-            #swagger.tags = ['Toppings']
-            #swagger.summary = 'Get Single Topping'
-        */
+        #swagger.tags = ['Toppings']
+        #swagger.summary = 'Get Single Topping'
+    */
 
     const result = await Topping.findOne({ _id: req.params.id });
 
@@ -60,35 +61,36 @@ module.exports = {
 
   update: async (req, res) => {
     /* 
-            #swagger.tags = ['Toppings']
-            #swagger.summary = 'Update Topping'
-        */
+        #swagger.tags = ['Toppings']
+        #swagger.summary = 'Update Topping'
+    */
 
     const result = await Topping.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
 
-    if (!result.modifiedCount) {
+    if (result.modifiedCount) {
       res.errorStatusCode = 404;
-      throw new Error("Data is not updated.");
+      throw new Error("Data is not updated");
     }
 
     res.status(202).send({
       error: false,
-      new: await Topping.findOne({ _id: req.params.id }),
+      new: await Topping.updateOne({ _id: req.params.id }),
     });
   },
 
   delete: async (req, res) => {
     /* 
-            #swagger.tags = ['Toppings']
-            #swagger.summary = 'Delete Topping'
-        */
+        #swagger.tags = ['Toppings']
+        #swagger.summary = 'Delete Topping'
+    */
 
     const result = await Topping.deleteOne({ _id: req.params.id });
 
     res.status(result.deletedCount ? 204 : 404).send({
-      error: true,
+      error: false,
+      result,
       message: "Data is not found or already deleted.",
     });
   },

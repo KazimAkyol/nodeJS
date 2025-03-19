@@ -8,8 +8,8 @@ const { mongoose } = require("../configs/dbConnection");
 const TokenSchema = new mongoose.Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      type: mongoose.Types.ObjectId,
+      ref: "User", //* controller'daki user'in ismi User.
       required: true,
       unique: true,
       index: true,

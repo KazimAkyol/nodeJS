@@ -5,7 +5,7 @@
 const router = require("express").Router();
 const token = require("../controllers/token");
 /* ------------------------------------------------------- */
-// URL: /users
+// URL: /toppings
 
 router.route("/").get(token.list).post(token.create);
 
