@@ -75,7 +75,7 @@ module.exports = {
             #swagger.summary = 'Update Pizza'
         */
 
-    //* if same id sent more than once in the toppingIds field.
+    //* file upload
     if (req.file) {
       req.body.image = req.file.filename;
     }

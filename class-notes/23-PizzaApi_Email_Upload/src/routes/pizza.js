@@ -28,6 +28,8 @@ const upload = multer({
 // URL: /tokens
 
 router.route("/").get(pizza.list).post(upload.single("image"), pizza.create);
+//   .post(upload.array("image"), pizza.create)
+//   .post(upload.any("image"), pizza.create);
 
 router
   .route("/:id")

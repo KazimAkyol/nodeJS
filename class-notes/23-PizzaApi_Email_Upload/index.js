@@ -135,6 +135,10 @@ app.all("/", (req, res) => {
 // Other path
 app.use("/", require("./src/routes/"));
 
+// Static file route
+// app.use("./uploads", express.static("./uploads"));
+app.use("./images", express.static("./uploads"));
+
 // Not found
 app.all("*", (req, res) => {
   res.status(404).send({
