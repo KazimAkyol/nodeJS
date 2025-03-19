@@ -1,13 +1,14 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
 
-const User = require('../models/user');
+const User = require("../models/user");
+const sendMail = require("../helpers/sendMail");
 
 module.exports = {
-    list: async (req, res) => {
-        /* 
+  list: async (req, res) => {
+    /* 
             #swagger.tags = ['Users']
             #swagger.summary = 'List Users'
             #swagger.desription = `
@@ -21,79 +22,91 @@ module.exports = {
             `
         */
 
-        const result = await res.getModelList(User);
+    const result = await res.getModelList(User);
 
-        res.status(200).send({
-            error: false,
-            details: await res.getModelListDetails(User),
-            result
-        })
-    },
+    res.status(200).send({
+      error: false,
+      details: await res.getModelListDetails(User),
+      result,
+    });
+  },
 
-    create: async (req, res) => {
-        /* 
+  create: async (req, res) => {
+    /* 
             #swagger.tags = ['Users']
             #swagger.summary = 'Create User'
         */
 
-        //? Password Validation 
-        if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(req?.body?.password)) {
-            res.errorStatusCode = 401;
-            throw new Error("Password must be at least 8 characters long and contain at least one special character and  at least one uppercase character");
-        }
+    //? Password Validation
+    if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(
+        req?.body?.password
+      )
+    ) {
+      res.errorStatusCode = 401;
+      throw new Error(
+        "Password must be at least 8 characters long and contain at least one special character and  at least one uppercase character"
+      );
+    }
 
-        const result = await User.create(req.body);
+    const result = await User.create(req.body);
 
-        res.status(201).send({
-            error: false,
-            result
-        })
-    },
+    // if (result) {
 
-    read: async (req, res) => {
-        /* 
+    // }
+
+    res.status(201).send({
+      error: false,
+      result,
+    });
+  },
+
+  read: async (req, res) => {
+    /* 
             #swagger.tags = ['Users']
             #swagger.summary = 'Get Single User'
         */
 
-        const result = await User.findOne({ _id: req.params.id });
+    const result = await User.findOne({ _id: req.params.id });
 
-        res.status(200).send({
-            error: false,
-            result
-        })
-    },
+    res.status(200).send({
+      error: false,
+      result,
+    });
+  },
 
-    update: async (req, res) => {
-        /* 
+  update: async (req, res) => {
+    /* 
             #swagger.tags = ['Users']
             #swagger.summary = 'Update User'
         */
 
-        const result = await User.updateOne({ _id: req.params.id }, req.body, { runValidators: true });
+    const result = await User.updateOne({ _id: req.params.id }, req.body, {
+      runValidators: true,
+    });
 
-        if (!result.modifiedCount) {
-            res.errorStatusCode = 404
-            throw new Error('Data is not updated.')
-        }
+    if (!result.modifiedCount) {
+      res.errorStatusCode = 404;
+      throw new Error("Data is not updated.");
+    }
 
-        res.status(202).send({
-            error: false,
-            new: await User.findOne({ _id: req.params.id })
-        })
-    },
+    res.status(202).send({
+      error: false,
+      new: await User.findOne({ _id: req.params.id }),
+    });
+  },
 
-    delete: async (req, res) => {
-        /* 
+  delete: async (req, res) => {
+    /* 
             #swagger.tags = ['Users']
             #swagger.summary = 'Delete User'
         */
 
-        const result = await User.deleteOne({ _id: req.params.id });
+    const result = await User.deleteOne({ _id: req.params.id });
 
-        res.status(result.deletedCount ? 204 : 404).send({
-            error: true,
-            message: 'Data is not found or already deleted.'
-        })
-    }
+    res.status(result.deletedCount ? 204 : 404).send({
+      error: true,
+      message: "Data is not found or already deleted.",
+    });
+  },
 };
