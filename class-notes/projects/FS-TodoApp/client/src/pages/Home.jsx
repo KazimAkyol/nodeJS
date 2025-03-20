@@ -5,15 +5,15 @@ import AddBilgi from "../components/AddBilgi";
 const Home = () => {
   const [tutorials, setTutorials] = useState([]);
 
-  //   const url = "https://tutorial-api.fullstack.clarusway.com/tutorials/";
-  const url = "http://127.0.0.1:8000/todo/";
+  //   const url = "https://tutorial-api.fullstack.clarusway.com/tutorials/"; //* bu link canli'da,ulasilabilir.
+  const url = "http://127.0.0.1:8000/todo/"; //* bu link canli'da degil, herkes tarafindan ulasilabilir olmasi icin deploy edilmesi lazim. Benim DB'im, server klasörünün icinde db.sqlite3'de.
 
   //!GET (READ)
   const getBilgiler = async () => {
     const res = await axios.get(url);
     console.log(res.data);
 
-    setTutorials(res.data);
+    setTutorials(res.data.result);
   };
 
   useEffect(() => {

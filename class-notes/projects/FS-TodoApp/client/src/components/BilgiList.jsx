@@ -21,7 +21,7 @@ const BilgiList = ({ tutorials, deleteBilgi, putBilgi }) => {
         </thead>
         <tbody>
           {tutorials.map((a) => (
-            <tr>
+            <tr key={a.id}>
               <th>{a.id}</th>
               <td>{a.title}</td>
               <td>{a.description}</td>
@@ -62,14 +62,3 @@ const BilgiList = ({ tutorials, deleteBilgi, putBilgi }) => {
   );
 };
 export default BilgiList;
-
-
-
-
-
-
-
-
-
-
-
