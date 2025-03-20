@@ -7,8 +7,9 @@ const Home = () => {
 
   //   const url = "https://tutorial-api.fullstack.clarusway.com/tutorials/"; //* bu link canli'da,ulasilabilir.
   const url = "http://127.0.0.1:8000/todo/"; //* bu link canli'da degil, herkes tarafindan ulasilabilir olmasi icin deploy edilmesi lazim. Benim DB'im, server klasörünün icinde db.sqlite3'de.
+  //* Sadece bu url eklenerek Backend ile Frontend arasinda baglanti kuruldu.
 
-  //!GET (READ)
+  //! GET (READ)
   const getBilgiler = async () => {
     const res = await axios.get(url);
     console.log(res.data);
@@ -20,7 +21,7 @@ const Home = () => {
     getBilgiler();
   }, []);
 
-  //!POST (create database e veri gönderme)
+  //! POST (create: database'e veri gönderme)
 
   const postBilgi = async (yeniVeri) => {
     await axios.post(url, yeniVeri);
@@ -28,7 +29,7 @@ const Home = () => {
     getBilgiler();
   };
 
-  //!DELETE (database den silme)
+  //! DELETE (database'den silme)
 
   const deleteBilgi = async (id) => {
     // console.log(id);
@@ -38,7 +39,7 @@ const Home = () => {
     getBilgiler();
   };
 
-  //!put update işlemi
+  //! PUT (update işlemi)
 
   const putBilgi = async (yeniVeri) => {
     await axios.put(`${url}${yeniVeri.id}/`, yeniVeri);

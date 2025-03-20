@@ -22,7 +22,7 @@ module.exports = {
                     "password": "aA12345.?",
                 }
             }
-        */
+    */
 
     const { username, email, password } = req.body;
 
@@ -62,8 +62,8 @@ module.exports = {
     /* JWT Token */
     //* JWT'nin bir ömürleri vardir.
     //* AccessT - 30 dk, RefreshT - 2 GÜN.
-    //* Her istekte bana AccessT'i gönder diyecegiz
-    //* Backend'ten Frontend'e RefreshT döndürülerek AccessT gönderilir. Güvenlik amaciyla böyle bir yol izlenir.Kötü amacli kullanici(Hacker) AccessT ulasip browser'daki enduser'a ait bilgileri calmak isteyebilir. 30 dk sonra RefreshT döndürülerek yeni AccesT gönderilir. Bu sürecte RefreshT'nin da süresi biterse browser'daki enduser'i logout yapip ondan login olmasi istenerek isleyis en basa alinir.
+    //* Her istekte bana AccessT'i gönder diyecegiz.
+    //* Backend'ten Frontend'e RefreshT döndürülerek AccessT gönderilir. AccessT ve RefreshT sistemde ve bu yapilanlardan haberi yok. Güvenlik amaciyla böyle bir yol izlenir.Kötü amacli kullanici(Hacker) AccessT ulasip browser'daki enduser'a ait bilgileri calmak isteyebilir. 30 dk sonra RefreshT döndürülerek yeni AccesT gönderilir. Bu sürecte RefreshT'nin da süresi biterse browser'daki enduser'i logout yapip ondan login olmasi istenerek isleyis en basa alinir.
 
     //* Access Token:
     const accessData = {
