@@ -20,7 +20,7 @@ module.exports = {
                 </ul>
             `
     */
-    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde # isareti swagger yazip ici istenildigi gibi doldurulabilir.
+    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde #swagger seklinde yazip ici istenildigi gibi doldurulabilir.
 
     const result = await res.getModelList(User); //* daha detayli islemleri yapabilmek icin getModelList kullanildi.
 
@@ -50,7 +50,7 @@ module.exports = {
 
     const result = await User.create(req.body);
 
-    res.status(200).send({
+    res.status(201).send({
       error: false,
       result,
     });

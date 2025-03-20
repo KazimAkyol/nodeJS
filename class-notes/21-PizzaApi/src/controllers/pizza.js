@@ -20,7 +20,7 @@ module.exports = {
                 </ul>
             `
     */
-    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde # isareti swagger yazip ici istenildigi gibi doldurulabilir.
+    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde #swagger seklinde yazip ici istenildigi gibi doldurulabilir.
 
     const result = await res.getModelList(Pizza, "toppingIds");
     //* daha detayli islemleri yapabilmek icin getModelList kullanildi.
