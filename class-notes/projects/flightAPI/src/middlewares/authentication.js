@@ -1,10 +1,22 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
 
-module.exports = (req, res, next) => {
+const jwt = require("jsonwebtoken");
 
-   
-    next()
-}
+module.exports = async (req, res, next) => {
+  req.user = null;
+
+  const auth = req.headers?.authorization || null;
+  const tokenKey = auth ? auth.split(" ") : null;
+
+  if (tokenKey && tokenKey[0] == "Bearer") {
+    jwt.verify(tokenKey[1].process.env.ACCESS_KEY, (error, accessData) => {
+      req.user = accessData ? accessData : null;
+      req.body.createdId = req.user?._id;
+    });
+  }
+
+  next();
+};
