@@ -118,7 +118,7 @@ module.exports = {
                     },
                 }
             }
-        */
+    */
 
     const { refresh } = req.body?.bearer;
 

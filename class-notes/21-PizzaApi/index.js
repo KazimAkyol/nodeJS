@@ -16,7 +16,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env?.PORT || 8000;
 
-// AsyncErrors to errorHandler:
+// asyncErrors to errorHandler:
 require("express-async-errors");
 
 // DB Connection:
