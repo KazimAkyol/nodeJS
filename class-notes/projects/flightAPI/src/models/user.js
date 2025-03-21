@@ -42,9 +42,26 @@ const UserSchema = new mongoose.Schema(
         "Please enter a valid email address.",
       ],
     },
+
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+
+    isStaff: {
+      type: Boolean,
+      default: false,
+    },
+
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     collection: "user",
     timestamps: true,
   }
 );
+
+module.exports = mongoose.model("User", UserSchema);
