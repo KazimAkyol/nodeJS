@@ -43,7 +43,7 @@ const document = {
     description: packageJson.description,
     // termOfService: "htttp://127.0.0.1:8000/#",
     contact: { name: packageJson.author, email: packageJson.email },
-    licence: { name: packageJson.license },
+    license: { name: packageJson.license },
   },
 
   host: `${HOST}:${PORT}`,
@@ -58,6 +58,7 @@ const document = {
         "Simple Token Authentication * Example Use: <b>Token ...tokenKey...</b>",
     },
   },
+  
   security: [{ Token: [] }],
 
   // paths will be created by swaggerAutogen
