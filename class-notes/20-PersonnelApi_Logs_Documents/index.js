@@ -90,6 +90,27 @@ app.use(
 //* Bu kod blogunu yazdiktan sonra dosya ana dizininde logs adinda bir klasör olusturulur ve bundan sonra gün gün tutulacak log kayitlari buraya kaydedilir.
 
 /* ------------------------------------------------------- */
+
+// DOCUMENTATION:
+// $ npm i swagger-autogen # JSON Creator
+// $ npm i swagger-ui-express
+// $ npm i redoc-express
+
+// Json
+app.use('/documents/json', (req, res) => {
+    res.sendFile('swagger.json', { root: '.' })
+});
+
+// Swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerJson = require('./swagger.json');
+app.use('/documents/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson, { swaggerOptions: { persistAuthorization: true } }));
+
+// Redoc
+const redoc = require('redoc-express');
+app.use('/documents/redoc', redoc({ specUrl: '/documents/json', title: 'Redoc UI' }));
+
+/* ------------------------------------------------------- */
 //* Routes:
 
 // Home path

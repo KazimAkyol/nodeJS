@@ -68,5 +68,6 @@ const document = {
   },
 };
 
+// To run swaggerAutogen : node swaggerAutogen.js
 // swaggerAutogen('outputFile, routes, document);
 swaggerAutogen("./swagger.json", ["./index.js"], document);
