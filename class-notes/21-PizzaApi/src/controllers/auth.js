@@ -33,7 +33,7 @@ module.exports = {
     const user = await User.findOne({
       $or: [{ username }, { email }],
       password,
-    });  //* Bu sekilde DB'e bir sorgu atildi.
+    }); //* Bu sekilde DB'e bir sorgu atildi.
 
     if (!user) {
       res.errorStatusCode = 401;
@@ -65,8 +65,7 @@ module.exports = {
 
   logout: async (req, res) => {
     /*
-        #swagger.tags = ["Tokens"]
-        #swagger.summary = "Create Token"
+        #swagger.ignore = true
     */
 
     const result = req.user
