@@ -33,9 +33,9 @@ const document = {
   },
   security: [{ JWT: true }],
   definition: {
-    Flight: require("./src/models/flight").schema.obj,
-    Passenger: require("./src/models/passenger").schema.obj,
-    Reservation: require("./src/models/reservation").schema.obj,
+    // Flight: require("./src/models/flight").schema.obj,
+    // Passenger: require("./src/models/passenger").schema.obj,
+    // Reservation: require("./src/models/reservation").schema.obj,
     User: require("./src/models/user").schema.obj,
   },
 };

@@ -2,6 +2,14 @@
 /* -------------------------------------------------------
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
+
+// $ cp .env-sample .env
+// $ npm init -y
+// $ npm i express dotenv mongoose express-async-errors
+// $ npm i morgan swagger-autogen swagger-ui-express redoc-express
+// $ mkdir logs
+// $ npm run dev
+
 const express = require("express");
 const app = express();
 
