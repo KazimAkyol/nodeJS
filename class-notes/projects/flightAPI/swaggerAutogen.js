@@ -15,7 +15,7 @@ const document = {
     title: packageJson.title,
     description: packageJson.description,
     termsOfService: "http://www.clarusway.com",
-    contact: { name: packageJson.author, email: "ali@clarusway.com" },
+    contact: { name: packageJson.author, email: "akyolkzm.2016493@gmail.com" },
     license: { name: packageJson.license },
   },
   host: `${HOST}:${PORT}`,
@@ -32,10 +32,10 @@ const document = {
     },
   },
   security: [{ JWT: true }],
-  definition: {
-    // Flight: require("./src/models/flight").schema.obj,
-    // Passenger: require("./src/models/passenger").schema.obj,
-    // Reservation: require("./src/models/reservation").schema.obj,
+  definitions: {
+    Flight: require("./src/models/flight").schema.obj,
+    Passenger: require("./src/models/passenger").schema.obj,
+    Reservation: require("./src/models/reservation").schema.obj,
     User: require("./src/models/user").schema.obj,
   },
 };

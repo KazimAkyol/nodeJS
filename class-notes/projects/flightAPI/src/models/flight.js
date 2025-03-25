@@ -28,7 +28,7 @@ const FlightSchema = new mongoose.Schema(
     },
 
     departureDate: {
-      type: Data,
+      type: Date,
       required: true,
     },
 
