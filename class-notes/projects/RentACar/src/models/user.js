@@ -15,6 +15,7 @@
 const { mongoose } = require("../configs/dbConnection");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 const uniqueValidator = require("mongoose-unique-validator");
+const emailValidation = require("../helpers/emailValidation");
 // User Model:
 const UserSchema = new mongoose.Schema(
   {
@@ -30,20 +31,16 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: true,
       set: (password) => passwordEncrypt(password),
-      // selected:false
+      // selected:false //* Admin durumunda, firmada Staff da Customer da islemler yapiyor. Admin bile olsa Staff'in dahi sifresini görme
     },
 
     email: {
       type: String,
       trim: true,
       required: [true, "An Email address is required"],
-      unique: [true, "There is this email. Email field must be unique"],
+      unique: true, //* mongoDB unique veriler icin kendi mesajini gösterir.
       validate: [
-        (email) => {
-          const regexEmailCheck =
-            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-          return regexEmailCheck.test(email);
-        },
+        (email) => emailValidation(email),
         "Email format is not valid",
       ],
     },
@@ -63,9 +60,10 @@ const UserSchema = new mongoose.Schema(
       default: false,
     },
   },
-  { collection: "users", timestamps: true },
+  { collection: "users", timestamps: true }
 );
 
+//* Biz unique veriler icin kendi mesajimizi göndermek istiyorsak plugin(uniqueValidator) metodunu kullanabiliriz.
 UserSchema.plugin(uniqueValidator, {
   message: "This {PATH} is exist",
 });

@@ -41,7 +41,7 @@ const Car = {
   },
 };
 
-/*------------------------------------------*
+/*------------------------------------------*/
 
 console.log(Car);
 console.log(Car.brand);
@@ -185,6 +185,4 @@ const mercedes = new carConstructor("Mercedes", "Maybach", 2025);
 console.log(mercedes);
 console.log(mercedes.startEngine());
 
-/*------------------------------------------*/
-/*------------------------------------------*/
 /*------------------------------------------*/

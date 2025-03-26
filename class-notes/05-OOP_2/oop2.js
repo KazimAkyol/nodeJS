@@ -6,7 +6,7 @@
 //? OOP: Object Oriented Programming
 //? DRY: Don't Repeat Yourself
 //? BLUEPRINT: Taslak(Mimarlarin kullandigi mavi sablon kagidi)
-//? CLASS: Obje türetmek icin kullanilacak sablon
+//? CLASS: Obje türetmek icin kullanilan sablon
 
 //* Class Expression
 // const PascalCaseClassName = class { ...}
@@ -111,7 +111,7 @@ console.log(BmwAccessory);
 /* ------------------------------------ *
 //* Polymorphism: Miras aldigimiz sinifin özellik/metodlarini yeniden yazabiliriz.
 //* - Override: Üst metodla aynı isim ve yapıda yeni bir metod yazma. (ezme / iptal etme / önceliğini alma)
-//* - Overload: Üst metodla aynı isimde ama farklı yapıda (farklı adet/tip) yeni method oluşturma. (aynı anda ikisi de aktif) (JS desteklemez)
+//* - Overload: Üst metodla aynı isimde ama farklı yapıda (farklı adet/tip) yeni metod oluşturma. (aynı anda ikisi de aktif) (JS desteklemez)
 
 class Vehicle {
   vehicleIsActive = true;
@@ -223,7 +223,7 @@ class Car {
   }
 
   //? Direkt class ile erismek istediklerimizi static ile isaretleriz.
-  //? Statik property veya methodlara instance ile erisilmez.
+  //? Statik property veya metodlara instance ile erisilmez.
 
   static staticProp = "Static prop";
 
