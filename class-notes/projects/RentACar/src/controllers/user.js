@@ -2,6 +2,15 @@
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
+
+// Thunder'da deneme yapmak icin;
+// "username": "test",
+// "password": "1234",
+// "email": "test@site.com",
+// "isActive": true,
+// "isStaff": false,
+// "isAdmin": false,
+
 // User Controller:
 
 const User = require("../models/user");
@@ -38,15 +47,11 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "username": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "isActive": true,
-                    "isStaff": false,
-                    "isAdmin": false,
+                    $ref: '#/definitions/User'
                 }
             }
         */
+
     passwordValidation(req?.body?.password);
     const data = await User.create(req.body);
 
@@ -62,7 +67,7 @@ module.exports = {
             #swagger.summary = "Get Single User"
         */
 
-    //? Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
+    //* Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
     // if (!req.user.isAdmin) {
     //     req.params.id = req.user.id
     // }
@@ -95,7 +100,7 @@ module.exports = {
             }
         */
 
-    //? Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
+    //* Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
     if (!req.user.isAdmin) req.params.id = req.user._id;
     const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,

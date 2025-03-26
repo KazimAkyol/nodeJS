@@ -33,11 +33,70 @@ const uniqueValidator = require("mongoose-unique-validator");
 // Car Model:
 
 const CarSchema = new mongoose.Schema(
-  {},
+  {
+    plateNumber: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
+
+    brand: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+
+    model: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+
+    year: {
+      type: Number,
+      trim: true,
+      required: true,
+      min: 2020,
+      max: new Date().getFullYear(),
+    },
+    isAutomatic: {
+      type: Boolean,
+      default: false,
+    },
+
+    pricePerDay: {
+      type: Number,
+      required: true,
+    },
+
+    isAvailable: {
+      //* isPublish, datada isAvailable olarak tanimlandigi icin isAvailable yazildi.
+      type: Boolean,
+      required: true,
+    },
+
+    images: {
+      type: [String],
+      default: [],
+    },
+
+    createdId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    updatedId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
   {
     collection: "cars",
     timestamps: true,
-  },
+  }
 );
 
 CarSchema.plugin(uniqueValidator, {
