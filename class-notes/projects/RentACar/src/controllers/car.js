@@ -22,9 +22,9 @@ module.exports = {
             `
         */
 
-    let customFilter = { isAvailable: true }; // customer ise sadece available olanları getir.
+    let customFilter = { isAvailable: true }; //* customer ise sadece available olanları getir.
 
-    if (req.user.isAdmin || req.user.isStaff) customFilter = {}; // Admin veya staf ise bütün verileri getir
+    if (req.user.isAdmin || req.user.isStaff) customFilter = {}; //* isAdmin veya isStaff ise bütün verileri getir
 
     const data = await res.getModelList(Car, customFilter);
 
@@ -43,10 +43,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-
-
-                $ref:"#/definitions/Car"
-                 
+                   $ref:"#/definitions/Car"
                 }
             }
         */
