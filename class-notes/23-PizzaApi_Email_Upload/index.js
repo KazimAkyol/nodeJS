@@ -48,7 +48,7 @@ const nodemailer = require("nodemailer");
 /* ------------------------------------------------------- *
 
 //* Create Test Account:
-nodemailer.createTestAccount().then((email) => console.log(email)); //* Bu kod blogunu yazip fake bir email adresi olusturulur ve daha sonra sürekli fake emil adresi olusturmasin diye bu kisim yoruma alinir.
+nodemailer.createTestAccount().then((email) => console.log(email)); //* Bu kod blogunu yazip fake bir email adresi olusturulur ve daha sonra sürekli fake email adresi olusturmasin diye bu kisim yoruma alinir.
 
 
 {
@@ -56,11 +56,10 @@ nodemailer.createTestAccount().then((email) => console.log(email)); //* Bu kod b
   pass: 'nRdcUyrYCh4dEga3xT',
   smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
   imap: { host: 'imap.ethereal.email', port: 993, secure: true },
-  pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },//* güncel olarak pop3 server'lari kullaniliyor.
+  pop3: { host: 'pop3.ethereal.email', port: 995, secure: true }, //* güncel olarak pop3 server'lari kullaniliyor.
   web: 'https://ethereal.email',
   mxEnabled: false
 } 
-
 
 //* Connect to MailServer
 const transporter = nodemailer.createTransport({
