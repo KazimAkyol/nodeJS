@@ -51,9 +51,15 @@ module.exports = {
 
     const result = await User.create(req.body);
 
-    // if (result) {
-
-    // }
+    if (result) {
+      sendMail(
+        result.email,
+        "Welcome to Pizza API Service",
+        `
+                  <h1>Welcome ${result.username} to our system </h1>
+                  `
+      );
+    }
 
     res.status(201).send({
       error: false,

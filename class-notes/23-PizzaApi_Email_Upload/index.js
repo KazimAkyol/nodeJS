@@ -39,36 +39,36 @@ app.use(require("./src/middlewares/queryHandler"));
 // Logger:
 app.use(require("./src/middlewares/logger"));
 
-/* ------------------------------------------------------- */
-// E-MAIL
+/* ------------------------------------------------------- *
+//* E-MAIL
 // $ npm i nodemailer
+// https://www.nodemailer.com/
 
 const nodemailer = require("nodemailer");
 
-/* ------------------------------------------------------- *
-
+/* ------- Send email with ethereal(fake) email ----------------- *
 //* Create Test Account:
-nodemailer.createTestAccount().then((email) => console.log(email)); //* Bu kod blogunu yazip fake bir email adresi olusturulur ve daha sonra sürekli fake email adresi olusturmasin diye bu kisim yoruma alinir.
-
+// nodemailer.createTestAccount().then((email) => console.log(email));
+//* Bu kod blogunu yazip fake bir email adresi olusturulur ve daha sonra sürekli fake email adresi olusturmasin diye bu kisim yoruma alinir.
 
 {
-  user: 'j2wgj3mrv4rxhf4k@ethereal.email',
-  pass: 'nRdcUyrYCh4dEga3xT',
+  user: 'og4mqbpd3nww5t2j@ethereal.email',
+  pass: '8AcAnfaNcBT1GeyNxs',
   smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
   imap: { host: 'imap.ethereal.email', port: 993, secure: true },
   pop3: { host: 'pop3.ethereal.email', port: 995, secure: true }, //* güncel olarak pop3 server'lari kullaniliyor.
   web: 'https://ethereal.email',
   mxEnabled: false
-} 
+}
 
-//* Connect to MailServer
+//* Connect to MailServer / SMTP
 const transporter = nodemailer.createTransport({
   host: "smtp.ethereal.email",
   port: 587,
   secure: false,
   auth: {
-    user: "j2wgj3mrv4rxhf4k@ethereal.email",
-    pass: "nRdcUyrYCh4dEga3xT",
+    user: "og4mqbpd3nww5t2j@ethereal.email",
+    pass: "8AcAnfaNcBT1GeyNxs",
   },
 });
 
@@ -77,42 +77,70 @@ const transporter = nodemailer.createTransport({
 //* Send Mail:
 transporter.sendMail(
   {
-    from: "smtp.ethereal.email",
+    from: "og4mqbpd3nww5t2j@ethereal.email",
     to: "info@clarusway.com",
     subject: "Hello Clarusway",
-    text: "Hello there, how are you today?",
-    html: "<p>Hello there, how are you <b>today?<b></p>/",
+    text: "Hello there, how are your today?",
+    html: "<p>Hello there, how are your <b>today?<b> </p>/",
   },
   function (error, success) {
     success ? console.log("SUCCESS:", success) : console.log("ERROR:", error);
   }
 );
 
-/* ------------------------------------------------------- *
+/* - Send email with ethereal(fake) email - */
 
-// GoogleMail (gmail)
+/* - Send email with gmail service - *
+//* GoogleMail (gmail)
 // Google -> AccountHome -> Security -> Two-Step-Verify (make it on) -> App-Passwords (if not showing use this link: https://myaccount.google.com/apppasswords)
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "akyolkzm.2016493@gmail.com",
-    pass: "fvng wwem jrmn lvim",
+    pass: "fvng wwem jrmn lvim", //* gmail tarafindan bize verilen password
   },
 });
 
 transporter.sendMail(
   {
-    from: "ali@clarusway.com",
+    from: "akyolkzm.2016493@gmail.com",
     to: "info@clarusway.com",
-    subject: "Hi There",
-    text: "Hello there, how are you today?",
-    html: "<p>Hello there, how are you <b>today?<b> </p>/",
+    subject: "Hello Clarusway",
+    text: "Hello there, how are your today?",
+    html: "<p>Hello there, how are your <b>today?<b> </p>/",
   },
   function (error, success) {
     success ? console.log("SUCCESS:", success) : console.log("ERROR:", error);
   }
 );
+
+/* - Send email with gmail service - */
+
+/* - Send email with yandex service - *
+//* Yandex mail
+
+const transporter = nodemailer.createTransport({
+  service: "yandex",
+  auth: {
+    user: "test@yandex.com",
+    pass: "yourPersonelPassword", //* yandex tarafindan bize verilen password
+  },
+});
+
+transporter.sendMail(
+  {
+    from: "og4mqbpd3nww5t2j@ethereal.email",
+    to: "info@clarusway.com",
+    subject: "Hello Clarusway",
+    text: "Hello there, how are your today?",
+    html: "<p>Hello there, how are your <b>today?<b> </p>/",
+  },
+  function (error, success) {
+    success ? console.log("SUCCESS:", success) : console.log("ERROR:", error);
+  }
+);
+/* - Send email with yandex service - */
 
 /* ------------------------------------------------------- */
 //* Routes:
