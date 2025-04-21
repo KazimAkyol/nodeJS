@@ -8,6 +8,7 @@ const upload = require("../middlewares/upload");
 /* ------------------------------------------------------- *
 // UPLOAD (Multer Middleware)
 // npm i multer
+// https://expressjs.com/en/resources/middleware/multer.html
 
 const multer = require("multer");
 
@@ -25,7 +26,7 @@ const upload = multer({
 }); //* Bu kod blogunu yazip Postman kullanarak /pizzas URL'inde POST Send yapip, cb(callBack) function'i yazarak pizza.png isimli image'i Desktop'tan projemizdeki uploads dosyasina yükler. Ya da ilgili resmin yüklendigi now'i yakalayabilmek icin 21.satirdaki kod blogu yazilir.
 
 /* ------------------------------------------------------- */
-// URL: /tokens
+// URL: /pizzas
 
 router.route("/").get(pizza.list).post(upload.single("image"), pizza.create);
 //   .post(upload.array("image"), pizza.create)
@@ -34,8 +35,8 @@ router.route("/").get(pizza.list).post(upload.single("image"), pizza.create);
 router
   .route("/:id")
   .get(pizza.read)
-  .put(pizza.update)
-  .patch(pizza.update)
+  .put(upload.single("image"), pizza.update)
+  .patch(upload.single("image"), pizza.update)
   .delete(pizza.delete);
 
 /* ------------------------------------------------------- */
