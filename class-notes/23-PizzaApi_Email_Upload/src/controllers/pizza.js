@@ -41,6 +41,9 @@ module.exports = {
 
     req.body.toppingIds = [...new Set(req.body.toppingIds)];
 
+    //* file upload
+    // console.log(req.file); // Single
+    // console.log(req.files); // Array
     if (req.file) {
       req.body.image = req.file.filename;
     }
