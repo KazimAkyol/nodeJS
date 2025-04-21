@@ -14,7 +14,7 @@ module.exports = function sendMail(to, subject, message) {
     },
   });
 
-  // Send Mail
+  // Google -> AccountHome -> Security -> Two-Step-Verify (make it on) -> App-Passwords (if not showing use this link: https://myaccount.google.com/apppasswords)
   transporter.sendMail(
     {
       from: "akyolkzm.2016493@gmail.com",

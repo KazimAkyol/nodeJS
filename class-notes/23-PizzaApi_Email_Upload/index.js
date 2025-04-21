@@ -55,8 +55,8 @@ const nodemailer = require("nodemailer");
 {
   user: 'og4mqbpd3nww5t2j@ethereal.email',
   pass: '8AcAnfaNcBT1GeyNxs',
-  smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
-  imap: { host: 'imap.ethereal.email', port: 993, secure: true },
+  smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },  // send mail service
+  imap: { host: 'imap.ethereal.email', port: 993, secure: true }, // receive mail service
   pop3: { host: 'pop3.ethereal.email', port: 995, secure: true }, //* güncel olarak pop3 server'lari kullaniliyor.
   web: 'https://ethereal.email',
   mxEnabled: false
@@ -81,8 +81,8 @@ transporter.sendMail(
     from: "og4mqbpd3nww5t2j@ethereal.email",
     to: "info@clarusway.com",
     subject: "Hello Clarusway",
-    text: "Hello there, how are your today?",
-    html: "<p>Hello there, how are your <b>today?<b> </p>/",
+    text: "Hello there, how are you today?",
+    html: "<p>Hello there, how are you <b>today?<b> </p>/",
   },
   function (error, success) {
     success ? console.log("SUCCESS:", success) : console.log("ERROR:", error);
@@ -93,7 +93,7 @@ transporter.sendMail(
 
 /* - Send email with gmail service - *
 //* GoogleMail (gmail)
-// Google -> AccountHome -> Security -> Two-Step-Verify (make it on) -> App-Passwords (if not showing use this link: https://myaccount.google.com/apppasswords)
+//* Google -> AccountHome -> Security -> Two-Step-Verify (make it on) -> App-Passwords (if not showing use this link: https://myaccount.google.com/apppasswords)
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -163,7 +163,7 @@ app.all("/", (req, res) => {
 // Other path
 app.use("/", require("./src/routes/"));
 
-// Static file route
+// Static file route //* DB'de bulunan bir resmi URL'e resmi kendi ismiyle yazinca browser'da görüntülenebilir.
 // app.use("./uploads", express.static("./uploads"));
 app.use("./images", express.static("./uploads"));
 

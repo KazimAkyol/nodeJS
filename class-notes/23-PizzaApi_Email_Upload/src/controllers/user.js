@@ -37,7 +37,7 @@ module.exports = {
             #swagger.summary = 'Create User'
         */
 
-    //? Password Validation
+    //* Password Validation
     if (
       !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(
         req?.body?.password
